@@ -67,6 +67,14 @@ gulp.task('connectDist', function () {
     port: 9999
   });
 });
+gulp.task('connectDistTest', function () {
+  connect.server({
+    root: './',
+    port: 9999
+  });
+  
+  connect.serverClose();
+});
 gulp.task('browserify', function() {
   gulp.src(['app/js/main.js'])
   .pipe(browserify({
@@ -108,5 +116,12 @@ gulp.task('build', function() {
   runSequence(
     ['clean'],
     ['lint', 'minify-css', 'browserifyDist', 'copy-html-files', 'copy-bower-components', 'copy-image-file','copy-services','connectDist']
+  );
+});
+// *** build test task *** //
+gulp.task('build-jenkins', function() {
+  runSequence(
+    ['clean'],
+    ['lint', 'minify-css', 'browserifyDist', 'copy-html-files', 'copy-bower-components', 'copy-image-file','copy-services','connectDistTest']
   );
 });
