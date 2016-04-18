@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.google.gson.GsonBuilder;
+
 @SpringBootApplication
 public class FpdsApplication {
 
@@ -26,7 +28,7 @@ public class FpdsApplication {
 		 JestClientFactory factory = new JestClientFactory();
 		 factory.setHttpClientConfig(new HttpClientConfig
 		                        .Builder(elasticServerUrl)
-		                        .multiThreaded(true)
+		                        .multiThreaded(true).gson(new GsonBuilder().setDateFormat("MM/dd/yyyy").create())
 		                        .build());
 		 JestClient client = factory.getObject();
 		 System.out.println("JestClient Instantiated..." + client);
