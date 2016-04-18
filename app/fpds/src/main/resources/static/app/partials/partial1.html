@@ -1,0 +1,27 @@
+<div class="container pull-middle">
+    <!--<input  align = "middle" type="text" class="form-control pull-left" style="width: 1000px; margin-right: 35px, border: 1px solid black; background-color: #e5e5e5;" autofocus ng-model="query" placeholder="Search a Company" typeahead="suggestion for suggestion in cities($viewValue)" > -->
+   <input type="text" ng-model="query" typeahead="type.vendorname for type in cities($viewValue)"  typeahead-loading="loadingLocations" class="form-control">
+   <br/>
+    
+</div>
+{{ query }}
+
+<ul ng-repeat = "vendor in value">
+	<li>{{ vendor.vendorname }}</li>
+</ul>
+{{ value }}
+<br/>
+<br/>
+
+<script type="text/ng-template" id="searchResults.html">
+	<div>
+		<div>
+			{{ match.model.vendorname }}
+		<div>
+	</div>
+</script>
+
+<!--<h1>Viz</h1>
+<div id="vizContainer"></div>
+<h1>Dashboard</h1>
+<div id="vizContainer1"></div> -->

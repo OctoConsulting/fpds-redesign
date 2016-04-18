@@ -31,7 +31,7 @@ public class SearchController {
 	@Autowired
 	SearchService searchService;
 	
-	@RequestMapping("/")
+	@RequestMapping("/total")
 	public Integer totalDocuments() {
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		searchSourceBuilder.query(QueryBuilders.matchAllQuery());
