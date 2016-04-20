@@ -6,7 +6,7 @@
   require('angular-route');
   require('angular-animate');
   require('angular-ui-bootstrap');
-
+  
   var mainCtrl = require('./controllers/mainctrl');
   var searchFactory = require('../../services/SearchFactory');
 
@@ -29,7 +29,7 @@
 
   .factory('SearchFactory',['$http',searchFactory])
     //Load controller
-  .controller('MainController', ['$scope','$http','limitToFilter','SearchFactory', mainCtrl]);
+  .controller('MainController', ['$scope','$http','SearchFactory', mainCtrl]);
 
   
 

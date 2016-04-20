@@ -31,7 +31,7 @@ gulp.task('minify-css', function() {
     .pipe(gulp.dest('./'));
 });
 gulp.task('minify-js', function() {
-  gulp.src(['./app/**/*.js', '!./app/bower_components/**'])
+  gulp.src(['./app/**/*.js', '!./app/bower_components/**','!.app/services/**'])
     .pipe(uglify({
       // inSourceMap:
       // outSourceMap: "app.js.map"
@@ -46,14 +46,14 @@ gulp.task('copy-html-files', function () {
   gulp.src('./app/**/*.html')
     .pipe(gulp.dest('./'));
 });
-gulp.task('copy-image-file',function(){
+gulp.task('copy-images', function () {
   gulp.src('./app/images/**')
-  .pipe(gulp.dest('./images'))
+  .pipe(gulp.dest('./images'));
 
 });
-gulp.task('copy-services',function(){
+gulp.task('copy-services', function () {
   gulp.src('./app/services/**')
-  .pipe(gulp.dest('./services'))
+    .pipe(gulp.dest('./services'));
 });
 gulp.task('connect', function () {
   connect.server({
@@ -107,6 +107,6 @@ gulp.task('default', function() {
 gulp.task('build', function() {
   runSequence(
     ['clean'],
-    ['lint', 'minify-css', 'browserifyDist', 'copy-html-files', 'copy-bower-components', 'copy-image-file','copy-services','connectDist']
+    ['lint', 'minify-css', 'browserifyDist', 'copy-html-files', 'copy-bower-components', 'copy-services', 'copy-images']
   );
 });
