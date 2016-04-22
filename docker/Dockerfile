@@ -15,13 +15,11 @@ RUN apt-get update \
      default-jre \
      default-jdk \
      maven \
+     nodejs \
+     npm \
   && rm -rf /var/lib/apt/lists/*;
 
-# Install the latest NVM
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash && \
-    sudo /bin/bash -c "echo \"[[ -s \$HOME/.nvm/nvm.sh ]] && . \$HOME/.nvm/nvm.sh\" >> /etc/profile.d/npm.sh" && \
-    echo "[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh" >> $HOME/.bashrc
-
+#Install NPM packages
 RUN npm install -g gulp bower browserify 
 
 # Add id_rsa for github
