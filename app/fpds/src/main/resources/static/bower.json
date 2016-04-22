@@ -16,7 +16,6 @@
     "angular": "~1.2.22",
     "angular-animate": "~1.2.22",
     "angular-route": "~1.2.22",
-    "angular-ui-bootstrap": "~0.13.1",
     "jquery": "~2.1.1",
     "animate.css": "~3.2.0",
     "bootstrap": "~3.2.0",
