@@ -85,4 +85,16 @@ public class SearchController {
 		return results;
 	}			
 
+	
+	@RequestMapping("/prime_contracts")
+	public List<String> getPrimeContracts(HttpServletRequest request) {
+		String startDt = request.getParameter("start_date");
+		String endDt = request.getParameter("end_date");
+		if(endDt == null) {
+			LocalDate now = LocalDate.now();
+			endDt = now.format(dateFormatter);
+		}
+		List<String> results = searchService.getPrimeAwards(startDt, endDt);
+		return results;
+	}	
 }

@@ -12,4 +12,7 @@ public interface SearchService {
 	
 	//Get Total Contract value awarded by Date Range
 	public String getTotalAwards(String startDt, String endDt);
+	
+	//Top awards by award value by Date Range
+	public List<String> getPrimeAwards(String startDt, String endDt);
 }

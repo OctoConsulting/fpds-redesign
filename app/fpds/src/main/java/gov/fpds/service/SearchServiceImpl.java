@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.json.Json;
@@ -27,6 +28,19 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Autowired
 	JestClient jestClient;
+	
+	private final Function<Contract, String> primeAwardsConverter = new Function<Contract, String>() {
+		@Override
+		public String apply(Contract c) {
+           JsonObject obj = Json.createObjectBuilder()
+        		                .add("agency", c.getMaj_agency_cat().substring(c.getMaj_agency_cat().indexOf(":") + 2))
+        		                .add("company ", c.getVendorname())
+        		                .add("task_order", c.getContractactiontype())
+        		                .add("contract_value", c.getBaseandalloptionsvalue())
+        		                .build();
+           return obj.toString();
+		}
+	};
 
 	@Override
 	public List<Contract> searchContracts(String term) {
@@ -118,6 +132,50 @@ public class SearchServiceImpl implements SearchService {
 			e.printStackTrace();
 		}		
 		return results;
+	}
+
+	@Override
+	public List<String> getPrimeAwards(String startDt, String endDt) {
+        String query = "{\n" +
+	                  // " \"fields\" : [\"maj_agency_cat\", \"vendorname\", \"contractactiontype\", \"baseandalloptionsvalue\"], \n" +
+					   " \"query\" : {\n" +
+					   "     \"filtered\": {\n" +
+					   "         \"filter\": {\n" +
+					   "             \"range\": {\n" +
+					   "                 \"signeddate\": {\n" +
+					   "                         \"gte\": \""+ startDt + "\",\n" +
+					   "                         \"lte\": \""+ endDt + "\"\n" +
+					   "                     }\n" +
+					   "             }\n" +
+					   "         }\n" +
+					   "     }\n" +
+					   " },\n" +
+					   " \"sort\": { \"baseandalloptionsvalue\": { \"order\": \"desc\" }} \n" +
+				       "}";
+        
+        System.out.println("Query: \n" + query);
+       
+		Search search = new Search.Builder(query)
+		                                // multiple index or types can be added.
+		                                .addIndex("usaspending")
+		                                .addType("contract")
+		                                .build();
+		SearchResult result = null;
+        List<String> retVal = null;
+		try {
+			 result = jestClient.execute(search);
+			 List<SearchResult.Hit<Contract, Void>> hits = result.getHits(Contract.class);
+			 System.out.println("Got Hits: \n" + hits);
+			 retVal = hits.stream()
+					      .map(hit -> hit.source)
+                          .map(primeAwardsConverter)
+			              .collect(Collectors.toList());
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 return retVal;
 	}
 	
 	
