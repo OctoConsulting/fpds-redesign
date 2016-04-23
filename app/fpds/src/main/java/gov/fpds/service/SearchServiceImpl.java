@@ -123,7 +123,7 @@ public class SearchServiceImpl implements SearchService {
 	        
 	        JsonObject resultObj = Json.createObjectBuilder()
 	        		                .add("total_contracts", totalContractsVal.intValue())
-	        		                .add("total_award_value ", totalAwardsVal.doubleValue())
+	        		                .add("total_award_value", totalAwardsVal.doubleValue())
 	        		                .build();
 	        if(resultObj != null) {
 	        	results = resultObj.toString();
