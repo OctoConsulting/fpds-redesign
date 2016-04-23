@@ -14,5 +14,5 @@ public interface SearchService {
 	public String getTotalAwards(String startDt, String endDt);
 	
 	//Top awards by award value by Date Range
-	public List<String> getPrimeAwards(String startDt, String endDt);
+	public String getPrimeAwards(String startDt, String endDt);
 }

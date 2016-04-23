@@ -1,5 +1,6 @@
 package gov.fpds.domain;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,11 +22,11 @@ public class Contract {
 	private String account_title;
 	private String agencyid;
 	private String aiobflag;
-	private Double annualrevenue;
+	private BigDecimal annualrevenue;
 	private String apaobflag;
 	private String baobflag;
-	private Double baseandalloptionsvalue;
-	private Double baseandexercisedoptionsvalue;
+	private BigDecimal baseandalloptionsvalue;
+	private BigDecimal baseandexercisedoptionsvalue;
 	private String ccrexception;
 	private String city;
 	private String claimantprogramcode;
@@ -171,15 +172,15 @@ public class Contract {
 	private String pop_state_code;
 	private String priceevaluationpercentdifference;
 	private String prime_awardee_executive1;
-	private Double prime_awardee_executive1_compensation;
+	private BigDecimal prime_awardee_executive1_compensation;
 	private String prime_awardee_executive2;
-	private Double prime_awardee_executive2_compensation;
+	private BigDecimal prime_awardee_executive2_compensation;
 	private String prime_awardee_executive3;
-	private Double prime_awardee_executive3_compensation;
+	private BigDecimal prime_awardee_executive3_compensation;
 	private String prime_awardee_executive4;
-	private Double prime_awardee_executive4_compensation;
+	private BigDecimal prime_awardee_executive4_compensation;
 	private String prime_awardee_executive5;
-	private Double prime_awardee_executive5_compensation;
+	private BigDecimal prime_awardee_executive5_compensation;
 	private String principalnaicscode;
 	private String productorservicecode;
 	private String programacronym;
@@ -283,10 +284,10 @@ public class Contract {
 	public void setAiobflag(String aiobflag) {
 		this.aiobflag = aiobflag;
 	}
-	public Double getAnnualrevenue() {
+	public BigDecimal getAnnualrevenue() {
 		return annualrevenue;
 	}
-	public void setAnnualrevenue(Double annualrevenue) {
+	public void setAnnualrevenue(BigDecimal annualrevenue) {
 		this.annualrevenue = annualrevenue;
 	}
 	public String getApaobflag() {
@@ -301,16 +302,16 @@ public class Contract {
 	public void setBaobflag(String baobflag) {
 		this.baobflag = baobflag;
 	}
-	public Double getBaseandalloptionsvalue() {
+	public BigDecimal getBaseandalloptionsvalue() {
 		return baseandalloptionsvalue;
 	}
-	public void setBaseandalloptionsvalue(Double baseandalloptionsvalue) {
+	public void setBaseandalloptionsvalue(BigDecimal baseandalloptionsvalue) {
 		this.baseandalloptionsvalue = baseandalloptionsvalue;
 	}
-	public Double getBaseandexercisedoptionsvalue() {
+	public BigDecimal getBaseandexercisedoptionsvalue() {
 		return baseandexercisedoptionsvalue;
 	}
-	public void setBaseandexercisedoptionsvalue(Double baseandexercisedoptionsvalue) {
+	public void setBaseandexercisedoptionsvalue(BigDecimal baseandexercisedoptionsvalue) {
 		this.baseandexercisedoptionsvalue = baseandexercisedoptionsvalue;
 	}
 	public String getCcrexception() {
@@ -1217,11 +1218,11 @@ public class Contract {
 	public void setPrime_awardee_executive1(String prime_awardee_executive1) {
 		this.prime_awardee_executive1 = prime_awardee_executive1;
 	}
-	public Double getPrime_awardee_executive1_compensation() {
+	public BigDecimal getPrime_awardee_executive1_compensation() {
 		return prime_awardee_executive1_compensation;
 	}
 	public void setPrime_awardee_executive1_compensation(
-			Double prime_awardee_executive1_compensation) {
+			BigDecimal prime_awardee_executive1_compensation) {
 		this.prime_awardee_executive1_compensation = prime_awardee_executive1_compensation;
 	}
 	public String getPrime_awardee_executive2() {
@@ -1230,11 +1231,11 @@ public class Contract {
 	public void setPrime_awardee_executive2(String prime_awardee_executive2) {
 		this.prime_awardee_executive2 = prime_awardee_executive2;
 	}
-	public Double getPrime_awardee_executive2_compensation() {
+	public BigDecimal getPrime_awardee_executive2_compensation() {
 		return prime_awardee_executive2_compensation;
 	}
 	public void setPrime_awardee_executive2_compensation(
-			Double prime_awardee_executive2_compensation) {
+			BigDecimal prime_awardee_executive2_compensation) {
 		this.prime_awardee_executive2_compensation = prime_awardee_executive2_compensation;
 	}
 	public String getPrime_awardee_executive3() {
@@ -1243,11 +1244,11 @@ public class Contract {
 	public void setPrime_awardee_executive3(String prime_awardee_executive3) {
 		this.prime_awardee_executive3 = prime_awardee_executive3;
 	}
-	public Double getPrime_awardee_executive3_compensation() {
+	public BigDecimal getPrime_awardee_executive3_compensation() {
 		return prime_awardee_executive3_compensation;
 	}
 	public void setPrime_awardee_executive3_compensation(
-			Double prime_awardee_executive3_compensation) {
+			BigDecimal prime_awardee_executive3_compensation) {
 		this.prime_awardee_executive3_compensation = prime_awardee_executive3_compensation;
 	}
 	public String getPrime_awardee_executive4() {
@@ -1256,11 +1257,11 @@ public class Contract {
 	public void setPrime_awardee_executive4(String prime_awardee_executive4) {
 		this.prime_awardee_executive4 = prime_awardee_executive4;
 	}
-	public Double getPrime_awardee_executive4_compensation() {
+	public BigDecimal getPrime_awardee_executive4_compensation() {
 		return prime_awardee_executive4_compensation;
 	}
 	public void setPrime_awardee_executive4_compensation(
-			Double prime_awardee_executive4_compensation) {
+			BigDecimal prime_awardee_executive4_compensation) {
 		this.prime_awardee_executive4_compensation = prime_awardee_executive4_compensation;
 	}
 	public String getPrime_awardee_executive5() {
@@ -1269,11 +1270,11 @@ public class Contract {
 	public void setPrime_awardee_executive5(String prime_awardee_executive5) {
 		this.prime_awardee_executive5 = prime_awardee_executive5;
 	}
-	public Double getPrime_awardee_executive5_compensation() {
+	public BigDecimal getPrime_awardee_executive5_compensation() {
 		return prime_awardee_executive5_compensation;
 	}
 	public void setPrime_awardee_executive5_compensation(
-			Double prime_awardee_executive5_compensation) {
+			BigDecimal prime_awardee_executive5_compensation) {
 		this.prime_awardee_executive5_compensation = prime_awardee_executive5_compensation;
 	}
 	public String getPrincipalnaicscode() {

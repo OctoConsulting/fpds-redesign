@@ -9,6 +9,7 @@ import io.searchbox.core.search.aggregation.CardinalityAggregation;
 import io.searchbox.core.search.aggregation.SumAggregation;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,9 @@ public class SearchServiceImpl implements SearchService {
         		                .add("task_order", c.getContractactiontype())
         		                .add("contract_value", c.getBaseandalloptionsvalue())
         		                .build();
-           return obj.toString();
+           String retVal = obj.toString().replace("\\","");
+           System.out.println("retVal: \n" + retVal);
+           return retVal;
 		}
 	};
 
@@ -135,7 +138,7 @@ public class SearchServiceImpl implements SearchService {
 	}
 
 	@Override
-	public List<String> getPrimeAwards(String startDt, String endDt) {
+	public String getPrimeAwards(String startDt, String endDt) {
         String query = "{\n" +
 	                  // " \"fields\" : [\"maj_agency_cat\", \"vendorname\", \"contractactiontype\", \"baseandalloptionsvalue\"], \n" +
 					   " \"query\" : {\n" +
@@ -175,9 +178,15 @@ public class SearchServiceImpl implements SearchService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 return retVal;
+		
+		StringBuilder finalVal = new StringBuilder("[");
+		for(String val : retVal) {
+			finalVal.append(val).append(",");
+		}
+		finalVal.setLength(finalVal.length()-1);
+		finalVal.append("]");
+		System.out.println(finalVal);
+		return finalVal.toString();
 	}
-	
-	
 
 }
