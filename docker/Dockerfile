@@ -12,9 +12,9 @@ RUN apt-get update \
      git \
      openssh-client \
      rlwrap \
-     openjdk-7-jdk \
-     openjdk-7-doc \
-     openjdk-7-jre-lib \
+     openjdk-8-jdk \
+     openjdk-8-doc \
+     openjdk-8-jre-lib \
      maven \
      nodejs \
      npm \
