@@ -2,28 +2,34 @@
 <html ng-app = "FpdsApp">
   <head lang="en">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Angular-Gulp-Browserify-Starter</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="manifest" href="/manifest.json">
+
+    <title>FPDS Prototype</title>
     <!-- styles -->
+    <link href="https://fonts.googleapis.com/css?family=Cabin:700|Source+Sans+Pro:400,200,300,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="bower_components/animate.css/animate.css"/>
+    <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.min.css"/>
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- <script src="http://ec2-52-91-246-146.compute-1.amazonaws.com/javascripts/api/tableau-2.js"></script> -->
 
-    <link rel="stylesheet" href="./css/main.css"/>
-    <!-- scripts -->
-    <!--<script src="http://ec2-54-89-65-71.compute-1.amazonaws.com/javascripts/api/tableau-2.js"></script> -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="./js/bundled.js"></script>
-    <!--<script type="text/javascript">
+    <!-- <script type="text/javascript">
         window.onload = function initDash(){
           var containerDiv1 = document.getElementById("vizContainer1"),
-          url = "http://ec2-54-89-65-71.compute-1.amazonaws.com/views/FPDS_SparkSQL_Test/Dashboard1?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no";
+          url = "http://ec2-52-91-246-146.compute-1.amazonaws.com/views/FPDS_SparkSQL_Test/Dashboard1?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no";
 
           var containerDiv = document.getElementById("vizContainer"),
-          url1 = "http://ec2-54-89-65-71.compute-1.amazonaws.com/views/FPDS_SparkSQL_Test/TransactionIDCount?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no";
+          url1 = "http://ec2-52-91-246-146.compute-1.amazonaws.com/views/FPDS_SparkSQL_Test/TransactionIDCount?:embed=y&:showShareOptions=true&:display_count=no&:showVizHome=no";
 
           var viz = new tableau.Viz(containerDiv1,url);
           var viz1 = new tableau.Viz(containerDiv, url1);          
@@ -31,35 +37,64 @@
     </script> -->     
   </head>
   <body>
-    <nav class="navbar navbar-default">
-      <div>
-          <a href="index.html"><img src="./images/fdps.jpg" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
-          <b><font size="6"> Federal Procurement Data System</font></b> 
-      </div>   
-    
-      <hr/>
-
-      <ul class="nav nav-pills nav-justified ">
-          <li role="presentation" class="active"><a href="#" data-toggle="tab"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Home</a></li>
-          <li role="presentation"><a href="#" data-toggle="tab"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;Newsroom</a></li>
-          <li role="presentation"><a href="#" data-toggle="tab"><span class="glyphicon glyphicon-align-left"></span>&nbsp;&nbsp;Reports</a></li>
-          <li role="presentation"><a href="#" data-toggle="tab"><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;Status</a></li>
-          <li role="presentation"><a href="#" data-toggle="tab"><span class="glyphicon glyphicon-hdd"></span>&nbsp;&nbsp;Worksite</a></li>
-          <li role="presentation"><a href="#" data-toggle="tab"><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;&nbsp;Archive</a></li>
-          <li role="presentation"><a href="#" data-toggle="tab"><span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;Training</a></li>
-          <li role="presentation"><a href="#" data-toggle="tab"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Help</a></li>
-
-      </ul>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+      <div class="container topnav">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+          </button>  
+          <a class="navbar-brand topnav" href="#/">FPDS</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li> <a href="#/reports">Reports</a> </li>
+            <li> <a href="#/help">Help</a> </li>
+          </ul>  
+        </div>
+      </div>  
     </nav>
-    <br/>
-    {{ 1 + 2 }}
-    <br/>
-    
+    <br/>  
     <!-- views -->
     <div ng-view></div>
-    
-    
-    
-    
+    <br/>
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="list-inline">
+              <li> <a href="#">Home</a> </li>
+              <li class="footer-menu-divider">&sdot;</li>
+              <li> <a href="#page1">Search</a> </li>
+              <li class="footer-menu-divider">&sdot;</li>
+              <li> <a href="#page2">Reports</a> </li>
+              <li class="footer-menu-divider">&sdot;</li>
+              <li> <a href="#page3">Help</a> </li>
+            </ul>
+            <p class="copyright text-muted small">Copyright &copy; OLabs - Octo Consulting Group 2016. All Rights Reserved</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- scripts -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="./js/bundled.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+    <script type="text/javascript">
+      WebFontConfig = {
+        google: { families: [ 'Cabin:700:latin', 'Source+Sans+Pro:400,200,300,600:latin' ] }
+      };
+      (function() {
+        var wf = document.createElement('script');
+        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })(); </script>    
   </body>
 </html>

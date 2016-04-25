@@ -66,7 +66,7 @@ public class SearchServiceImpl implements SearchService {
 		public String apply(Contract c) {
            JsonObject obj = Json.createObjectBuilder()
         		                .add("agency", c.getMaj_agency_cat().substring(c.getMaj_agency_cat().indexOf(":") + 2))
-        		                .add("company ", c.getVendorname())
+        		                .add("company", c.getVendorname())
         		                .add("task_order", c.getContractactiontype())
         		                .add("contract_value", c.getBaseandalloptionsvalue())
         		                .build();
@@ -251,7 +251,7 @@ public class SearchServiceImpl implements SearchService {
 	        
 	        JsonObject resultObj = Json.createObjectBuilder()
 	        		                .add("total_contracts", totalContractsVal.intValue())
-	        		                .add("total_award_value ", totalAwardsVal.doubleValue())
+	        		                .add("total_award_value", totalAwardsVal.doubleValue())
 	        		                .build();
 	        if(resultObj != null) {
 	        	results = resultObj.toString();

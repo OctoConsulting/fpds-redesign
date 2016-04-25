@@ -1,12 +1,77 @@
-<div class="container pull-middle">
-    <input type="text" ng-model="query" typeahead="type.vendorname for type in cities($viewValue)"  typeahead-loading="loadingLocations" class="form-control">
-   <br/>
-    
+<div class="row">
+	<div class="col-xs-8 col-xs-offset-2">
+		<div class="input-group">
+			<input type="hidden" name="search_param" value="all" id="search_param">
+			<input type="text" ng-model="query" class="form-control" typeahead="type.vendorname for type in cities($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" name="x" placeholder="Search term...">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button">
+					<span class="glyphicon glyphicon-search"></span>
+				</button>
+			</span>
+		</div>
+	</div>
 </div>
-
+    
 <br/>
 <br/>
 
+<div class="container" id="content-section">
+	<div class="col">
+		<div class="col-md-4 col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="btn-group pull-right">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span>In {{ period }} </span><span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+			            	<li><a ng-click="filter('Past Week')" >Past Week</a></li>
+			            	<li><a ng-click="filter('Past Month')">Past Month</a></li>
+			            	<li><a ng-click="filter('Past Year')">Past Year</a></li>
+			            	<li><a ng-click="filter('Past 2 years')">Past 2 years</a></li>
+			            </ul>
+					</div>
+					<h4>Total Awards</h4>
+				</div>
+				<div class="panel-body">
+					<center>
+						<font size="6">{{ noOfContracts | number }}</font><font size="4"> contracts, with the value of</font>
+						<h1>{{ totalContractsValue | currency }} Millions</h1></center>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container" id="content-section-b">
+    	<div class="col">
+      		<div class="col-md-8 col-sm-6">
+        		<div class="panel panel-default">
+          			<div class="panel-heading">
+            		    <h4>Awards Value</h4>
+          			</div>
+          			<div class="panel-body">
+            			<div class="list-group"> 
+            			<a href="http://www.octoconsulting.com/" class="list-group-item">Topic 1</a>
+            			<a href="http://www.octoconsulting.com/" class="list-group-item">Topic 2</a> 
+            			<a href="http://www.octoconsulting.com/" class="list-group-item">Topic 3</a> 
+            		</div>
+          		</div>
+       		</div>
+      	</div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+  	<div class="panel-heading">
+  		<h4>Top Prime Contracts</h4>
+  	</div>
+  	<div>
+  		<div ui-grid-resize-columns ui-grid-move-columns class="grid" ui-grid="gridOptions">
+  			<div class="watermark" ng-show="!gridOptions.data.length">No data available</div>
+  		</div>
+  	</div>	
+  </div>
+  
+</div>
 
 
 <!-- <h1>Dashboard</h1>
