@@ -29,4 +29,6 @@ RUN chmod 600 /root/.ssh/id_rsa
 RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 RUN git clone git@github.com:OctoConsulting/fpds-redesign.git
-
+RUN chmod u+x app/fpds/mvnw
+RUN cd app/fpds && ./mvnw clean install
+RUN cd src/main/resources/static && npm install && bower install && gulp build
