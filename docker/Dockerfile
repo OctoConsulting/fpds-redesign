@@ -20,7 +20,7 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*;
 
 #Install NPM packages
-#RUN npm install -g gulp bower browserify 
+RUN npm install -g gulp bower browserify 
 
 # Add id_rsa for github
 RUN mkdir -p /root/.ssh
