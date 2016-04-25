@@ -12,8 +12,9 @@ RUN apt-get update \
      git \
      openssh-client \
      rlwrap \
-#     default-jre \
-#     default-jdk \
+     openjdk-7-jdk \
+     openjdk-7-doc \
+     openjdk-7-jre-lib \
      maven \
      nodejs \
      npm \
@@ -31,8 +32,8 @@ RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 RUN git clone git@github.com:OctoConsulting/fpds-redesign.git
 RUN chmod u+x fpds-redesign/app/fpds/mvnw
 
-RUN echo ~/.mavenrc
 RUN java -version
+RUN mvn -version
 
 RUN cd fpds-redesign/app/fpds && ./mvnw clean install
 RUN cd src/main/resources/static && npm install && bower install && gulp build
