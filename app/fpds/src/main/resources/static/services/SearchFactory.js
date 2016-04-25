@@ -23,43 +23,54 @@ module.exports = function($http){
 		var today = new Date();
 		var currMonth = today.getMonth() + 1;
 		var now = currMonth + "/" + today.getDate() + "/" + today.getFullYear();
+
 		//console.log('today ' + now);
+		var sdate = getPeriod(period);
+
+		return $http.get("/total_awards?start_date=" + sdate + "&end_date=" + now);
+	};
+
+	factory.getPrime = function(period){
+		console.log(period);
+		var today = new Date();
+		var currMonth = today.getMonth() + 1;
+		var now = currMonth + "/" + today.getDate() + "/" + today.getFullYear();
+		var sdate = getPeriod(period);
+		
+		return $http.get("/prime_contracts?start_date=" + sdate + "&end_date=" + now);
+
+	};
+
+	getPeriod = function(period){
+		var today = new Date();
 
 		if(period === 'Week'){
-			var prevDate = new Date(today);
-			prevDate.setDate(today.getDate() - 7);
-			var prevMonth = prevDate.getMonth() + 1;
-			var preDate = prevMonth + "/" + prevDate.getDate() + "/" + prevDate.getFullYear();
-			
-			//console.log('week curr ' + preDate);
-
-			return $http.get("/total_awards?start_date=" + preDate + "&end_date=" + now);
+			var preDate = new Date(today);
+			preDate.setDate(today.getDate() - 7);
+			var wmonth = preDate.getMonth() + 1;
+			var wdate = wmonth + "/" + preDate.getDate() + "/" + preDate.getFullYear();
+			return wdate;
 		}
 		else if(period === 'Month'){
-			var previMonth = new Date();
-			var preMonth = previMonth.getMonth() + "/" + previMonth.getDate() + "/" + previMonth.getFullYear();
-			//console.log('last month ' + preMonth);
-			return $http.get("/total_awards?start_date=" + preMonth + "&end_date=" + now);			
+			var preMonth = new Date(today);
+			var mdate = preMonth.getMonth() + "/" + preMonth.getDate() + "/" + preMonth.getFullYear();
+			return mdate;
 		}
 		else if(period === 'Year'){
-			var prevYear = new Date(today);
-			prevYear.setYear(today.getFullYear() - 1);
-			var prMonth = prevYear.getMonth() + 1;
-			var preYear =  prMonth + "/" + prevYear.getDate() + "/" + prevYear.getFullYear();
-
-			//console.log('last year ' + preYear);
-			return $http.get("/total_awards?start_date=" + preYear + "&end_date=" + now);
+			var preYear = new Date(today);
+			preYear.setYear(today.getFullYear() - 1);
+			var ymonth = preYear.getMonth() + 1;
+			var ydate = ymonth + "/" + preYear.getDate() + "/" + preYear.getFullYear();
+			return ydate;
 		}
 		else if(period === '2 Years'){
-			var tprevYear = new Date(today);
-			tprevYear.setYear(today.getFullYear() - 2);
-			var trMonth = tprevYear.getMonth() + 1;
-			var tYear = trMonth + "/" + tprevYear.getDate() + "/" + tprevYear.getFullYear();
-
-			//console.log('2 opt ' + tYear);
-			return $http.get("/total_awards?start_date=" + tYear + "&end_date=" + now);
+			var preTyear = new Date(today);
+			preTyear.setYear(today.getFullYear() - 2);
+			var ytmonth = preTyear.getMonth() + 1;
+			var ytdate = ytmonth + "/" + preTyear.getDate() + "/" + preTyear.getFullYear();
+			return ytdate;
 		}
-		
+
 	};
 	
 	return factory;

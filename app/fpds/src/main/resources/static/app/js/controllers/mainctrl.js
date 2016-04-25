@@ -18,6 +18,8 @@ module.exports = function($scope,$http,SearchFactory) {
   };
 
   $scope.period = 'Year'; 
+
+
   SearchFactory.getContract('Year')
     .success(function(result){
       $scope.noOfContracts = result.total_contracts;
@@ -27,6 +29,25 @@ module.exports = function($scope,$http,SearchFactory) {
       console.log(data);
     });
 
+  SearchFactory.getPrime('Year')
+    .success(function(result){
+      console.log(result);
+      $scope.primeAwards = result;
+    })
+    .error(function(data,status,header,config){
+      console.log(status);
+    });
+
+    $scope.gridOptions = {
+        data: 'primeAwards',
+        enablePinning: true,
+        columnDefs: [{ name : "Agency" , width: '30%', field: "agency"},
+                    { name: "Company Name" , width: '30%', field: "company" },
+                    { name: "Task Order" , width: '20%', field: "task_order"},
+                    { name: "Contract Value" , width: '20%', field: "contract_value" , cellFilter : 'currency'}]
+    };
+
+    
   
   $scope.filter= function(value){
     console.log(value);
@@ -39,6 +60,18 @@ module.exports = function($scope,$http,SearchFactory) {
       .error(function(data,status,header,config){
         console.log(data);
       });
+
+    SearchFactory.getPrime(value)
+    .success(function(result){
+      console.log(result.length);
+      if (typeof result === "undefined"){
+        console.log("Entered");
+      }
+      $scope.primeAwards = result;
+    })
+    .error(function(data,status,header,config){
+      console.log(status);
+    });
   };	
 
   convertToMill = function(val){

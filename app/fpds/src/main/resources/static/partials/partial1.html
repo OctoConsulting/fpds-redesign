@@ -60,7 +60,17 @@
       	</div>
     </div>
   </div>
-
+  <div class="panel panel-default">
+  	<div class="panel-heading">
+  		<h4>Top Prime Contracts in {{ period }}</h4>
+  	</div>
+  	<div>
+  		<div ui-grid-resize-columns ui-grid-move-columns class="grid" ui-grid="gridOptions">
+  			<div class="watermark" ng-show="!gridOptions.data.length">No data available</div>
+  		</div>
+  	</div>	
+  </div>
+  
 </div>
 
 
