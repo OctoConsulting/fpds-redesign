@@ -12,12 +12,12 @@ RUN apt-get update \
      git \
      openssh-client \
      rlwrap \
-     default-jre \
-     default-jdk \
+#     default-jre \
+#     default-jdk \
      maven \
      nodejs \
      npm \
-  && rm -rf /var/lib/apt/lists/*;
+  && apt-get clean 
 
 #Install NPM packages
 RUN npm install -g gulp bower browserify 
@@ -30,5 +30,9 @@ RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 RUN git clone git@github.com:OctoConsulting/fpds-redesign.git
 RUN chmod u+x fpds-redesign/app/fpds/mvnw
+
+RUN echo ~/.mavenrc
+RUN java -version
+
 RUN cd fpds-redesign/app/fpds && ./mvnw clean install
 RUN cd src/main/resources/static && npm install && bower install && gulp build
