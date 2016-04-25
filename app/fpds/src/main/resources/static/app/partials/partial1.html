@@ -22,16 +22,16 @@
 				<div class="panel-heading">
 					<div class="btn-group pull-right">
 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<span>Filter by </span><span class="caret"></span>
+							<span>In {{ period }} </span><span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu">
-			            	<li><a ng-click="filter('Week')" >Past Week</a></li>
-			            	<li><a ng-click="filter('Month')">Past Month</a></li>
-			            	<li><a ng-click="filter('Year')">Past Year</a></li>
-			            	<li><a ng-click="filter('2 Years')">Past 2 years</a></li>
+			            	<li><a ng-click="filter('Past Week')" >Past Week</a></li>
+			            	<li><a ng-click="filter('Past Month')">Past Month</a></li>
+			            	<li><a ng-click="filter('Past Year')">Past Year</a></li>
+			            	<li><a ng-click="filter('Past 2 years')">Past 2 years</a></li>
 			            </ul>
 					</div>
-					<h4>Total Awards in {{ period }}</h4>
+					<h4>Total Awards</h4>
 				</div>
 				<div class="panel-body">
 					<center>
@@ -62,7 +62,7 @@
   </div>
   <div class="panel panel-default">
   	<div class="panel-heading">
-  		<h4>Top Prime Contracts in {{ period }}</h4>
+  		<h4>Top Prime Contracts</h4>
   	</div>
   	<div>
   		<div ui-grid-resize-columns ui-grid-move-columns class="grid" ui-grid="gridOptions">

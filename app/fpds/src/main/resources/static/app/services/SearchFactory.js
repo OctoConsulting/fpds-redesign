@@ -44,26 +44,26 @@ module.exports = function($http){
 	getPeriod = function(period){
 		var today = new Date();
 
-		if(period === 'Week'){
+		if(period === 'Past Week'){
 			var preDate = new Date(today);
 			preDate.setDate(today.getDate() - 7);
 			var wmonth = preDate.getMonth() + 1;
 			var wdate = wmonth + "/" + preDate.getDate() + "/" + preDate.getFullYear();
 			return wdate;
 		}
-		else if(period === 'Month'){
+		else if(period === 'Past Month'){
 			var preMonth = new Date(today);
 			var mdate = preMonth.getMonth() + "/" + preMonth.getDate() + "/" + preMonth.getFullYear();
 			return mdate;
 		}
-		else if(period === 'Year'){
+		else if(period === 'Past Year'){
 			var preYear = new Date(today);
 			preYear.setYear(today.getFullYear() - 1);
 			var ymonth = preYear.getMonth() + 1;
 			var ydate = ymonth + "/" + preYear.getDate() + "/" + preYear.getFullYear();
 			return ydate;
 		}
-		else if(period === '2 Years'){
+		else if(period === 'Past 2 years'){
 			var preTyear = new Date(today);
 			preTyear.setYear(today.getFullYear() - 2);
 			var ytmonth = preTyear.getMonth() + 1;

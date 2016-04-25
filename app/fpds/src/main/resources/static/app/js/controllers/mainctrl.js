@@ -17,10 +17,10 @@ module.exports = function($scope,$http,SearchFactory) {
     });  
   };
 
-  $scope.period = 'Year'; 
+  $scope.period = 'Past Year'; 
 
 
-  SearchFactory.getContract('Year')
+  SearchFactory.getContract('Past Year')
     .success(function(result){
       $scope.noOfContracts = result.total_contracts;
       $scope.totalContractsValue = convertToMill(result.total_award_value);
@@ -29,7 +29,7 @@ module.exports = function($scope,$http,SearchFactory) {
       console.log(data);
     });
 
-  SearchFactory.getPrime('Year')
+  SearchFactory.getPrime('Past Year')
     .success(function(result){
       console.log(result);
       $scope.primeAwards = result;
