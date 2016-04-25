@@ -37,4 +37,4 @@ RUN java -version
 RUN mvn -version
 
 RUN cd fpds-redesign/app/fpds && ./mvnw clean install
-RUN cd src/main/resources/static && npm install && bower install && gulp build
+RUN cd fpds-redesign/app/fpds/src/main/resources/static && npm install && bower install && gulp build && mvn spring-boot:run &
