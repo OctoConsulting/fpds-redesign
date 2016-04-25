@@ -1,15 +1,10 @@
 FROM ubuntu:trusty
 MAINTAINER Dan Montgomery <dan.montgomery@octoconsulting.com>
 
+RUN apt-get -y -q update && apt-get -y -q install software-properties-common htop
+RUN add-apt-repository ppa:webupd8team/java && apt-get -y -q update
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
-RUN add-apt-repository ppa:webupd8team/java -y
-RUN apt-get update
-RUN apt-get install oracle-java8-installer
-RUN echo "Setting environment variables for Java 8.."
-RUN apt-get install -y oracle-java8-set-default
-
-RUN apt-get update \
-  && apt-get install -y --force-yes --no-install-recommends \
+RUN apt-get -y -q install oracle-java8-installer \
      apt-transport-https \
      build-essential \
      ca-certificates \
@@ -23,6 +18,8 @@ RUN apt-get update \
      nodejs \
      npm \
   && apt-get clean 
+
+RUN update-java-alternatives -s java-8-oracle
 
 #Install NPM packages
 RUN npm install -g gulp bower browserify 
