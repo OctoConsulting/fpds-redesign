@@ -8,7 +8,7 @@ import javax.json.JsonObject;
 
 public interface SearchService {
 	//Free-Text Search on all fields
-	public List<Contract> searchContracts(String term);
+	public String searchContracts(String term);
 	
 	//Get Total Contract value awarded by Date Range
 	public String getTotalAwards(String startDt, String endDt);

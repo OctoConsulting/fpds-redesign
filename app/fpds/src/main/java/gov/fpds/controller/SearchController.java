@@ -56,13 +56,13 @@ public class SearchController {
 	}
 	
 	@RequestMapping("/search")
-	public List<Contract> autoComplete(HttpServletRequest request) {
+	public String autoComplete(HttpServletRequest request) {
 		String term = request.getParameter("q");
 		if(term == null) {
 			term = "";
 		}
 
-        List<Contract> results = null;
+        String results = null;
 		try {
 			results = searchService.searchContracts(term);
 		} catch (Exception e) {
