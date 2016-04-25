@@ -1,6 +1,13 @@
 FROM ubuntu:trusty
 MAINTAINER Dan Montgomery <dan.montgomery@octoconsulting.com>
 
+RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+RUN add-apt-repository ppa:webupd8team/java -y
+RUN apt-get update
+RUN apt-get install oracle-java8-installer
+RUN echo "Setting environment variables for Java 8.."
+RUN apt-get install -y oracle-java8-set-default
+
 RUN apt-get update \
   && apt-get install -y --force-yes --no-install-recommends \
      apt-transport-https \
@@ -12,9 +19,6 @@ RUN apt-get update \
      git \
      openssh-client \
      rlwrap \
-     openjdk-8-jdk \
-     openjdk-8-doc \
-     openjdk-8-jre-lib \
      maven \
      nodejs \
      npm \
