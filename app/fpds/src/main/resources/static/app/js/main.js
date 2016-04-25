@@ -10,7 +10,7 @@
   var mainCtrl = require('./controllers/mainctrl');
   var searchFactory = require('../../services/SearchFactory');
 
-  angular.module('FpdsApp', ['ngRoute', 'ngAnimate','ui.bootstrap','ui.grid','ui.grid.resizeColumns', 'ui.grid.moveColumns'])
+  angular.module('FpdsApp', ['ngRoute', 'ngAnimate','ui.bootstrap','ui.grid','ui.grid.resizeColumns', 'ui.grid.moveColumns','ui.grid.selection', 'ui.grid.exporter'])
 
   .config([
     '$routeProvider',

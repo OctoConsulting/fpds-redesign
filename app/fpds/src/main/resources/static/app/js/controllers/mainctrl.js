@@ -33,6 +33,7 @@ module.exports = function($scope,$http,SearchFactory) {
     .success(function(result){
       console.log(result);
       $scope.primeAwards = result;
+      console.log($scope.primeAwards);
     })
     .error(function(data,status,header,config){
       console.log(status);
@@ -44,7 +45,29 @@ module.exports = function($scope,$http,SearchFactory) {
         columnDefs: [{ name : "Agency" , width: '30%', field: "agency"},
                     { name: "Company Name" , width: '30%', field: "company" },
                     { name: "Task Order" , width: '20%', field: "task_order"},
-                    { name: "Contract Value" , width: '20%', field: "contract_value" , cellFilter : 'currency'}]
+                    { name: "Contract Value" , width: '20%', field: "contract_value" , cellFilter : 'currency'}],
+        enableGridMenu: true,
+        enableSelectAll: true,
+        exporterCsvFilename: 'PrimeAwards.csv',
+        exporterPdfDefaultStyle: {fontSize: 9},
+        exporterPdfTableStyle: {margin: [30, 30, 30, 30]},
+        exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'blue'},
+        exporterPdfHeader: { text: "Top Prime Contracts", style: 'headerStyle' },
+        exporterPdfFooter: function ( currentPage, pageCount ) {
+          return { text: currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
+        },
+        exporterPdfCustomFormatter: function ( docDefinition ) {
+          docDefinition.styles.headerStyle = { fontSize: 22, bold: true };
+          docDefinition.styles.footerStyle = { fontSize: 10, bold: true };
+          return docDefinition;
+        },
+        exporterPdfOrientation: 'portrait',
+        exporterPdfPageSize: 'LETTER',
+        exporterPdfMaxGridWidth: 500,
+        exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
+        onRegisterApi: function(gridApi){
+            $scope.gridApi = gridApi;
+        }
     };
 
     
