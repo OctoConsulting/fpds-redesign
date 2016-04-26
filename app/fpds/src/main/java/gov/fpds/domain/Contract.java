@@ -51,7 +51,7 @@ public class Contract {
 	private String descriptionofcontractrequirement;
 	private String divisionname;
 	private String divisionnumberorofficecode;
-	private String dollarsobligated;
+	private BigDecimal dollarsobligated;
 	private String dunsnumber;
 	private String educationalinstitutionflag;
 	private Date effective;
@@ -463,10 +463,10 @@ public class Contract {
 	public void setDivisionnumberorofficecode(String divisionnumberorofficecode) {
 		this.divisionnumberorofficecode = divisionnumberorofficecode;
 	}
-	public String getDollarsobligated() {
+	public BigDecimal getDollarsobligated() {
 		return dollarsobligated;
 	}
-	public void setDollarsobligated(String dollarsobligated) {
+	public void setDollarsobligated(BigDecimal dollarsobligated) {
 		this.dollarsobligated = dollarsobligated;
 	}
 	public String getDunsnumber() {

@@ -10,8 +10,6 @@ import io.searchbox.core.search.aggregation.CardinalityAggregation;
 import io.searchbox.core.search.aggregation.SumAggregation;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -24,12 +22,8 @@ import javax.json.Json;
 import javax.json.JsonObject;
 
 import org.apache.commons.lang3.StringUtils;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.google.gson.JsonElement;
 
 @Service
 public class SearchServiceImpl implements SearchService {
@@ -38,55 +32,49 @@ public class SearchServiceImpl implements SearchService {
 	JestClient jestClient;
 	
 	
-	private final Function<Hit<Contract, Void>, String> autoCompleteConverter = new Function<Hit<Contract, Void>, String>() {
-		@Override
-		public String apply(Hit<Contract, Void> h) {
-		   Map<String, List<String>> highlights = h.highlight;
-		   String retVal = "";
-		   if(highlights != null && highlights.size() > 0) {
-			    Iterator<Entry<String, List<String>>> it = highlights.entrySet().iterator();
-			    JsonObject obj = null;
-			    if (it.hasNext()) {
-			        Map.Entry<String, List<String>> pair = it.next();
-			        obj = Json.createObjectBuilder()
-			        		             .add("field_name", pair.getKey())
-			        		             .add("field_value", StringUtils.join(pair.getValue(), " "))
-			        		             .build();
-			    }
+	private final Function<Hit<Contract, Void>, String> autoCompleteConverter = h -> {
+																					   Map<String, List<String>> highlights = h.highlight;
+																					   String retVal = "";
+																					   if(highlights != null && highlights.size() > 0) {
+																						    Iterator<Entry<String, List<String>>> it = highlights.entrySet().iterator();
+																						    JsonObject obj = null;
+																						    if (it.hasNext()) {
+																						        Map.Entry<String, List<String>> pair = it.next();
+																						        obj = Json.createObjectBuilder()
+																						        		             .add("field_name", pair.getKey())
+																						        		             .add("field_value", StringUtils.join(pair.getValue(), " "))
+																						        		             .build();
+																						    }
+																				
+																					       retVal = obj.toString().replace("<em>", "").replace("</em>", "");
+																					       System.out.println("retVal: \n" + retVal);
+																					   }
+																					   return retVal;
+																					};
 	
-	           retVal = obj.toString().replace("<em>", "").replace("</em>", "");
-	           System.out.println("retVal: \n" + retVal);
-		   }
-           return retVal;
-		}
-	};
-	
-	private final Function<Contract, String> primeAwardsConverter = new Function<Contract, String>() {
-		@Override
-		public String apply(Contract c) {
-           JsonObject obj = Json.createObjectBuilder()
-        		                .add("agency", c.getMaj_agency_cat().substring(c.getMaj_agency_cat().indexOf(":") + 2))
-        		                .add("company", c.getVendorname())
-        		                .add("task_order", c.getContractactiontype())
-        		                .add("contract_value", c.getBaseandalloptionsvalue())
-        		                .build();
-           String retVal = obj.toString().replace("\\","");
-           System.out.println("retVal: \n" + retVal);
-           return retVal;
-		}
-	};
+	private final Function<Contract, String> primeAwardsConverter = c -> {
+																		   JsonObject obj = Json.createObjectBuilder()
+																				                .add("agency", c.getMaj_agency_cat().substring(c.getMaj_agency_cat().indexOf(":") + 2))
+																				                .add("company", c.getVendorname())
+																				                .add("task_order", c.getContractactiontype())
+																				                .add("contract_value", c.getDollarsobligated())
+																				                .build();
+																		   String retVal = obj.toString().replace("\\","");
+																		   System.out.println("retVal: \n" + retVal);
+																		   return retVal;
+																		};
 
 	@Override
 	public String searchContracts(String term) {
 		String query = "{\n"
-				+ "\"size\" : 50,"
+				+ "\"size\" : 100,"
 				+ "\"query\" : {\n"
 				+ "    \"filtered\" :{\n"
 				+ "        \"query\" : {\n"
 				+ "          \"multi_match\" : {\n"
 				+ "            \"query\":      \"" + term + "\",\n"
 				+ "            \"type\":       \"phrase_prefix\",\n"
-				+ "            \"fields\":     [ \"piid\", \"idvpiid\", \"idvagencyid\", \"vendorname\", \"principalnaicscode\", \"agencyid\", \"typeofsetaside\", \"contractactiontype\",  \"typeofcontractpricing\"],\n"
+				+ "            \"fields\":     [ \"piid\", \"idvpiid\", \"idvagencyid\", \"vendorname\",\"dunsnumber\", \"principalnaicscode\", \"organizationaltype\",\"maj_agency_cat\", \"maj_fund_agency_cat\", \"agencyid\", \"fundingrequestingagencyid\", \"fundingrequestingofficeid\", \"typeofsetaside\", \"contractactiontype\", \"contractingofficeagencyid\", \"contractingofficeid\", \"typeofcontractpricing\", \"prime_awardee_executive1\", \"prime_awardee_executive2\", \"prime_awardee_executive3\", \"prime_awardee_executive4\", \"prime_awardee_executive5\"],\n"
 				+ "            \"lenient\": true\n"
 				+ "          }\n"
 				+ "        }\n"
@@ -101,7 +89,7 @@ public class SearchServiceImpl implements SearchService {
 				+ "          \"principalnaicscode\": {},\n"
 				+ "          \"agencyid\": {},\n"
 				+ "          \"typeofsetaside\" : {},\n"
-			//	+ "          \"maj_agency_cat\" : {},\n"
+				+ "          \"maj_agency_cat\" : {},\n"
 				+ "          \"contractactiontype\" : {},\n"
 				+ "          \"typeofcontractpricing\" : {},\n"
 /*				+ "          \"PlaceofPerformanceCity\": {},\n"
@@ -215,7 +203,7 @@ public class SearchServiceImpl implements SearchService {
 					   " },\n" +
 					   " \"aggs\" : {\n" +
 					   "     \"totalAwardValue\": {\n" +
-					   "         \"sum\" : { \"field\" : \"baseandalloptionsvalue\" }\n" +
+					   "         \"sum\" : { \"field\" : \"dollarsobligated\" }\n" +
 					   "     },\n" +
 					   "     \"totalContracts\" : {\n" +
 					   "         \"cardinality\" : {\n" +
@@ -281,7 +269,7 @@ public class SearchServiceImpl implements SearchService {
 					   "         }\n" +
 					   "     }\n" +
 					   " },\n" +
-					   " \"sort\": { \"baseandalloptionsvalue\": { \"order\": \"desc\" }} \n" +
+					   " \"sort\": { \"dollarsobligated\": { \"order\": \"desc\" }} \n" +
 				       "}";
         
         System.out.println("Query: \n" + query);
