@@ -3,6 +3,7 @@ module.exports = function($scope,$http,SearchFactory) {
     
   SearchFactory.getItems();
 
+  var records;
   
   $scope.cities = function(cityName){
     console.log(cityName);
@@ -18,7 +19,7 @@ module.exports = function($scope,$http,SearchFactory) {
   };
 
   $scope.period = 'Past Year'; 
-
+  $scope.denom = '';
 
   SearchFactory.getContract('Past Year')
     .success(function(result){
@@ -31,9 +32,7 @@ module.exports = function($scope,$http,SearchFactory) {
 
   SearchFactory.getPrime('Past Year')
     .success(function(result){
-      console.log(result);
       $scope.primeAwards = result;
-      console.log($scope.primeAwards);
     })
     .error(function(data,status,header,config){
       console.log(status);
@@ -45,7 +44,7 @@ module.exports = function($scope,$http,SearchFactory) {
         columnDefs: [{ name : "Agency" , width: '30%', field: "agency"},
                     { name: "Company Name" , width: '30%', field: "company" },
                     { name: "Task Order" , width: '20%', field: "task_order"},
-                    { name: "Contract Value" , width: '20%', field: "contract_value" , cellFilter : 'currency'}],
+                    { name: "Contract Value" , width: '17.7%', field: "contract_value" , cellFilter : 'currency',cellClass: 'grid-align'}],
         enableGridMenu: true,
         enableSelectAll: true,
         exporterCsvFilename: 'PrimeAwards.csv',
@@ -86,20 +85,42 @@ module.exports = function($scope,$http,SearchFactory) {
 
     SearchFactory.getPrime(value)
     .success(function(result){
-      console.log(result.length);
-      if (typeof result === "undefined"){
-        console.log("Entered");
-      }
+      records = result.length;
       $scope.primeAwards = result;
     })
     .error(function(data,status,header,config){
       console.log(status);
     });
-  };	
+  };
 
+  
   convertToMill = function(val){
-    val = val/1000000;
-    val = Math.round(val*100)/100;
-    return val;
+    //val = val/1000000;
+    //val = Math.round(val*100)/100;
+    if(val === 0){
+      $scope.denom = "";
+      return val;
+    }
+    else{
+      console.log("Value " + val);
+      var temp = Math.floor(Math.log10(Math.round(val))) + 1;
+      console.log(temp);
+      if(temp > 6 && temp <= 9){
+        val = val/1000000;
+        val = Math.round(val*100)/100;
+        $scope.denom = 'Millions';
+        return val;
+      }
+      else if(temp > 9){
+        val = val/1000000000;
+        val = Math.round(val*100)/100;
+        $scope.denom = 'Billions';
+        return val;
+      }
+      else{
+        $scope.denom = "";
+        return val;  
+      }
+    }        
   };
 };
