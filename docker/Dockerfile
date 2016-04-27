@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:xenial
 MAINTAINER Dan Montgomery <dan.montgomery@octoconsulting.com>
 
 RUN apt-get -y -q update && apt-get -y -q install software-properties-common htop
@@ -16,6 +16,7 @@ RUN apt-get -y -q install oracle-java8-installer \
      rlwrap \
      maven \
      npm \
+     curl \
   && apt-get clean 
 
 curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -sudo apt-get install -y nodejs
@@ -34,9 +35,5 @@ RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 RUN git clone git@github.com:OctoConsulting/fpds-redesign.git
 RUN chmod u+x fpds-redesign/app/fpds/mvnw
 
-RUN java -version
-RUN mvn -version
-
 RUN cd fpds-redesign/app/fpds && ./mvnw clean install
-#RUN cd fpds-redesign/app/fpds/src/main/resources/static && npm install && bower install && gulp build && mvn spring-boot:run &
 RUN cd fpds-redesign/app/fpds/src/main/resources/static && npm install && bower install && gulp build
