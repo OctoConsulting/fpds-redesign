@@ -15,9 +15,10 @@ RUN apt-get -y -q install oracle-java8-installer \
      openssh-client \
      rlwrap \
      maven \
-     nodejs \
      npm \
   && apt-get clean 
+
+curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -sudo apt-get install -y nodejs
 
 RUN update-java-alternatives -s java-8-oracle
 
