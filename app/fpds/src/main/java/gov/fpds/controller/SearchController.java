@@ -1,6 +1,7 @@
 package gov.fpds.controller;
 
 import gov.fpds.domain.Contract;
+import gov.fpds.domain.SearchResponse;
 import gov.fpds.service.SearchService;
 import io.searchbox.client.JestClient;
 import io.searchbox.core.Search;
@@ -13,17 +14,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SearchController {
-	@Autowired
-	ElasticsearchTemplate elasticSearchTemplate;
 	
 	@Autowired
 	JestClient jestClient;
@@ -35,11 +31,9 @@ public class SearchController {
 	
 	@RequestMapping("/total")
 	public Integer totalDocuments() {
-		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-		searchSourceBuilder.query(QueryBuilders.matchAllQuery());
+		String query = "{ \"query\" : {\"match_all\": {} }}";
 
-		Search search = new Search.Builder(searchSourceBuilder.toString())
-		                                // multiple index or types can be added.
+		Search search = new Search.Builder(query)
 		                                .addIndex("usaspending")
 		                                .addType("contract")
 		                                .build();
@@ -97,4 +91,25 @@ public class SearchController {
 		String results = searchService.getPrimeAwards(startDt, endDt);
 		return results;
 	}	
+
+	@RequestMapping("/results")
+	public SearchResponse getSearchResults(HttpServletRequest request) {
+		String term = request.getParameter("q");
+		String from = request.getParameter("from");
+		int frm = 0;
+		if(from != null) {
+			frm = Integer.parseInt(from);
+		}
+		String size = request.getParameter("size");
+		int sze = 10;
+		if(size != null) {
+			sze = Integer.parseInt(size);
+		}		
+		
+		if(term == null) {
+			term = "";
+		}
+		SearchResponse results = searchService.getSearchResults(term, frm, sze);
+		return results;
+	}		
 }

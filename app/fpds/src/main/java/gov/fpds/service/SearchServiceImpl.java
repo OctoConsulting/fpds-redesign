@@ -1,6 +1,7 @@
 package gov.fpds.service;
 
 import gov.fpds.domain.Contract;
+import gov.fpds.domain.SearchResponse;
 import io.searchbox.client.JestClient;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
@@ -74,7 +75,7 @@ public class SearchServiceImpl implements SearchService {
 				+ "          \"multi_match\" : {\n"
 				+ "            \"query\":      \"" + term + "\",\n"
 				+ "            \"type\":       \"phrase_prefix\",\n"
-				+ "            \"fields\":     [ \"piid\", \"idvpiid\", \"idvagencyid\", \"vendorname\",\"dunsnumber\", \"principalnaicscode\", \"organizationaltype\",\"maj_agency_cat\", \"maj_fund_agency_cat\", \"agencyid\", \"fundingrequestingagencyid\", \"fundingrequestingofficeid\", \"typeofsetaside\", \"contractactiontype\", \"contractingofficeagencyid\", \"contractingofficeid\", \"typeofcontractpricing\", \"prime_awardee_executive1\", \"prime_awardee_executive2\", \"prime_awardee_executive3\", \"prime_awardee_executive4\", \"prime_awardee_executive5\"],\n"
+				+ "            \"fields\":     [\"vendorname\", \"vendoralternatename\", \"vendorlegalorganizationname\", \"vendordoingasbusinessname\", \"maj_agency_cat\", \"maj_fund_agency_cat\", \"fundingrequestingofficeid\",  \"contractingofficeid\", \"contractingofficeagencyid\", \"mod_agency\", \"mod_parent\"],\n"
 				+ "            \"lenient\": true\n"
 				+ "          }\n"
 				+ "        }\n"
@@ -82,69 +83,17 @@ public class SearchServiceImpl implements SearchService {
 				+ "},\n"
 				+ "  \"highlight\": {\n"
 				+ "       \"fields\" : {\n"
-				+ "          \"piid\" : {},\n"
-				+ "          \"idvpiid\" : {},\n"
-				+ "          \"idvagencyid\": {},\n"
 				+ "          \"vendorname\" : {},\n"
-				+ "          \"principalnaicscode\": {},\n"
-				+ "          \"agencyid\": {},\n"
-				+ "          \"typeofsetaside\" : {},\n"
+				+ "          \"vendoralternatename\": {},\n"
+				+ "          \"vendorlegalorganizationname\": {},\n"
+				+ "          \"vendordoingasbusinessname\" : {},\n"
 				+ "          \"maj_agency_cat\" : {},\n"
-				+ "          \"contractactiontype\" : {},\n"
-				+ "          \"typeofcontractpricing\" : {},\n"
-/*				+ "          \"PlaceofPerformanceCity\": {},\n"
-				+ "          \"pop_state_code\": {},\n"
-				+ "          \"placeofperformancecountrycode\": {},\n"
-				+ "          \"placeofperformancezipcode\": {},\n"
-				+ "          \"pop_cd\": {},\n"
-				+ "          \"placeofperformancecongressionaldistrict\": {},          \n"*/
-		//		+ "          \"mod_agency\" : {},\n"
 				+ "          \"maj_fund_agency_cat\" : {},\n"
 				+ "          \"contractingofficeagencyid\" : {},\n"
 				+ "          \"contractingofficeid\" : {},\n"
-				+ "          \"fundingrequestingagencyid\" : {},\n"
 				+ "          \"fundingrequestingofficeid\" : {},\n"
-				+ "          \"performancebasedservicecontract\" : {},\n"
-				+ "          \"progsourceagency\" : {},\n"
-				+ "          \"progsourceaccount\" : {},\n"
-				+ "          \"progsourcesubacct\" : {},\n"
-/*				+ "          \"streetaddress\" : {},\n"
-				+ "          \"city\" : {},\n"
-				+ "          \"state\" : {},\n"
-				+ "          \"zipcode\" : {},\n"*/
-				+ "          \"dunsnumber\": {},\n"
-				+ "          \"statecode\" : {},\n"
-				+ "          \"transaction_status\": {},\n"
-/*				+ "          \"vendorcountrycode\": {},\n"
-				+ "          \"vendor_state_code\": {},\n"
-				+ "          \"vendorsitecode\": {},\n"
-				+ "          \"vendoralternatesitecode\": {},          \n" */
-			//	+ "          \"parentdunsnumber\": {},\n"
-			//	+ "          \"mod_parent\": {},\n"
-				+ "          \"productorservicecode\": {},\n"
-				+ "          \"systemequipmentcode\": {},\n"
-				+ "          \"claimantprogramcode\": {},          \n"
-				+ "          \"informationtechnologycommercialitemcategory\": {},\n"
-				+ "          \"gfe_gfp\": {},\n"
-				+ "          \"useofepadesignatedproducts\": {},\n"
-				+ "          \"recoveredmaterialclauses\": {},\n"
-				+ "          \"seatransportation\": \":\",\n"
-				+ "          \"contractbundling\": {},\n"
-/*				+ "          \"countryoforigin\": {},\n"
-				+ "          \"placeofmanufacture\": {},\n" */
-				+ "          \"manufacturingorganizationtype\": {},\n"
-				+ "          \"extentcompeted\": {},\n"
-				+ "          \"reasonnotcompeted\": {},\n"
-				+ "          \"solicitationprocedures\": {},\n"
-				+ "          \"evaluatedpreference\": {},\n"
-				+ "          \"organizationaltype\": {},\n"
-				+ "          \"contractingofficerbusinesssizedetermination\": {},\n"
-				+ "          \"prime_awardee_executive1\": {},\n"
-				+ "          \"prime_awardee_executive2\": {},\n"
-				+ "          \"prime_awardee_executive3\": {},\n"
-				+ "          \"prime_awardee_executive4\": {},\n"
-				+ "          \"prime_awardee_executive5\": {},\n"
-				+ "          \"interagencycontractingauthority\": {}\n"
+				+ "          \"mod_agency\" : {},\n"
+				+ "          \"mod_parent\" : {}\n"
 				+ "    }\n"
 				+ "}\n"
 				+ "}";
@@ -307,6 +256,58 @@ public class SearchServiceImpl implements SearchService {
 		finalVal.append("]");
 		System.out.println(finalVal);
 		return finalVal.toString();
+	}
+
+	@Override
+	public SearchResponse getSearchResults(String searchTerm, int from, int size) {
+        String query = "{\n" +
+                // " \"fields\" : [\"maj_agency_cat\", \"vendorname\", \"contractactiontype\", \"baseandalloptionsvalue\"], \n" +
+        		 "  \"from\" : " + from + ", \"size\" : " + size + ",\n"
+				+   " \"query\" : {\n"
+				+ "    \"filtered\" :{\n"
+				+ "        \"query\" : {\n"
+				+ "          \"multi_match\" : {\n"
+				+ "            \"query\":      \"" + searchTerm + "\",\n"
+				+ "            \"type\":       \"phrase\",\n"
+				+ "            \"fields\":     [\"vendorname\", \"vendoralternatename\", \"vendorlegalorganizationname\", \"vendordoingasbusinessname\", \"maj_agency_cat\", \"maj_fund_agency_cat\", \"fundingrequestingofficeid\",  \"contractingofficeid\", \"contractingofficeagencyid\", \"mod_agency\", \"mod_parent\"],\n"
+				+ "            \"lenient\": true\n"
+				+ "          }\n"
+				+ "        }\n"
+				+ "    }\n"
+				+ "},\n" +
+				   " \"sort\": {\n" +
+				   "   \"signeddate\": { \"order\": \"desc\" },\n" +
+				   "   \"effectivedate\": { \"order\": \"desc\" },\n" +
+				   "   \"dollarsobligated\": { \"order\": \"desc\" }\n" +
+				   "} \n" +
+			       "}";
+  
+	    System.out.println("Query: \n" + query);
+	 
+		Search search = new Search.Builder(query)
+		                                // multiple index or types can be added.
+		                                .addIndex("usaspending")
+		                                .addType("contract")
+		                                .build();
+		SearchResult result = null;
+	    List<Contract> retVal = null;
+	    SearchResponse sr = null;
+		try {
+			 result = jestClient.execute(search);
+			 List<SearchResult.Hit<Contract, Void>> hits = result.getHits(Contract.class);
+			 retVal = hits.stream()
+					      .map(hit -> hit.source)
+			              .collect(Collectors.toList());
+			 
+			 sr = new SearchResponse(result.getTotal(),retVal);
+			 
+	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return sr;
 	}
 
 }

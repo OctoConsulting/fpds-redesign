@@ -54,7 +54,7 @@ public class Contract {
 	private BigDecimal dollarsobligated;
 	private String dunsnumber;
 	private String educationalinstitutionflag;
-	private Date effective;
+	private Date effectivedate;
 	private String emergingsmallbusinessflag;
 	private String evaluatedpreference;
 	private String extentcompeted;
@@ -481,11 +481,11 @@ public class Contract {
 	public void setEducationalinstitutionflag(String educationalinstitutionflag) {
 		this.educationalinstitutionflag = educationalinstitutionflag;
 	}
-	public Date getEffective() {
-		return effective;
+	public Date getEffectivedate() {
+		return effectivedate;
 	}
-	public void setEffective(Date effective) {
-		this.effective = effective;
+	public void setEffectiveDate(Date effectivedate) {
+		this.effectivedate = effectivedate;
 	}
 	public String getEmergingsmallbusinessflag() {
 		return emergingsmallbusinessflag;
