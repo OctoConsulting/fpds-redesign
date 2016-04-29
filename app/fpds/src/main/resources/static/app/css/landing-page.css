@@ -1,5 +1,5 @@
 body {
-	margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+	margin-top: 70px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
 
@@ -110,8 +110,8 @@ h6 {
 
 .banner {
     padding: 100px 0;
-    color: #f8f8f8;
-   background-color: grey;
+    color: #0A3C5D;
+   background-color: #0A3C5D;
     background-size: cover;
 }
 
@@ -154,20 +154,25 @@ h6 {
 }
 
 .footer {
-	background-color: #1d2731;
-	padding: 70px 0;
+	background-color: #1D2731;
+	padding: 10px 0;
 }
 .footer-content {
 	width: 390px;
-	margin: 0 auto;
+	margin: 0 auto
 }
 .footer-content > div {
-	margin-bottom: 40px;
+	margin-bottom: 10px;
+	color: #FFFFFF;
 }
 
 p.copyright {
-    margin: 5px 0 0;
-}
+	margin-top: 5px;
+	margin-right: 0;
+	margin-left: 10px;
+	margin-bottom: 0;
+	color: #FFFFFF;
+	}
 
 .search-result .thumbnail { border-radius: 0 !important; }
 .search-result:first-child { margin-top: 0 !important; }
@@ -180,11 +185,24 @@ p.copyright {
 .search-result h3 { font: 500 normal 1.375em "Source Sans Pro", sans-serif; margin-top: 0 !important; margin-bottom: 10px !important; }
 .search-result h3 > a, .search-result i { color: #248dc1 !important; }
 .search-result p { font: normal normal 1.125em "Source Sans Pro", sans-serif; } 
-.search-result span.plus { position: absolute; right: 0; top: 126px; }
+.search-result span.plus { position: absolute; right: 0;}
 .search-result span.plus a { background-color: #248dc1; padding: 5px 5px 3px 5px; }
 .search-result span.plus a:hover { background-color: #414141; }
 .search-result span.plus a i { color: #fff !important; }
 .search-result span.border { display: block; width: 97%; margin: 0 15px; border-bottom: 1px dotted #ccc; }
-.grid-align {
-    text-align: right;
+.navbar-default {
+    background-color: #0A3C5D;
+    border-color: #0A3C5D;
+}
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+}
+.navbar {
+    min-height: 90px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+.pagination-centered{
+    text-align:center;
 }

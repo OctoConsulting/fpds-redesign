@@ -1,10 +1,10 @@
 <div class="row">
 	<div class="col-xs-8 col-xs-offset-2">
 		<div class="input-group">
-			<input type="hidden" name="search_param" value="all" id="search_param">
-			<input type="text" ng-model="query" class="form-control" typeahead="type.field_value for type in cities($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" name="x" placeholder="Search term...">
+			<input type="hidden" name="search_param" value="all" id="search_param" >
+			<input type="text" ng-model="query" class="form-control" typeahead="type.field_value for type in cities($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term...">
 			<span class="input-group-btn">
-				<button class="btn btn-default" type="button">
+				<button class="btn btn-default" type="button" ng-click="search()">
 					<span class="glyphicon glyphicon-search"></span>
 				</button>
 			</span>
@@ -12,6 +12,7 @@
 	</div>
 </div>
     
+<br/>
 <br/>
 <br/>
 
@@ -60,6 +61,8 @@
       	</div>
     </div>
   </div>
+  <br/>
+  <br/>
   <div class="panel panel-default">
   	<div class="panel-heading">
   		<h4>Top Prime Contracts</h4>
