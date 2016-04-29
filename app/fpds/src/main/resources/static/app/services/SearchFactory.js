@@ -41,6 +41,11 @@ module.exports = function($http){
 
 	};
 
+	factory.getSearchDetails = function(vendor,start,size){
+		//console.log("getSearchDetails " + vendor  + " " + start + " " + size);
+		return $http.get("/results?q=" + vendor + "&from=" + start + "&size=" + size);
+	};
+
 	getPeriod = function(period){
 		var today = new Date();
 

@@ -1,4 +1,4 @@
-module.exports = function($scope,$http,SearchFactory) {
+module.exports = function($scope,$http,$location,SearchFactory) {
   console.log("required!!");
     
   SearchFactory.getItems();
@@ -93,6 +93,17 @@ module.exports = function($scope,$http,SearchFactory) {
     });
   };
 
+  $scope.onSelect = function ($item, $model, $label) {                
+    $scope.choosen = $item.field_value;
+  };
+
+  $scope.search = function(){
+    console.log("Search");
+    console.log($scope.choosen);
+    //console.log("Cho " + $scope.cho);
+    var earl = '/search/' + $scope.query;
+    $location.path(earl);
+  };
   
   convertToMill = function(val){
     //val = val/1000000;
