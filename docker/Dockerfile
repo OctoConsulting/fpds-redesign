@@ -22,6 +22,8 @@ RUN apt-get -y -q install oracle-java8-installer \
 
 RUN update-java-alternatives -s java-8-oracle
 
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+
 #Install NPM packages
 RUN npm install -g gulp bower browserify 
 
