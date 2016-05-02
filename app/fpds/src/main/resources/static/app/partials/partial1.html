@@ -1,10 +1,31 @@
+<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+    <div class="container topnav">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    	<div class="navbar-header">
+        	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        		<span class="sr-only">Toggle navigation</span>
+        	</button>  
+        	<a class="navbar-brand topnav" href="#/"><img src="images/logo.png" alt="FPDS" /></a>
+    	</div>
+    	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        	<ul class="nav navbar-nav navbar-right">
+        		<li> <a href="#/reports">Reports</a> </li>
+            	<li> <a href="#/help">Help</a> </li>
+        	</ul>  
+    	</div>
+     </div>  
+</nav>
+<br/> 
+<br/>
+
+
 <div class="row">
 	<div class="col-xs-8 col-xs-offset-2">
 		<div class="input-group">
-			<input type="hidden" name="search_param" value="all" id="search_param">
-			<input type="text" ng-model="query" class="form-control" typeahead="type.field_value for type in cities($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" name="x" placeholder="Search term...">
+			<input type="hidden" name="search_param" value="all" id="search_param" >
+			<input type="text" ng-model="query" class="form-control" typeahead="type.field_value for type in cities($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term...">
 			<span class="input-group-btn">
-				<button class="btn btn-default" type="button">
+				<button class="btn btn-default" type="button" ng-click="search()">
 					<span class="glyphicon glyphicon-search"></span>
 				</button>
 			</span>
@@ -12,6 +33,7 @@
 	</div>
 </div>
     
+<br/>
 <br/>
 <br/>
 
@@ -60,6 +82,8 @@
       	</div>
     </div>
   </div>
+  <br/>
+  <br/>
   <div class="panel panel-default">
   	<div class="panel-heading">
   		<h4>Top Prime Contracts</h4>

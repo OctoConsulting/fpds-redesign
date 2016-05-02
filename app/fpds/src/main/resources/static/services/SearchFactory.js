@@ -1,7 +1,7 @@
 module.exports = function($http){
 
 	var factory = {};
-
+	
 	factory.getItems = function(){
 		$http.get("/total").success(function(data) {
     		console.log(data);
@@ -39,6 +39,11 @@ module.exports = function($http){
 		
 		return $http.get("/prime_contracts?start_date=" + sdate + "&end_date=" + now);
 
+	};
+
+	factory.getSearchDetails = function(vendor,start,size){
+		//console.log("getSearchDetails " + vendor  + " " + start + " " + size);
+		return $http.get("/results?q=" + vendor + "&from=" + start + "&size=" + size);
 	};
 
 	getPeriod = function(period){

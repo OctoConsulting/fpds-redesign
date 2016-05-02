@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.min.css"/>
     <!-- Custom CSS -->
     <link href="css/landing-page.css" rel="stylesheet">
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
     <!-- Custom Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     <!-- <script src="http://ec2-52-91-246-146.compute-1.amazonaws.com/javascripts/api/tableau-2.js"></script> -->
@@ -38,34 +39,17 @@
   </head>
   <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
-      <div class="container topnav">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-          </button>  
-          <a class="navbar-brand topnav" href="#/">FPDS</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li> <a href="#/reports">Reports</a> </li>
-            <li> <a href="#/help">Help</a> </li>
-          </ul>  
-        </div>
-      </div>  
-    </nav>
-    <br/>  
+
     <!-- views -->
-    <div ng-view></div>
-    <br/>
+    <div class = "bodyview" ng-view></div>
     <!-- Footer -->
+    
     <footer>
-      <div class="container">
+      <div class="footer">
         <div class="row">
           <div class="col-lg-12">
             <ul class="list-inline">
-              <li> <a href="#">Home</a> </li>
+              <li> <a href="#">Home</a></li>
               <li class="footer-menu-divider">&sdot;</li>
               <li> <a href="#page1">Search</a> </li>
               <li class="footer-menu-divider">&sdot;</li>
@@ -78,6 +62,7 @@
         </div>
       </div>
     </footer>
+    
 
     <!-- scripts -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
