@@ -1,7 +1,7 @@
 module.exports = function($http){
 
 	var factory = {};
-
+	
 	factory.getItems = function(){
 		$http.get("/total").success(function(data) {
     		console.log(data);

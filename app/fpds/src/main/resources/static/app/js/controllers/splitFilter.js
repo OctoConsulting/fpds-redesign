@@ -1,6 +1,7 @@
 module.exports = function(){
 
 	return function(input,splitChar,splitIndex){
-		return input.split(splitChar)[splitIndex];
+		if(typeof input != 'undefined')
+			return input.split(splitChar)[splitIndex];
 	};
 }; 

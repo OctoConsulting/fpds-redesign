@@ -1,0 +1,60 @@
+<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+	<div class="container topnav">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+			</button>
+			<a class="navbar-brand topnav" href="index.html"><img src="images/logo.png" alt="FPDS" /></a> 
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li> <a href="#page1">Reports</a> </li>
+				<li> <a href="#page2">Help</a> </li>
+			</ul>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<div class="row">
+		<div class="col-xs-8 col-xs-offset-2">
+			<div class="input-group">
+				<input type="hidden" name="search_param" value="all" id="search_param">
+				<input type="text" ng-model="query" class="form-control" typeahead="type.field_value for type in cities($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term...">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
+				</span>
+			</div>
+		</div>
+	</div>
+	<br/>	
+</nav>
+<br/>
+
+<section id="service">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-sm-6 col-xs-12 text-center wow animated zoomIn">
+				<div class="service-item">
+					<div class="service-icon"><i class="fa fa-search  fa-2x"></i></div>
+					<h4>1) Search for Contracts:</h4>
+					<p>Search for Contracts Awarded across all of the Federal Government Institutions</p>
+				</div>				
+			</div>
+			<div class="col-md-4 col-sm-6 col-xs-12 text-center wow animated zoomIn" data-wow-delay="0.3s">
+				<div class="service-item">
+					<div class="service-icon"> <i class="fa fa-eye fa-2x"></i> </div>
+					<h4>2) View the Dashboard:</h4>
+					<p> Take a look at agency and government contract metrics, socio-economic considerations and obligations</p>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6 col-xs-12 text-center wow animated zoomIn" data-wow-delay="0.6s">
+				<div class="service-item">
+					<div class="service-icon"> <i class="fa fa-bar-chart fa-2x"></i> </div>
+					<h4>3) Explore the details: </h4>
+					<p> Access details of every contract within the federal government</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

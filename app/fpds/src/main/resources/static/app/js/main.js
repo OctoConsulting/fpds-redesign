@@ -21,14 +21,14 @@
       // routes
       $routeProvider
         .when("/", {
-          templateUrl: "./partials/partial1.html",
+          templateUrl: "./partials/landingPage.html",
           controller: "MainController"
         })
         .when("/search/:vendor",{
           templateUrl: "./partials/partial2.html",
           controller: "SearchController",
         })
-        .when("/searchDetails/:tranid",{
+        .when("/searchDetails/:tranid/:pageNo/:query",{
           templateUrl: "./partials/partial3.html",
           controller:"SearchDetailsController",
         })
@@ -41,7 +41,7 @@
   .factory('SearchFactory',['$http',searchFactory])
   .filter('split',[splitFilter])
     //Load controller
-  .controller('SearchDetailsController',['$scope','$http','$routeParams','SearchFactory',searchDetailsCtrl])  
+  .controller('SearchDetailsController',['$scope','$http','$routeParams','$location','SearchFactory',searchDetailsCtrl])  
   .controller('SearchController',['$scope','$http','$routeParams','SearchFactory',searchCtrl])
   .controller('MainController', ['$scope','$http','$location','SearchFactory', mainCtrl]);
 
