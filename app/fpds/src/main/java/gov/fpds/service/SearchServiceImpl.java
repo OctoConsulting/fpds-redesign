@@ -48,7 +48,7 @@ public class SearchServiceImpl implements SearchService {
 																						    }
 																				
 																					       retVal = obj.toString().replace("<em>", "").replace("</em>", "");
-																					       System.out.println("retVal: \n" + retVal);
+																					       //System.out.println("retVal: \n" + retVal);
 																					   }
 																					   return retVal;
 																					};
@@ -60,15 +60,15 @@ public class SearchServiceImpl implements SearchService {
 																				                .add("task_order", c.getContractactiontype())
 																				                .add("contract_value", c.getDollarsobligated())
 																				                .build();
-																		   String retVal = obj.toString().replace("\\","");
-																		   System.out.println("retVal: \n" + retVal);
+																		   String retVal = obj.toString();
+																		   //System.out.println("retVal: \n" + retVal);
 																		   return retVal;
 																		};
 
 	@Override
 	public String searchContracts(String term) {
 		String query = "{\n"
-				+ "\"size\" : 100,"
+				+ "\"size\" : 50,"
 				+ "\"query\" : {\n"
 				+ "    \"filtered\" :{\n"
 				+ "        \"query\" : {\n"
@@ -221,7 +221,7 @@ public class SearchServiceImpl implements SearchService {
 					   " \"sort\": { \"dollarsobligated\": { \"order\": \"desc\" }} \n" +
 				       "}";
         
-        System.out.println("Query: \n" + query);
+        //System.out.println("Query: \n" + query);
        
 		Search search = new Search.Builder(query)
 		                                // multiple index or types can be added.
@@ -233,7 +233,7 @@ public class SearchServiceImpl implements SearchService {
 		try {
 			 result = jestClient.execute(search);
 			 List<SearchResult.Hit<Contract, Void>> hits = result.getHits(Contract.class);
-			 System.out.println("Got Hits: \n" + hits);
+			 //System.out.println("Got Hits: \n" + hits);
 			 retVal = hits.stream()
 					      .map(hit -> hit.source)
                           .map(primeAwardsConverter)
@@ -254,7 +254,7 @@ public class SearchServiceImpl implements SearchService {
 		}
 		
 		finalVal.append("]");
-		System.out.println(finalVal);
+		//System.out.println(finalVal);
 		return finalVal.toString();
 	}
 
@@ -282,7 +282,7 @@ public class SearchServiceImpl implements SearchService {
 				   "} \n" +
 			       "}";
   
-	    System.out.println("Query: \n" + query);
+	    //System.out.println("Query: \n" + query);
 	 
 		Search search = new Search.Builder(query)
 		                                // multiple index or types can be added.
