@@ -1,0 +1,60 @@
+<header id="navigation" class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+	<div class="container topnav">
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li> <a href="#page1">Reports</a> </li>
+				<li> <a href="#page2">Help</a> </li>
+			</ul>
+		</div>
+		<div class="container-fluid identity-header">
+			<div class="row">
+				<h1 class="app-title text-center text-uppercase"><a ui-sref="home" href="#/"><img src="images/logo.png" alt="FPDS" /></a></h1>
+				<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+					<div class="input-group autocomplete">
+						<input type="text" ng-model="query" class="form-control" typeahead="type.field_value for type in cities($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
+						</span>
+					</div>	
+				</div>	
+			</div>
+		</div>
+	</div>
+</header>
+<div class = "mainNav">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="col-md-4">
+					<div class="fpds-tile">
+						<h3 class="text-uppercase"><span class="glyphicon glyphicon-search"></span> Search for Contracts</h3><hr>
+						<h4 class="text-muted medium">Search for Contracts Awarded across all of the Federal Government Institutions</h4>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="fpds-tile">
+						<h3 class="text-uppercase"><span class="glyphicon glyphicon-eye-open"></span> View the Dashboard</h3><hr>
+						<h4 class="text-muted medium">Take a look at the county's Take a look at agency and government contract metrics, socio-economic considerations and obligations</h4>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="fpds-tile">
+						<h3 class="text-uppercase"><span class="glyphicon glyphicon glyphicon-list"></span> Explore the details</h3><hr>
+						<h4 class="text-muted medium">Access details of every contract within the federal government</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	
+<footer>
+    <div class="footer">
+    	<br/>
+        <div>
+          <p class="left">Created by <br>     
+          <img src="images/olabs_logo_sm.png" alt="Olabs">  
+          <span class="copyright text-muted small" style = "text-align: right">Copyright &copy; OLabs - Octo Consulting Group 2016. All Rights Reserved</span> </p>  
+        </div>  
+        
+      </div>
+</footer>

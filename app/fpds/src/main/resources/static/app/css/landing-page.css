@@ -3,7 +3,10 @@ body {
     background-color: #fff; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
-
+.mainNav{
+    margin-top: 300px;
+    background-color: #fff;
+}
 
 /* Titles */
 h1, h2, h3, h4, h5, h6 {
@@ -26,8 +29,8 @@ h3 {
 
 h4 {
     color: #139347;
-    font-weight: 700;
-    font-size: 20px;
+    font-weight: 300;
+    font-size: 25px;
       font-family:"Source Sans Pro"; 
 }
  p{  color: #3f3f3f;
@@ -196,6 +199,17 @@ h4 {
    height:100px;
    width:100%;
    background:#0a3c5d;
+   color: #FFFFFF;
+}
+.footer1 {
+    
+  position:fixed;
+   left:0px;
+   bottom:0px;
+   height:80px;
+   width:100%;
+   background:#0a3c5d;
+   color: #FFFFFF;
 }
 .footer-content {
     width: 390px;
@@ -207,12 +221,15 @@ h4 {
     color: #FFFFFF;
 }
 
-p.copyright {
+span.copyright {
     margin-top: 5px;
-    margin-right: 0;
+    margin-right: 10px;
     margin-left: 10px;
     margin-bottom: 0;
     color: #FFFFFF;
+    text-align: right;
+    display:block;
+    float:right;
     }
     
  hr {
@@ -222,6 +239,11 @@ p.copyright {
     border-top: 1px solid #ccc;
     margin: 1em 0;
     padding: 0;
+}
+.left {
+    text-align: left;
+    margin-left: 10px;
+    color: #FFFFFF;
 }
 /*=================================================================
     Services
@@ -312,6 +334,7 @@ p.copyright {
 .navbar-default .navbar-nav>li>a:focus,.navbar-default .navbar-nav>li>a:hover{
     color: #D9B310;
     background-color: transparent
+    text-decoration:underline;
 }
 .grid-align {
     text-align: right;
@@ -331,7 +354,7 @@ label {
     font-weight: : normal;
 }
 .bodyview{
-    padding-bottom:100px;
+    padding-bottom:80px;
 }
 .searchList{
    font-weight: bold; 

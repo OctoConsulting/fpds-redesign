@@ -21,7 +21,7 @@
       // routes
       $routeProvider
         .when("/", {
-          templateUrl: "./partials/landingPage.html",
+          templateUrl: "./partials/landingPage1.html",
           controller: "MainController"
         })
         .when("/search/:vendor",{
