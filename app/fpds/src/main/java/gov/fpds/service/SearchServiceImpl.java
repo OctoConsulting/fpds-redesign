@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javax.json.Json;
@@ -41,9 +42,13 @@ public class SearchServiceImpl implements SearchService {
 																						    JsonObject obj = null;
 																						    if (it.hasNext()) {
 																						        Map.Entry<String, List<String>> pair = it.next();
+																						        String value = StringUtils.join(pair.getValue(), " ");
+																						        if(value.indexOf(":") != -1) {
+																						        	value = value.substring(value.indexOf(":") + 2);
+																						        }
 																						        obj = Json.createObjectBuilder()
 																						        		             .add("field_name", pair.getKey())
-																						        		             .add("field_value", StringUtils.join(pair.getValue(), " "))
+																						        		             .add("field_value", value)
 																						        		             .build();
 																						    }
 																				
@@ -52,6 +57,26 @@ public class SearchServiceImpl implements SearchService {
 																					   }
 																					   return retVal;
 																					};
+																					
+	private static Predicate<Hit<Contract, Void>> startsWith(String term) {
+	    return h -> {
+			   Map<String, List<String>> highlights = h.highlight;
+			   String retVal = "";
+			   if(highlights != null && highlights.size() > 0) {
+				    Iterator<Entry<String, List<String>>> it = highlights.entrySet().iterator();
+				    if (it.hasNext()) {
+				        Map.Entry<String, List<String>> pair = it.next();
+				        retVal = StringUtils.join(pair.getValue(), " ");
+				        if(retVal.indexOf(":") != -1) {
+				        	retVal = retVal.substring(retVal.indexOf(":") + 2);
+				        }
+				    }
+			   }
+			  //System.out.println("field_value is :" + retVal + " Term is: " + term); 
+	    	  return retVal.startsWith("<em>");
+	    };  
+	}
+
 	
 	private final Function<Contract, String> primeAwardsConverter = c -> {
 																		   JsonObject obj = Json.createObjectBuilder()
@@ -115,6 +140,7 @@ public class SearchServiceImpl implements SearchService {
 			// .collect(Collectors.toList());
 			 
 			 List<String> highlights = hits.stream()
+				 .filter(startsWith(term))
 			     .map(autoCompleteConverter)
 			     .collect(Collectors.toList());
 			 
