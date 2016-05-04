@@ -112,4 +112,15 @@ public class SearchController {
 		SearchResponse results = searchService.getSearchResults(term, frm, sze);
 		return results;
 	}		
+	
+	@RequestMapping("/piidcontracts")
+	public List<Contract> getContractsByPiid(HttpServletRequest request) {
+		String piid = request.getParameter("piid");
+			
+		if(piid == null) {
+			piid = "";
+		}
+		List<Contract> results = searchService.getTransactionsByPiid(piid);
+		return results;
+	}		
 }

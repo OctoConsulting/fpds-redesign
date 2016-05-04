@@ -1,17 +1,16 @@
 package gov.fpds.domain;
 
+import io.searchbox.annotations.JestId;
+
 import java.math.BigDecimal;
 import java.sql.Date;
 
-import org.apache.commons.lang3.StringUtils;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
-import io.searchbox.annotations.JestId;
-
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Contract {
 	@JestId
 	private String id;

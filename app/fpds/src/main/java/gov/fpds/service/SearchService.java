@@ -4,6 +4,7 @@ import gov.fpds.domain.Contract;
 import gov.fpds.domain.SearchResponse;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.json.JsonObject;
 
@@ -19,4 +20,10 @@ public interface SearchService {
 	
 	//Search Results
 	public SearchResponse getSearchResults(String searchTerm, int from, int size);
+	
+	//Transactions by piid
+	public List<Contract> getTransactionsByPiid(String piid);
+	
+	//Transactions by idvid
+	public Map<String, List<Contract>> getTransactionsByIdvid(String idvid);
 }

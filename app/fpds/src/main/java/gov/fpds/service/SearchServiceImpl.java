@@ -336,4 +336,63 @@ public class SearchServiceImpl implements SearchService {
 		return sr;
 	}
 
+	@Override
+	public List<Contract> getTransactionsByPiid(String piid) {
+        String query = "{\n"
+        		+ "   \"size\" : 100,\n"
+        		+ "    \"query\" : {\n"
+        		+ "        \"filtered\": {\n"
+        		+ "            \"query\": {\n"
+        		+ "                \"match\": {\n"
+        		+ "                    \"piid\": \"" + piid + "\"\n"
+        		+ "                }\n"
+        		+ "            }\n"
+        		+ "        }\n"
+        		+ "    },\n"
+        		+ "   \"sort\" : [\n"
+        		+ "     \"modnumber\"\n"
+        		+ "   ],\n"
+        		+ "    \"_source\": {\n"
+        		+ "        \"include\": [\n"
+        		+ "            \"piid\", \"modnumber\",\"maj_fund_agency_cat\", \"vendorname\", \n"
+        		+ "            \"signeddate\", \"effectivedate\",\"currentcompletiondate\",\n"
+        		+ "            \"contractactiontype\", \"principalnaicscode\", \"dollarsobligated\", \n"
+        		+ "            \"baseandalloptionsvalue\"\n"
+        		+ "        ]\n"
+        		+ "    }\n}";
+  
+	    //System.out.println("Query: \n" + query);
+	 
+		Search search = new Search.Builder(query)
+		                                // multiple index or types can be added.
+		                                .addIndex("usaspending")
+		                                .addType("contract")
+		                                .build();
+		SearchResult result = null;
+	    List<Contract> retVal = null;
+	    SearchResponse sr = null;
+		try {
+			 result = jestClient.execute(search);
+			 List<SearchResult.Hit<Contract, Void>> hits = result.getHits(Contract.class);
+			 retVal = hits.stream()
+					      .map(hit -> hit.source)
+			              .collect(Collectors.toList());
+			 
+			 sr = new SearchResponse(result.getTotal(),retVal);
+			 
+	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return retVal;
+	}
+
+	@Override
+	public Map<String, List<Contract>> getTransactionsByIdvid(String idvid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
