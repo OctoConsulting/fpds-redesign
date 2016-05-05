@@ -1,4 +1,4 @@
-module.exports = function($scope,$http,$routeParams,SearchFactory){
+module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 
 	console.log("Search Page");
 	$scope.bigCurrentPage = 1;
@@ -32,12 +32,14 @@ module.exports = function($scope,$http,$routeParams,SearchFactory){
 
 	$scope.search = function(){
 		$scope.searchValue = $scope.query;
+		$scope.loading = 0;
 		SearchFactory.getSearchDetails($scope.searchValue,0,10)
 			.success(function(data){
 				$scope.vendorResult = data.transactions;
 				$scope.totalResults = data.total;
 				$scope.bigTotalItems = data.total;
 				$scope.bigCurrentPage = 1;
+				$scope.loading = 1;
 				//console.log("Size " + $scope.vendorResult.length);
 				//console.log("Total " + $scope.totalResults);
 			})
@@ -62,6 +64,23 @@ module.exports = function($scope,$http,$routeParams,SearchFactory){
 			.error(function(data,status,header,config){
 				console.log(status);
 			});
+	};
+
+	$scope.details = function(value){
+		//searchDetails/{{ contract.unique_transaction_id }}/{{ bigCurrentPage }} /{{ searchValue }}
+		var earl = '/searchDetails/' + value + "/" + $scope.bigCurrentPage + "/" + $scope.searchValue;
+    	$location.path(earl);
+    	
+	};
+
+	$scope.viewContract = function(value){
+		var url = '/viewContracts/'+ value;
+		$location.path(url);
+	};
+
+	$scope.viewIDV = function(value){
+		var rl = '/viewIdv/' + value;
+		$location.path(rl);
 	};	
 
 };

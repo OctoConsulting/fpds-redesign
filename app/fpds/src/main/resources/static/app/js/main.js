@@ -10,8 +10,11 @@
   var mainCtrl = require('./controllers/mainctrl');
   var searchCtrl = require('./controllers/searchResultsCtrl');
   var searchDetailsCtrl = require('./controllers/searchDetailsCtrl');
+  var viewContractsCtrl = require('./controllers/viewContractsCtrl');
+  var viewIdvCtrl = require('./controllers/viewIdvCtrl');
   var searchFactory = require('../../services/SearchFactory');
   var splitFilter = require('./controllers/splitFilter');
+
 
   angular.module('FpdsApp', ['ngRoute', 'ngAnimate','ui.bootstrap','ui.grid','ui.grid.resizeColumns', 'ui.grid.moveColumns','ui.grid.selection', 'ui.grid.exporter'])
 
@@ -32,6 +35,14 @@
           templateUrl: "./partials/partial3.html",
           controller:"SearchDetailsController",
         })
+        .when("/viewContracts/:contractId",{
+          templateUrl: "./partials/partial4.html",
+          controller:"ViewContractsController", 
+        })
+        .when("/viewIdv/:idvId",{
+          templateUrl: "./partials/partial5.html",
+          controller:"ViewIdvController",
+        })
         .otherwise({
            redirectTo: '/'
         });
@@ -42,7 +53,9 @@
   .filter('split',[splitFilter])
     //Load controller
   .controller('SearchDetailsController',['$scope','$http','$routeParams','$location','SearchFactory',searchDetailsCtrl])  
-  .controller('SearchController',['$scope','$http','$routeParams','SearchFactory',searchCtrl])
+  .controller('SearchController',['$scope','$http','$location','$routeParams','SearchFactory',searchCtrl])
+  .controller('ViewContractsController',['$scope','$http','$location','$routeParams','SearchFactory',viewContractsCtrl])
+  .controller('ViewIdvController',['$scope','$http','$location','$routeParams','SearchFactory',viewIdvCtrl])
   .controller('MainController', ['$scope','$http','$location','SearchFactory', mainCtrl]);
 
 }());
