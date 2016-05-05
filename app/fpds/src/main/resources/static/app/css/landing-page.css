@@ -359,3 +359,25 @@ label {
 .searchList{
    font-weight: bold; 
 }
+.inbut{
+    background-color: #FFAD33;
+    color: #fff;
+    margin-bottom: 10px;
+    border-color: #FFAD33;
+    box-shadow: 5px 5px 2px #888888;
+}
+.inbut:hover{
+    background-color: #fff;
+    color: #FFAD33;
+    text-decoration: underline;
+    border-color: #FFAD33;
+}
+.panel-result ol li{list-style: none;}
+.contractPanel {
+    background-color: #0a3c5d;
+    color: #FFF;
+    font-size: large ;
+}
+.panel-result h4{
+    color: #0a3c5d;
+}
