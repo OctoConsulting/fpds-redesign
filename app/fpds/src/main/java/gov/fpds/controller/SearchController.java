@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -122,5 +123,16 @@ public class SearchController {
 		}
 		List<Contract> results = searchService.getTransactionsByPiid(piid);
 		return results;
-	}		
+	}
+	
+	@RequestMapping("/idvcontracts")
+	public Map<String, List<Contract>> getContractsByIdv(HttpServletRequest request) {
+		String idv = request.getParameter("idv");
+			
+		if(idv == null) {
+			idv = "";
+		}
+		Map<String, List<Contract>> results = searchService.getTransactionsByIdvid(idv);
+		return results;
+	}
 }

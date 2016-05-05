@@ -13,6 +13,7 @@ import io.searchbox.core.search.aggregation.SumAggregation;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -391,8 +392,55 @@ public class SearchServiceImpl implements SearchService {
 
 	@Override
 	public Map<String, List<Contract>> getTransactionsByIdvid(String idvid) {
-		// TODO Auto-generated method stub
-		return null;
+        String query = "{\n"
+        		+ "   \"size\" : 100,\n"
+        		+ "    \"query\" : {\n"
+        		+ "        \"filtered\": {\n"
+        		+ "            \"query\": {\n"
+        		+ "                \"match\": {\n"
+        		+ "                    \"idvpiid\": \"" + idvid + "\"\n"
+        		+ "                }\n"
+        		+ "            }\n"
+        		+ "        }\n"
+        		+ "    },\n"
+        		+ "   \"sort\" : [\n"
+        		+ "     \"piid\",\n"
+        		+ "     \"modnumber\"\n"
+        		+ "   ],\n"
+        		+ "    \"_source\": {\n"
+        		+ "        \"include\": [\n"
+        		+ "            \"idvpiid\", \"piid\", \"modnumber\",\"maj_fund_agency_cat\", \"vendorname\", \n"
+        		+ "            \"signeddate\", \"effectivedate\",\"currentcompletiondate\",\n"
+        		+ "            \"contractactiontype\", \"principalnaicscode\", \"dollarsobligated\", \n"
+        		+ "            \"baseandalloptionsvalue\"\n"
+        		+ "        ]\n"
+        		+ "    }\n}";
+  
+	    //System.out.println("Query: \n" + query);
+	 
+		Search search = new Search.Builder(query)
+		                                // multiple index or types can be added.
+		                                .addIndex("usaspending")
+		                                .addType("contract")
+		                                .build();
+		SearchResult result = null;
+		Map<String, List<Contract>> retVal = null;
+
+		try {
+			 result = jestClient.execute(search);
+			 List<SearchResult.Hit<Contract, Void>> hits = result.getHits(Contract.class);
+			 retVal = hits.stream()
+					      .map(hit -> hit.source)
+					      .collect(Collectors.groupingBy(
+					    		  Contract::getPiid, LinkedHashMap::new, Collectors.toList()));
+			 
+	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return retVal;
 	}
 
 }
