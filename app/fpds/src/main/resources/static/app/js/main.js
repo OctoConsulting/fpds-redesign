@@ -43,6 +43,10 @@
           templateUrl: "./partials/partial5.html",
           controller:"ViewIdvController",
         })
+        .when("/reports/",{
+          templateUrl: "./partials/partials6.html",
+          controller:"ReportsController",
+        })
         .otherwise({
            redirectTo: '/'
         });
