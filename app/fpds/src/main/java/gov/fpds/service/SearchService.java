@@ -26,4 +26,7 @@ public interface SearchService {
 	
 	//Transactions by idvid
 	public Map<String, List<Contract>> getTransactionsByIdvid(String idvid);
+	
+	//Search Results Analytics
+	public String getResultsAnalytics(String searchTerm, String startDt, String endDt);
 }

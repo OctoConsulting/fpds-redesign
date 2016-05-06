@@ -11,6 +11,7 @@ import io.searchbox.core.search.aggregation.CardinalityAggregation;
 import io.searchbox.core.search.aggregation.SumAggregation;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -441,6 +442,123 @@ public class SearchServiceImpl implements SearchService {
 		}
 		
 		return retVal;
+	}
+
+	@Override
+	public String getResultsAnalytics(String searchTerm, String startDt, String endDt) {
+        String query = "{\n" 
+				+   " \"query\" : {\n"
+				+ "    \"filtered\" :{\n"
+				+ "        \"query\" : {\n"
+				+ "          \"multi_match\" : {\n"
+				+ "            \"query\":      \"" + searchTerm + "\",\n"
+				+ "            \"type\":       \"phrase\",\n"
+				+ "            \"fields\":     [\"vendorname\", \"vendoralternatename\", \"vendorlegalorganizationname\", \"vendordoingasbusinessname\", \"maj_agency_cat\", \"maj_fund_agency_cat\", \"fundingrequestingofficeid\",  \"contractingofficeid\", \"contractingofficeagencyid\", \"mod_agency\", \"mod_parent\"]\n"
+				+ "          }\n"
+				+ "        },\n"
+				+ "         \"filter\": {\n"
+				+ "             \"range\": {\n"
+				+ "                 \"signeddate\": {\n"
+				+ "                         \"gte\": \""+ startDt + "\",\n"
+				+ "                         \"lte\": \""+ endDt + "\"\n"
+				+ "                     }\n"
+				+ "             }\n"
+				+ "         }\n"				
+				+ "    }\n"
+				+ "},\n"
+			    + "\"aggs\" : {\n"
+			    + "        \"num_contracts\" : {\n"
+			    + "            \"cardinality\" : {\n"
+			    + "                \"field\" : \"piid\"\n"
+			    + "            }\n"
+			    + "        },\n"
+			    + "        \"num_idvs\" : {\n"
+			    + "            \"cardinality\" : {\n"
+			    + "                \"field\" : \"idvpiid\"\n"
+			    + "            }\n"
+			    + "        },\n"
+			    + "        \"sum_obligated\": {\n"
+			    + "            \"sum\" : { \"field\" : \"dollarsobligated\" }\n"
+			    + "        },\n"
+			    + "        \"num_vendors\" : {\n"
+			    + "            \"cardinality\" : {\n"
+			    + "                \"field\" : \"dunsnumber\"\n"
+			    + "            }\n"
+			    + "        },\n"
+			    + "        \"num_states\" : {\n"
+			    + "            \"cardinality\" : {\n"
+			    + "                \"field\" : \"state\"\n"
+			    + "            }\n"
+			    + "        },\n"
+			    + "        \"num_agencies\" : {\n"
+			    + "            \"cardinality\" : {\n"
+			    + "                \"field\" : \"agencyid\"\n"
+			    + "            }\n"
+			    + "        }\n"
+			    + "    }\n"				
+		        + "}";
+  
+	    //System.out.println("Query: \n" + query);
+	 
+		Search search = new Search.Builder(query)
+		                                // multiple index or types can be added.
+		                                .addIndex("usaspending")
+		                                .addType("contract")
+		                                .setSearchType(io.searchbox.params.SearchType.COUNT)
+		                                .build();
+        String results = null;
+		SearchResult result = null;
+
+		try {
+			result = jestClient.execute(search);
+			Map<String, Class> nameToTypeMap = new LinkedHashMap<>(); 
+			
+	        nameToTypeMap.put("num_contracts", CardinalityAggregation.class);
+	        nameToTypeMap.put("num_idvs", CardinalityAggregation.class);
+	        nameToTypeMap.put("sum_obligated", SumAggregation.class);
+	        nameToTypeMap.put("num_vendors", CardinalityAggregation.class);
+	        nameToTypeMap.put("num_states", CardinalityAggregation.class);
+	        nameToTypeMap.put("num_agencies", CardinalityAggregation.class);
+	        
+	        List<Aggregation> aggregations = result.getAggregations().getAggregations(nameToTypeMap); 
+	        
+	        CardinalityAggregation numContractsAgg = (CardinalityAggregation)  aggregations.get(0);
+	        Long numContractsVal = numContractsAgg.getCardinality();
+	        
+	        CardinalityAggregation numIdvs = (CardinalityAggregation)  aggregations.get(1);
+	        Long numIdvsVal = numIdvs.getCardinality();	        
+
+	        SumAggregation sumObligated = (SumAggregation) aggregations.get(2);
+	        Double sumObligatedVal = sumObligated.getSum();
+	        
+	        CardinalityAggregation numVendors = (CardinalityAggregation)  aggregations.get(3);
+	        Long numVendorsVal = numVendors.getCardinality();
+	        
+	        CardinalityAggregation numStates = (CardinalityAggregation)  aggregations.get(4);
+	        Long numStatesVal = numStates.getCardinality();
+	        
+	        CardinalityAggregation numAgencies = (CardinalityAggregation)  aggregations.get(5);
+	        Long numAgenciesVal = numAgencies.getCardinality();	        
+	        
+	        JsonObject resultObj = Json.createObjectBuilder()
+	        		                .add("num_contracts", numContractsVal.intValue())
+	        		                .add("num_idvs", numIdvsVal.intValue())
+	        		                .add("sum_obligated", sumObligatedVal.doubleValue())
+	        		                .add("num_vendors", numVendorsVal.intValue())
+	        		                .add("num_states", numStatesVal.intValue())
+	        		                .add("num_agencies", numAgenciesVal.intValue())
+	        		                .build();
+	        if(resultObj != null) {
+	        	results = resultObj.toString();
+	        }
+	        
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return results;
+
 	}
 
 }
