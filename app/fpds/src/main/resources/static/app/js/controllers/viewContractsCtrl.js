@@ -47,8 +47,8 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 	SearchFactory.getViewContracts($scope.contractId)
 	.success(function(data){
 		$scope.contracts = data;
-		$scope.vendor = data[1].vendorname;
-		console.log("Here is " + $scope.vendor);
+		$scope.vendor = data[0].vendorname;
+		console.log("Here is " + $scope.contracts.length);
 		noOfContracts = $scope.contracts.length;
 	})
 	.error(function(header,config,status,data){

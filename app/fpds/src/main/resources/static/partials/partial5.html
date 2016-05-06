@@ -15,10 +15,73 @@
 			</div>
 		</div>
 	</nav>
+	<div class="container">
+		<section class="col-xs-12 col-sm-4 col-md-4 col-lg-12">
+			<div class="input-group">
+				<input type="hidden" name="search_param" value="all" id="search_param">
+				<input type="text" ng-model="query" class="form-control" typeahead="type.field_value for type in company($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term...">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button" ng-click = "search()">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			</div>
+		</section>
+		<h3 class="pull-right"><a href="#/search/{{ vendor }}" title="Search Results">Return to Search Page</a></h3>
+	</div>
+
+	<div class = "container panel-result">
+		<hr>
+		<br/>
+		<div class="panel panel-default">
+			<div class="panel-heading contractPanel">
+				<div class="pull-left">IDV No: {{ idvnumber }}</div>
+				<!--<button type="button" class="btn btn-default pull-right">Expand All <span class="glyphicon glyphicon-plus" aria-hidden="true"></button>-->
+				<div class="clearfix"></div>
+				</div>
+			</div>
+			<ol ng-repeat = "contract in contractDetails">
+				<li>
+					<div class="panel panel-default">
+						<div class="panel-heading IDVPanel">
+							<div class="pull-left">Contract No: {{ contract.piid }}</div>
+							<button type="button" class="btn btn-default pull-right" ng-click = "expand($index)"> {{ expanded[$index] ? "Colapse All ": "Expand All  " }} <span class="glyphicon" ng-class="{'glyphicon-minus' : expanded[$index], 'glyphicon-plus' : !expanded[$index]}" aria-hidden="true"></span></button>
+              				<div class="clearfix"></div>
+						</div>
+					</div>
+					<div ng-show = "expanded[$index]" >
+						<ol ng-repeat = "tran in contract.contracts">
+							<li>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<div class="pull-left">Mod Number: {{ tran.modnumber }}</div>
+										<button type="button" class="btn btn-default pull-right" ng-click ="tranExpand($parent.$index,$index)"><span class="glyphicon"  ng-class="{'glyphicon-minus' : flag[$parent.$index][$index], 'glyphicon-plus' : !flag[$parent.$index][$index]}" aria-hidden="true" aria-hidden="true"></span></button>
+										<div class="clearfix"></div>
+									</div>
+									<div class="panel-body tranPanel" ng-show="flag[$parent.$index][$index]">
+										<h4>Reason for Modification:{{ tran.reasonformodification }}</h4>
+										<div class="col-xs-12 col-sm-12 col-md-4">
+											Contract Start Date: {{ tran.effectivedate | date:'MM/dd/yyyy' }}
+										</div>
+										<div class="col-xs-12 col-sm-12 col-md-5">
+											Contract Completion Date: {{ tran.currentcompletiondate | date:'MM/dd/yyyy' }}
+										</div>
+										<div class="col-xs-12 col-sm-12 col-md-3">
+											Obligated Amount: {{ tran.dollarsobligated | currency }}
+										</div>
+									</div>
+								</div>
+							</li>
+						</ol>
+					</div>
+					
+				</li>
+			</ol>
+		</div>
+	</div>
 </div>
 
-<h2>View IDV Details Page</h2>
-<h3>{{ test }}</h3>
+
 
 <footer>
 	<div class="footer1">

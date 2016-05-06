@@ -374,9 +374,14 @@ label {
 }
 .panel-result ol li{list-style: none;}
 .contractPanel {
-    background-color: #0a3c5d;
-    color: #FFF;
+    background-color: #0a3c5d !important;
+    color: #FFF !important;
     font-size: large ;
+}
+.IDVPanel{
+    background-color: #F0ED63 !important;
+    color:black !important;
+    font-size: large
 }
 .panel-result h4{
     color: #0a3c5d;
