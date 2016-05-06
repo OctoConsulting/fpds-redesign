@@ -50,6 +50,10 @@ module.exports = function($http){
 		return $http.get("/piidcontracts?piid=" + contractId);
 	};
 
+	factory.getViewIdv = function(idvId){
+		return $http.get("/idvcontracts?idv=" + idvId);
+	};
+
 	getPeriod = function(period){
 		var today = new Date();
 
