@@ -135,4 +135,21 @@ public class SearchController {
 		Map<String, List<Contract>> results = searchService.getTransactionsByIdvid(idv);
 		return results;
 	}
+	
+	@RequestMapping("/results/analytics")
+	public String getResultsAnalytics(HttpServletRequest request) {
+		String term = request.getParameter("q");
+		String startDt = request.getParameter("start_date");
+		if(startDt == null) {
+			LocalDate begin = LocalDate.of(2001, 1, 1);
+			startDt = begin.format(dateFormatter);
+		}		
+		String endDt = request.getParameter("end_date");
+		if(endDt == null) {
+			LocalDate now = LocalDate.now();
+			endDt = now.format(dateFormatter);
+		}
+		String results = searchService.getResultsAnalytics(term, startDt, endDt);
+		return results;
+	}
 }
