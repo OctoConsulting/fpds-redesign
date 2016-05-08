@@ -9,7 +9,7 @@
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav navbar-right">
 									<li> <a href="#/">Home</a> </li>
-									<li> <a href="#">Reports</a> </li>
+									<li> <a href="#/reports">Reports</a> </li>
 									<li> <a href="#">Help</a> </li>
 								</ul>
 							</div>
@@ -48,7 +48,8 @@
 <section class="dark-bg text-left section-padding contact-wrap" id="contact" ng-show = "loading == 1">
 	<div class="container">
 		<hgroup class="mb20">
-			<h3 class="pull-right"><a href="#/search/{{ datas.vendorname }}" title="Search Results">Return to Search Page</a></h3>
+			<!--<h3 class="pull-right"><a href="#/search/{{ datas.vendorname }}" title="Search Results">Return to Search Page</a></h3>-->
+			<h3 class="pull-right"><button type="button" class="btn btn-default inbut" ng-click="back()">Return to Search Page</button></h3><br/>  
 			<h1>Details for {{ searchpara }}</h1>			
 		</hgroup>
 		<hr/>

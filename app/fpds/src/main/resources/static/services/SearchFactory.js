@@ -54,6 +54,14 @@ module.exports = function($http){
 		return $http.get("/idvcontracts?idv=" + idvId);
 	};
 
+	factory.getResults = function(value){
+		var todays = new Date();
+		var currMonth1 = todays.getMonth() + 1;
+		var nows = currMonth1 + "/" + todays.getDate() + "/" + todays.getFullYear();
+		var endDate = getPeriod("5 years");
+		return $http.get("results/analytics?q=" + value + "&start_date=" + endDate + "&end_date=" + nows);
+	};
+
 	getPeriod = function(period){
 		var today = new Date();
 
@@ -82,6 +90,13 @@ module.exports = function($http){
 			var ytmonth = preTyear.getMonth() + 1;
 			var ytdate = ytmonth + "/" + preTyear.getDate() + "/" + preTyear.getFullYear();
 			return ytdate;
+		}
+		else if(period === "5 years"){
+			var preTryear = new Date(today);
+			preTryear.setYear(today.getFullYear() - 5);
+			var ytrmonth = preTryear.getMonth() + 1;
+			var ytrdate = ytrmonth + "/" + preTryear.getDate() + "/" + preTryear.getFullYear();
+			return ytrdate;
 		}
 
 	};

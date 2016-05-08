@@ -20,6 +20,10 @@ module.exports = function($scope,$http,$routeParams,$location,SearchFactory){
 		var earl = '/search/' + $scope.query;
     	$location.path(earl);
 	};
+	$scope.back = function(){
+		var rl = '/search/' + $scope.vendorname;
+		$location.path(rl);
+	};
 	var start = ($scope.page - 1) * 10;
 
 	SearchFactory.getSearchDetails($scope.searchpara,start,10)
@@ -38,6 +42,7 @@ module.exports = function($scope,$http,$routeParams,$location,SearchFactory){
 				$scope.datas = recs[i];
 				console.log("Found " + $scope.datas.productorservicecode);
 				$scope.loading = 1;
+				$scope.vendorname = $scope.datas.vendorname;
 				break;
 			}
 		}

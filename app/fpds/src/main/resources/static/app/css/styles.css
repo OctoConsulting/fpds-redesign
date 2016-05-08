@@ -756,13 +756,13 @@ Search Results
 }
 .panel-result ol li{list-style: none;}
 .contractPanel {
-    background-color: #0a3c5d !important;
+    background-color: #1d2731 !important;
     color: #FFF !important;
     font-size: large ;
 }
 .IDVPanel{
-    background-color: #F0ED63 !important;
-    color:black !important;
+    background-color: #338cc1 !important;
+    color:#fff !important;
     font-size: large
 }
 .panel-result h4{

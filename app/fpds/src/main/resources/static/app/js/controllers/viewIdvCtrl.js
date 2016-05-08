@@ -18,6 +18,11 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
     	$location.path(earl);
 	};
 
+	$scope.back = function(){
+		var rl = '/search/' + $scope.vendor;
+		$location.path(rl);
+	};
+
 	var results = [];
 	
 	SearchFactory.getViewIdv($scope.idvnumber)

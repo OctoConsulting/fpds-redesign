@@ -9,7 +9,7 @@
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav navbar-right">
 									<li> <a href="#/">Home</a> </li>
-									<li> <a href="#">Reports</a> </li>
+									<li> <a href="#/reports">Reports</a> </li>
 									<li> <a href="#">Help</a> </li>
 								</ul>
 							</div>
@@ -46,7 +46,8 @@
 
 <div class = "dark-bg text-left contact-wrap" ng-show = "loading == 1">
 	<div class="container panel-result">
-		<h3 class="pull-right"><a href="#/search/{{ vendor }}" title="Search Results">Return to Search Page</a></h3>
+		<!--<h3 class="pull-right"><a href="#/search/{{ vendor }}" title="Search Results">Return to Search Page</a></h3>-->
+		<h3 class="pull-right"><button type="button" class="btn btn-default inbut" ng-click="back()">Return to Search Page</button></h3><br/>
 		<h1>Details for {{ vendor }}</h1>		
 		
 		<hr>

@@ -45,6 +45,11 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 		$scope.flag[val] = !$scope.flag[val];
 	};
 
+	$scope.back = function(){
+		var rl = '/search/' + $scope.vendor;
+		$location.path(rl);
+	};
+
 	SearchFactory.getViewContracts($scope.contractId)
 	.success(function(data){
 		$scope.contracts = data;

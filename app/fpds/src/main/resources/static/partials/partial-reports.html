@@ -1,0 +1,99 @@
+<header id="home">
+  <nav>
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="row">
+          <div class="container-fluid">
+            <div class="row">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> </button>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                  <li> <a href="#/">Home</a> </li>
+                  <li> <a href="#">Help</a> </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center col-lg-offset-2 col-lg-8">
+            <h1 class="animated fadeInDown"><a ui-sref="home" href="#/"><img src="images/logo.png" alt="FPDS" /></a></h1>
+          </div>
+        </div>
+      </div>
+    </section>
+  </nav>
+</header>
+
+<br/>
+<div class="row" ng-controller="TabsController">
+
+  <div class="col-md-2">
+  	<ul class="nav nav-pills nav-stacked">
+      <li ng-class="{ active: isSet(1) }">
+          <a href ng-click="setTab(1)">Obligated Amount by State</a>
+      </li>
+      <li ng-class="{ active: isSet(2) }">
+          <a href ng-click="setTab(2)">Socio-Economic Considerations by Agency</a>
+      </li>
+      <li ng-class="{ active: isSet(3) }">
+        <a href ng-click="setTab(3)">Top 100 Contractors Report</a>
+      </li>
+      <li ng-class="{ active: isSet(4) }">
+        <a href ng-click="setTab(4)">Obligated Amount by Contract Type</a>
+      </li>
+      <li ng-class="{ active: isSet(5) }">
+        <a href ng-click="setTab(5)">NAICS code by Agency</a>
+       </li>
+     </ul>
+  </div>
+  <div class="col-md-8">
+  		
+       	<div ng-show="isSet(1)">
+         	 <script type='text/javascript' src='http://ec2-52-90-228-239.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script>
+         	 <div class='tableauPlaceholder' style='width: 1154px; height: 936px;'>
+	        	<object class='tableauViz' width='1154' height='936' style='display:none;'>
+		        	<param name='host_url' value='http%3A%2F%2Fec2-52-90-228-239.compute-1.amazonaws.com%2F' /> 
+		        	<param name='site_root' value='' />
+		        	<param name='name' value='FPDSCustSQL10k&#47;ObligatedDollarsbyPlaceofPerformanceState' />
+		        	<param name='tabs' value='no' />
+		        	<param name='toolbar' value='yes' />
+		        	<param name='showShareOptions' value='true' />
+	        	</object>
+         	 </div>
+        </div>
+			 <div ng-show="isSet(2)">
+	        <script type='text/javascript' src='http://ec2-52-90-228-239.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script>
+         	 <div class='tableauPlaceholder' style='width: 1154px; height: 936px;'>
+	        	<object class='tableauViz' width='1154' height='936' style='display:none;'>
+		        	<param name='host_url' value='http%3A%2F%2Fec2-52-90-228-239.compute-1.amazonaws.com%2F' /> 
+		        	<param name='site_root' value='' />
+	         		<param name='name' value='FPDSCustSQL10k&#47;SocioEconomicConsiderations' />
+	         		<param name='tabs' value='no' /><param name='toolbar' value='yes' />
+	         		<param name='showShareOptions' value='true' />
+	         	</object>
+	         </div>
+	    	</div>
+	       <div ng-show="isSet(3)">
+	        <script type='text/javascript' src='http://ec2-52-90-228-239.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script>
+         	 <div class='tableauPlaceholder' style='width: 1154px; height: 936px;'>
+	        	<object class='tableauViz' width='1154' height='936' style='display:none;'>
+		        	<param name='host_url' value='http%3A%2F%2Fec2-52-90-228-239.compute-1.amazonaws.com%2F' /> 
+		        	<param name='site_root' value='' />
+	         		<param name='name' value='FPDSCustSQL10k&#47;Top100Vendors' />
+	         		<param name='tabs' value='no' />
+	         		<param name='toolbar' value='yes' />
+	         		<param name='showShareOptions' value='true' />
+	         	</object>
+	         </div>
+	    	</div>
+	    	<div ng-show="isSet(4)">
+	         <h1>Messages</h1>
+	         <p> Some messages </p>
+	    	</div>
+	    	<div ng-show="isSet(5)">
+	         <h1>Messages</h1>
+	         <p> Some messages </p>
+	    	</div>
+          	
+</div>
