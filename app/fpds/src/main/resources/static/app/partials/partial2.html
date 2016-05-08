@@ -88,10 +88,11 @@
 				</div>
 			
 				<div ng-repeat = "contract in vendorResult">
+					<div class = "light-box-1 box-hover">
 					<article class="search-result col">
-						
-						<h4>Agency Name: <label>{{ contract.maj_fund_agency_cat | split: ':' : 1 }}</label></h4>
-						<h3>Company Name: <label>{{ contract.vendorname }}</label></h3>
+						<br/>
+						<h4>&nbsp;&nbsp;Agency Name: <label>{{ contract.maj_fund_agency_cat | split: ':' : 1 }}</label></h4>
+						<h3>&nbsp;&nbsp;Company Name: <label>{{ contract.vendorname }}</label></h3>
 						
 						<div class="col-xs-12 col-sm-12 col-md-4">
 							<ul class="meta-search">
@@ -132,6 +133,7 @@
 						
 						<span class="clearfix borda"></span>
 					</article>
+					</div>
 				<hr/>
 				</div>
 			</div>	
