@@ -1,40 +1,54 @@
-<div class = "bodyview">
-	<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
-		<div class="container topnav">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-				</button>
-				<a class="navbar-brand topnav" href="#/"><img src="images/logo.png" alt="FPDS" /></a>
-			</div>
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right">
-					<li> <a href="#/reports">Reports</a> </li>
-					<li> <a href="#/help">Help</a> </li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-
-	<div class="container">
-		<section class="col-xs-12 col-sm-4 col-md-4 col-lg-12">
-			<div class="input-group">
-				<input type="hidden" name="search_param" value="all" id="search_param">
-				<input type="text" ng-model="query" class="form-control" typeahead="type.field_value for type in company($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term...">
-				<span class="input-group-btn">
-			      <button class="btn btn-default" type="button" ng-click = "search()">
-			      	<span class="glyphicon glyphicon-search"></span>
-			      </button>
-			    </span>
+<header id="home">
+	<nav>
+		<section class="hero" id="hero">
+			<div class="container">
+				<div class="row">
+					<div class="container-fluid">
+						<div class="row">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> </button>
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav navbar-right">
+									<li> <a href="#/">Home</a> </li>
+									<li> <a href="#">Reports</a> </li>
+									<li> <a href="#">Help</a> </li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3 text-center col-lg-offset-2 col-lg-8">
+						<h1 class="animated fadeInDown"><a ui-sref="home" href="#/"><img src="images/logo.png" alt="FPDS" /></a></h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3 text-center col-lg-offset-2 col-lg-8">
+						<div class="input-group autocomplete">	
+							<input type="hidden" name="search_param" value="all" id="search_param">
+							<input type="text" ng-model="query" class="form-control" typeahead="type.field_value for type in company($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term...">
+							<span class="input-group-btn">
+			      				<button class="btn btn-default" type="button" ng-click = "search()">
+			      					<span class="glyphicon glyphicon-search"></span>
+			      				</button>
+			    			</span>
+			    		</div>	
+					</div>
+				</div>
 			</div>
 		</section>
-		<hr/>
-		<h3 class="pull-right"><a href="#/search/{{ vendor }}" title="Search Results">Return to Search Page</a></h3>
+	</nav>
+</header>
+<div class = "dark-bg text-left contact-wrap landing" ng-show = "loading == 0"> 
+	<div class="container" >
+		<h1>Loading ... </h1>
 	</div>
+</div>	
 
-
+<div class = "dark-bg text-left contact-wrap" ng-show = "loading == 1">
 	<div class="container panel-result">
+		<h3 class="pull-right"><a href="#/search/{{ vendor }}" title="Search Results">Return to Search Page</a></h3>
+		<h1>Details for {{ vendor }}</h1>		
+		
 		<hr>
 		<br/>
 		<div class="panel panel-default">
@@ -45,13 +59,13 @@
 		</div>
 		<ol  ng-repeat = "tran in contracts">
 			<li>
-				<div class="panel panel-default">
+				<div class="panel panel-default light-box-1 box-hover">
 					<div class="panel-heading">
 						<div class="pull-left">Mod Number: {{ tran.modnumber }}</div>
             			<button type="button" class="btn btn-default pull-right" ng-click = "tranExpand($index)"><span class="glyphicon" ng-class="{'glyphicon-minus' : flag[$index], 'glyphicon-plus' : !flag[$index]}" aria-hidden="true"></span></button>
             			<div class="clearfix"></div>
             		</div>					
-					<div class="panel-body tranPanel" ng-show = "flag[$index]">
+					<div class="panel-body tranPanel " ng-show = "flag[$index]">
 						<h4>Reason for Modification:{{ tran.reasonformodification | split: ':' : 1 }}</h4>
 						<div class="col-xs-12 col-sm-12 col-md-4"> 
 	                 		Contract Start Date: {{ tran.effectivedate | date:'MM/dd/yyyy' }}
@@ -68,15 +82,18 @@
 		</ol>
 	</div>
 </div>	
-<br/>
-<footer>
-    <div class="footer1">
-    	
-        <div>
-          <p class="left">Created by <br>     
-          <img src="images/olabs_logo_sm.png" alt="Olabs">  
-          <span class="copyright text-muted small" style = "text-align: right">Copyright &copy; OLabs - Octo Consulting Group 2016. All Rights Reserved</span> </p>  
-        </div>  
-        
+<!--</div>-->	
+<footer ng-class="{'' : loading, 'footer' : !loading}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <ul class="legals">
+          <li><a href="#">Created by: <img src="images/olabs_logo_sm.png" alt="Olabs"></a></li>
+        </ul>
       </div>
+      <div class="col-md-6 credit">
+        <p>Copyright &copy; OLabs - Octo Consulting Group 2016. All Rights Reserved</p>
+      </div>
+    </div>
+  </div>
 </footer>

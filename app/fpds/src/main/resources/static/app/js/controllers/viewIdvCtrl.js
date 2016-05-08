@@ -1,7 +1,6 @@
 module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 	$scope.idvnumber = $routeParams.idvId;
-
-	$scope.vendor = "OCTO CONSULTING GROUP, INC.";
+	$scope.loading = 0;
 	$scope.expanded = [];
 	$scope.flag = [];
 
@@ -25,6 +24,7 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 	.success(function(data){
 		//console.log(data);
 		btnArray(data);
+		$scope.loading = 1;
 	})
 	.error(function(header,status,config,data){
 		console.log(status);
@@ -39,6 +39,8 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 
 		$scope.contractDetails = results;
 		var mainButtons = $scope.contractDetails.length;
+		$scope.vendor = $scope.contractDetails[0].contracts[0].vendorname;
+		console.log($scope.vendor);
 		//console.log("Main " +mainButtons);
 
 		for(var i = 0 ; i< mainButtons; i++){
@@ -51,6 +53,7 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 				$scope.flag[x][y] = false;
 			}
 		}
+
 	};
 
   		

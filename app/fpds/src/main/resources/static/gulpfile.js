@@ -21,7 +21,7 @@ gulp.task('lint', function() {
 gulp.task('clean', function() {
     gulp.src('./dist/*')
       .pipe(clean({force: true}));
-    gulp.src('./app/js/bundled.js')
+    gulp.src('./js/bundled.js')
       .pipe(clean({force: true}));
 });
 gulp.task('minify-css', function() {

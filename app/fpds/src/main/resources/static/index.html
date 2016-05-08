@@ -12,13 +12,18 @@
 
     <title>FPDS Prototype</title>
     <!-- styles -->
+    <link href="http://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Cabin:700|Source+Sans+Pro:400,200,300,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="bower_components/animate.css/animate.css"/>
     <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.min.css"/>
     <!-- Custom CSS -->
-    <link href="css/landing-page.css" rel="stylesheet">
+    <!--<link href="css/landing-page.css" rel="stylesheet">-->
+    <link href="css/flexslider.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/queries.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
     <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
     <!-- Custom Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
@@ -37,7 +42,7 @@
         } 
     </script> -->     
   </head>
-  <body>
+  <body id="top">
     <!-- Navigation -->
 
     <!-- views -->
@@ -72,17 +77,10 @@
     <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
     <script src="bower_components/angular-ui-grid/pdfmake.js"></script>
     <script src="bower_components/angular-ui-grid/vfs_fonts.js"></script>
-    <script type="text/javascript">
-      WebFontConfig = {
-        google: { families: [ 'Cabin:700:latin', 'Source+Sans+Pro:400,200,300,600:latin' ] }
-      };
-      (function() {
-        var wf = document.createElement('script');
-        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-        wf.type = 'text/javascript';
-        wf.async = 'true';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(wf, s);
-      })(); </script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
+    <script src="javascripts/waypoints.min.js"></script>
+    <script src="javascripts/scripts.js"></script>
+    <script src="javascripts/jquery.flexslider.js"></script>
+    <script src="javascripts/modernizr.js"></script>
   </body>
 </html>
