@@ -14,6 +14,7 @@
   var viewIdvCtrl = require('./controllers/viewIdvCtrl');
   var searchFactory = require('../../services/SearchFactory');
   var splitFilter = require('./controllers/splitFilter');
+  var enterDirective = require('./controllers/enterDirective');
   var tabsCtrl = require('./controllers/tabsCtrl');
 
   angular.module('FpdsApp', ['ngRoute', 'ngAnimate','ui.bootstrap','ui.grid','ui.grid.resizeColumns', 'ui.grid.moveColumns','ui.grid.selection', 'ui.grid.exporter'])
@@ -55,6 +56,7 @@
 
   .factory('SearchFactory',['$http',searchFactory])
   .filter('split',[splitFilter])
+  .directive('ngEnter',[enterDirective])
     //Load controller
   .controller('SearchDetailsController',['$scope','$http','$routeParams','$location','SearchFactory',searchDetailsCtrl])  
   .controller('SearchController',['$scope','$http','$location','$routeParams','SearchFactory',searchCtrl])
