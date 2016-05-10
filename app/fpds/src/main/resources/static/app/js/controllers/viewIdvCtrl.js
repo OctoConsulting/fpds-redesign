@@ -1,7 +1,6 @@
 module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 	$scope.idvnumber = $routeParams.idvId;
-
-	$scope.vendor = "OCTO CONSULTING GROUP, INC.";
+	$scope.loading = 0;
 	$scope.expanded = [];
 	$scope.flag = [];
 
@@ -19,35 +18,54 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
     	$location.path(earl);
 	};
 
+	$scope.back = function(){
+		var rl = '/search/' + $scope.vendor;
+		$location.path(rl);
+	};
+
+	var results = [];
+	
 	SearchFactory.getViewIdv($scope.idvnumber)
 	.success(function(data){
-		console.log(data);
-		//$scope.contractDetails = data;
+		//console.log(data);
+		btnArray(data);
+		$scope.loading = 1;
 	})
 	.error(function(header,status,config,data){
 		console.log(status);
 	});
 
-	$scope.contractDetails = [{piid : "0002", contracts : [{vendorname : "BATTELLE MEMORIAL INSTITUTE",currentcompletiondate : "2014-06-30",dollarsobligated:-310639.57,effectivedate:"2015-09-30",modnumber:5,reasonformodification:"SUPPLEMENTAL AGREEMENT FOR WORK WITHIN SCOPE"},
-														   {vendorname : "BATTELLE MEMORIAL INSTITUTE",currentcompletiondate : "2014-06-30",dollarsobligated:-310639.57,effectivedate:"2015-09-30",modnumber:5,reasonformodification:"SUPPLEMENTAL AGREEMENT FOR WORK WITHIN SCOPE"}]},
-														   {piid : "0003", contracts : [{vendorname : "BATTELLE MEMORIAL INSTITUTE",currentcompletiondate : "2014-06-30",dollarsobligated:-310639.57,effectivedate:"2015-09-30",modnumber:5,reasonformodification:"SUPPLEMENTAL AGREEMENT FOR WORK WITHIN SCOPE"},
-														   {vendorname : "BATTELLE MEMORIAL INSTITUTE",currentcompletiondate : "2014-06-30",dollarsobligated:-310639.57,effectivedate:"2015-09-30",modnumber:5,reasonformodification:"SUPPLEMENTAL AGREEMENT FOR WORK WITHIN SCOPE"},{vendorname : "BATTELLE MEMORIAL INSTITUTE",currentcompletiondate : "2014-06-30",dollarsobligated:-310639.57,effectivedate:"2015-09-30",modnumber:5,reasonformodification:"SUPPLEMENTAL AGREEMENT FOR WORK WITHIN SCOPE"}]}];
+		
+	btnArray = function(data){
+		_.forEach(data, function (value, key) {
+  			//console.log("Here");
+ 			results.push({"piid" : key, "contracts" : value});
+ 		});
 
-	var mainButtons = $scope.contractDetails.length;
-	console.log("Main " +mainButtons);
-	var innerMax;
+		$scope.contractDetails = results;
+		var mainButtons = $scope.contractDetails.length;
+		$scope.vendor = $scope.contractDetails[0].contracts[0].vendorname;
+		console.log($scope.vendor);
+		//console.log("Main " +mainButtons);
 
-	for(var i = 0 ; i< mainButtons; i++){
-		$scope.expanded[i] = false;
-	}
-	console.log(innerMax);
-
-	for(var x = 0; x < $scope.contractDetails.length ; x++){
-		$scope.flag[x] = [];
-		for(var y = 0; y < $scope.contractDetails[x].contracts.length; y++){
-			$scope.flag[x][y] = false;
+		for(var i = 0 ; i< mainButtons; i++){
+			$scope.expanded[i] = false;
 		}
-	}
+
+		for(var x = 0; x < $scope.contractDetails.length ; x++){
+			$scope.flag[x] = [];
+			for(var y = 0; y < $scope.contractDetails[x].contracts.length; y++){
+				$scope.flag[x][y] = false;
+			}
+		}
+
+	};
+
+  		
+	var innerMax;
+	//console.log(innerMax);
+
+	
 
 	$scope.expand = function(val){
 		$scope.expanded[val] = !$scope.expanded[val];
@@ -62,7 +80,7 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 	};
 
 	$scope.tranExpand = function(parent,child){
-		console.log("Parent " + parent +"Child " + child);
+		//console.log("Parent " + parent +"Child " + child);
 		$scope.flag[parent][child] = !$scope.flag[parent][child];
 	};
 };

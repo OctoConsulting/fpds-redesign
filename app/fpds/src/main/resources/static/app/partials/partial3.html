@@ -1,161 +1,186 @@
-<div class = "bodyview">
-<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
-    <div class="container topnav">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    	<div class="navbar-header">
-        	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        		<span class="sr-only">Toggle navigation</span>
-        	</button>  
-        	<a class="navbar-brand topnav" href="#/"><img src="images/logo.png" alt="FPDS" /></a>
-    	</div>
-    	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        	<ul class="nav navbar-nav navbar-right">
-        		<li> <a href="#/reports">Reports</a> </li>
-            	<li> <a href="#/help">Help</a> </li>
-        	</ul>  
-    	</div>
-     </div>  
-</nav>
- 
-<div class="container">
-	<section class="col-xs-12 col-sm-4 col-md-4 col-lg-12">
-		<div class="input-group">
-			<input type="hidden" name="search_param" value="all" id="search_param">
-			<input type="text" ng-model="query" class="form-control" typeahead="type.field_value for type in company($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term...">
-			<span class="input-group-btn">
-				<button class="btn btn-default" type="button" ng-click = "search()"><span class="glyphicon glyphicon-search"></span></button>
-			</span>
+<header id="home">
+	<nav>
+		<section class="hero" id="hero">
+			<div class="container">
+				<div class="row">
+					<div class="container-fluid">
+						<div class="row">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> </button>
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav navbar-right">
+									<li> <a href="#/">Home</a> </li>
+									<li> <a href="#/reports">Reports</a> </li>
+									<li> <a href="#">Help</a> </li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3 text-center col-lg-offset-2 col-lg-8">
+						<h1 class="animated fadeInDown"><a ui-sref="home" href="#/"><img src="images/logo.png" alt="FPDS" /></a></h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3 text-center col-lg-offset-2 col-lg-8">
+						<div class="input-group autocomplete">	
+							<input type="hidden" name="search_param" value="all" id="search_param">
+							<input type="text" ng-model="query" class="form-control" typeahead="type.field_value for type in company($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term..." ng-enter = "search()">
+							<span class="input-group-btn">
+			      				<button class="btn btn-default" type="button" ng-click = "search()">
+			      					<span class="glyphicon glyphicon-search"></span>
+			      				</button>
+			    			</span>
+			    		</div>	
+					</div>
+				</div>
+			</div>
+		</section>
+	</nav>
+</header>
+
+<div class = "dark-bg text-left contact-wrap landing" ng-show = "loading == 0"> 
+	<div class="container" >
+		<h1>Loading ... </h1>
+	</div>
+</div>	
+
+<section class="dark-bg text-left section-padding contact-wrap" id="contact" ng-show = "loading == 1">
+	<div class="container">
+		<hgroup class="mb20">
+			<!--<h3 class="pull-right"><a href="#/search/{{ datas.vendorname }}" title="Search Results">Return to Search Page</a></h3>-->
+			<h3 class="pull-right"><button type="button" class="btn btn-default inbut" ng-click="back()">Return to Search Page</button></h3><br/>  
+			<h1>Details for {{ searchpara }}</h1>			
+		</hgroup>
+		<hr/>
+		<br/>
+		<div class="col-xs-12 col-sm-6 col-md-12">
+      		<article class="search-result col">
+        		<div class="light-box box-hover">
+          			<h3>Contract Information</h3>
+			        <div class="col-xs-12 col-sm-12 col-md-6 ">
+			        	<ul class="meta-search paddingChange">
+			              <li><div class="col-md-5 searchList">Award Type: </div><div class="col-md-7 searchList-1">{{ datas.contractactiontype }}</div></li>
+			              <li><div class="col-md-5 searchList">Contract Number: </div><div class="col-md-7 searchList-1">{{ datas.piid }}</div></li>
+			              <li><div class="col-md-5 searchList">Funding Agency Name: </div><div class="col-md-7 searchList-1">{{ datas.maj_fund_agency_cat | split: ':' : 1 }}</div></li>
+			              <li><div class="col-md-5 searchList">Contract Office Agency Name: </div><div class="col-md-7 searchList-1">{{ datas.contractingofficeagencyid | split: ':' : 1 }}</div></li>
+		              	  <li><div class="col-md-5 searchList">Contract Office Name: </div><div class="col-md-7 searchList-1">{{ datas.contractingofficeid | split: ':' : 1 }}</div></li>
+			            </ul>
+			        </div>
+          			<div class="col-xs-12 col-sm-12 col-md-6 ">
+            			<ul class="meta-search paddingChange">
+		              		<li><div class="col-md-7 searchList">Period of Performance City Name: </div><div class="col-md-5 searchList-1">{{ datas.placeofPerformanceCity }}</div></li>
+		              		<li><div class="col-md-7 searchList">Period of Performance State Name: </div><div class="col-md-5 searchList-1">{{ datas.pop_state_code | split: ':' : 1 }}</div></li>
+			              	<li><div class="col-md-7 searchList">Period of Performance Country Name: </div><div class="col-md-5 searchList-1">{{ datas.placeofperformancecountrycode | split: ':' : 1 }}</div></li>
+			              	<li><div class="col-md-7 searchList">Period of Performance Zipcode: </div><div class="col-md-5 searchList-1">{{ datas.placeofperformancezipcode }}</div></li>
+            			</ul>
+          			</div>
+	          		
+          		<span class="clearfix borda"></span> 
+          	</div>
+      </article>
+      <hr>
+      <article class="search-result col">
+        <div class="light-box box-hover">
+          <div class="col-md-6">
+            <h3>Contract Timeline</h3>
+            <ul class="meta-search paddingChange">
+              <li><div class="col-md-5 searchList">Date Signed: </div><div class="col-md-7 searchList-1">{{ datas.signeddate | date:'MM/dd/yyyy' }}</li>
+              <li><div class="col-md-5 searchList">Start Date: </div><div class="col-md-7 searchList-1">{{ datas.effectivedate | date:'MM/dd/yyyy' }}</li>
+              <li><div class="col-md-5 searchList">Completion Date: </div><div class="col-md-7 searchList-1">{{ datas.currentcompletiondate | date:'MM/dd/yyyy' }}</div></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h3>Vendor Information</h3>
+            <ul class="meta-search paddingChange">
+              <li><div class="col-md-5 searchList">Vendor Name: </div><div class="col-md-7 searchList-1">{{ datas.vendorname }}</div></li>
+              <li><div class="col-md-5 searchList">DUNS Number: </div><div class="col-md-7 searchList-1">{{ datas.dunsnumber }}</div></li>
+              <li><div class="col-md-5 searchList">Vendor Address: </div><div class="col-md-7 searchList-1"><span ng-show = "datas.streetaddress != ''">{{datas.streetaddress}},</span><span ng-show = "datas.streetaddress2.length > 0 "><br/>{{ datas.streetaddress2 }},</span><span ng-show ="datas.streetaddress3.length > 0 "><br/>{{ datas.streetaddress3 }},</span><span ng-show ="datas.city.length > 0 "><br/>{{ datas.city }},</span><span ng-show ="datas.state.length > 0 ">{{ datas.state }},</span><span ng-show ="datas.zipcode.length > 0 "><br/>{{ datas.zipcode }},</span><span ng-show ="datas.vendorcountrycode.length > 0 ">{{ datas.vendorcountrycode | split: ':' : 0  }}</span></div></li>
+              <li><div class="col-md-5 searchList">Organization Type: </div><div class="col-md-7 searchList-1">{{ datas.organizationaltype }}</div></li>
+            </ul>
+          </div>
+          <span class="clearfix borda"></span> </div>
+      </article>
+      <hr>
+      <article class="search-result col">
+        <div class="light-box box-hover">
+          <h3>Competition Information</h3>
+          <div class="col-xs-12 col-sm-12 col-md-6">
+            <ul class="meta-search paddingChange">
+              <li><div class="col-md-5 searchList">Extent Competed Reference IDB: </div><div class="col-md-7 searchList-1">{{ datas.extentcompeted | split: ':' : 1 }}</li>
+              <li><div class="col-md-5 searchList">Solicitation Procedures: </div><div class="col-md-7 searchList-1">{{ datas.solicitationprocedures }}</div></li>
+              <li><div class="col-md-5 searchList">Type of Set Aside: </div><div class="col-md-7 searchList-1">{{ datas.typeofsetaside }}</div></li>
+              <li><div class="col-md-5 searchList">Fair oppurtunity: </div><div class="col-md-7 searchList-1">{{ datas.statutoryexceptiontofairopportunity }}</div></li>
+            </ul>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6">
+            <ul class="meta-search paddingChange">
+              	<li><div class="col-md-5 searchList">Local Area Set Aside: </div><div class="col-md-7 searchList-1">{{ datas.localareasetaside }}</div></li>
+              	<li><div class="col-md-5 searchList">FEDBIZOPPS: </div><div class="col-md-7 searchList-1">{{ datas.fedbizopps }}</div></li>
+              	<li><div class="col-md-5 searchList">No of Offers Recieved: </div><div class="col-md-7 searchList-1">{{ datas.numberofoffersreceived }}</div></li>
+            </ul>
+          </div>
+          <span class="clearfix borda"></span> </div>
+      </article>
+			<hr/>
+			<article class="search-result col">
+				<div class="light-box box-hover">
+					<h3>Product or Service Information</h3>
+					<div class="col-xs-12 col-sm-12 col-md-6">
+						<ul class="meta-search paddingChange">
+							<li><div class="col-md-5 searchList">Product Code:</div><div class="col-md-7 searchList-1"> {{ datas.productorservicecode | split: ':' : 1 }}</div></li>
+							<li><div class="col-md-5 searchList">NAICS Code:</div><div class="col-md-7 searchList-1"> {{ datas.principalnaicscode }}</div></li>
+							<li><div class="col-md-5 searchList">System Equipment Code:</div><div class="col-md-7 searchList-1"> {{ (datas.systemequipmentcode != ":" ? datas.claimantprogramcode : "None") }}</div></li>
+							<li><div class="col-md-5 searchList">Country of Product:</div> <div class="col-md-7 searchList-1"> {{ datas.countryoforigin }}</div></li>
+							<li><div class="col-md-5 searchList">Place of Manufacture:</div> <div class="col-md-7 searchList-1"> {{ datas.placeofmanufacture | split: ':' : 1 }}</div></li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-6 excerpet">
+						<ul class="meta-search paddingChange">
+							<li><div class="col-md-5 searchList">Domestic/Foreign entity:</div> <div class="col-md-7 searchList-1"> {{ datas.manufacturingorganizationtype | split: ':' : 1 }}</div></li>
+							<li><div class="col-md-5 searchList">Claimant Program Code:</div> <div class="col-md-7 searchList-1">{{ (datas.claimantprogramcode != ":" ? datas.claimantprogramcode : "None")  }}</div></li>
+							<li><div class="col-md-5 searchList">Use of EPA Designated Product:</div> <div class="col-md-7 searchList-1"> {{ datas.useofepadesignatedproducts | split: ':' : 1 }}</div></li>
+							<li><div class="col-md-5 searchList">Description of Requirement:</div> <div class="col-md-7 searchList-1"> {{ datas.descriptionofcontractrequirement }}</div></li>
+						</ul>
+					</div>
+					<span class="clearfix borda"></span>
+				</div>
+				
+			</article>
+			<hr/>
+			<article class="search-result col">
+				<div class="light-box box-hover">
+					<h3>Socio Economic Information</h3>
+					<div class="col-xs-12 col-sm-12 col-md-12">
+						<ul class="meta-search">
+							<li ng-show = "datas.firm8aflag == 'Y'">SBA Certified 8(a) Program Participant</li>
+							<li ng-show = "datas.sdbflag == 'Y'">Self-Certified Small Disadvantaged Business</li>
+							<li ng-show = "datas.womenownedflag == 'Y'">Women owned business</li>
+			        		<li ng-show = "datas.srdvobflag == 'Y'">Small Disadvantaged veteran owned business</li>
+			        		<li ng-show = "datas.minorityownedbusinessflag == 'Y'">Minority owned business</li>
+			        		<li ng-show = "datas.iswomenownedsmallbusiness == 'Y'">Women owned small business</li>
+			       	 		<li ng-show = "datas.hubzoneflag == 'Y'">SBA Certified HUBZone</li>
+			        		<li ng-show = "datas.isecondisadvwomenownedsmallbusiness == 'Y'">Economic Disadvantaged women owned small business</li>
+						</ul>
+					</div>
+					<span class="clearfix borda"></span> </div>
+				</div>
+				
+			</article>
 		</div>
-	</section>
-	<h3 class="pull-right"><a href="#/search/{{ datas.vendorname }}" title="Search Results">Return to Search Page</a></h3>
-</div>
-
-<div class="container" ng-show = "loading == 0">
-	<h1>Loading ... </h1>
-</div>
-
-<div class="container" ng-show = "loading == 1">
-	<hr/>
-	<section class="col-xs-12 col-sm-6 col-md-12">
-		<article class="search-result col">
-			<h2>Contract Information</h2>
-			<div class="col-xs-12 col-sm-12 col-md-6 ">
-				<ul class="meta-search">
-					<li><div class="searchList col-md-5">Award Type:</div><div class="col-md-7"> {{ datas.contractactiontype }}</div></li>
-					<li><div class="searchList col-md-5">Contract Number:</div><div class="col-md-7"> {{ datas.piid }}</div></li>
-					<li><div class="searchList col-md-5">Funding Agency Name:</div><div class="col-md-7"> {{ datas.maj_fund_agency_cat | split: ':' : 1 }}</div></li>
-					<li><div class="searchList col-md-5">Contract Office Agency Name:</div><div class="col-md-7"> {{ datas.contractingofficeagencyid | split: ':' : 1 }}</div></li><li><div class="searchList col-md-5">Contract Office Name:</div><div class="col-md-7"> {{ datas.contractingofficeid | split: ':' : 1 }}</div></li>
-				</ul>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-6 excerpet">
-				<ul>
-					<li><div class="searchList col-md-6">Period of Performance City Name:</div><div class="col-md-6"> {{ datas.placeofPerformanceCity }}</div></li>
-					<li><div class="searchList col-md-6">Period of Performance State Name:</div><div class="col-md-6"> {{ datas.pop_state_code | split: ':' : 1 }}</div></li>
-					<li><div class="searchList col-md-6">Period of Performance Country Name:</div><div class="col-md-6"> {{ datas.placeofperformancecountrycode | split: ':' : 1 }}</div></li>
-					<li><div class="searchList col-md-6">Period of Performance Zipcode:</div><div class="col-md-6"> {{ datas.placeofperformancezipcode }}</div></li>
-				</ul>
-			</div>	
-			<span class="clearfix borda"></span>				
-		</article>
-		<hr/>
-		<article class="search-result col">
-			<div class="col-xs-12 col-sm-12 col-md-12">
-				<h2>Contract Timeline</h2>
-				<ul class="meta-search">
-					<li><div class="searchList col-md-4">Contract Date Signed:</div><div class="col-md-8"> {{ datas.signeddate | date:'MM/dd/yyyy' }}</div></li>
-					<li><div class="searchList col-md-4">Contract Start Date:</div><div class="col-md-8"> {{ datas.effectivedate | date:'MM/dd/yyyy' }}</div></li>
-					<li><div class="searchList col-md-4 excerpet">Contract Completion Date:</div><div class="col-md-8"> {{ datas.currentcompletiondate | date:'MM/dd/yyyy' }}</div></li>					
-				</ul>
-			</div>
-			<span class="clearfix borda"></span>
-		</article>
-		<hr/>
-		<article class="search-result col">	
-			<div class="col-xs-12 col-sm-12 col-md-12">
-				<h2>Vendor Information</h2>
-				<ul class="meta-search">
-					<li><div class="searchList col-md-4">Vendor Name:</div><div class="col-md-8"> {{ datas.vendorname }}</div></li>
-					<li><div class="searchList col-md-4">DUNS Number:</div><div class="col-md-8"> {{ datas.dunsnumber }}</div></li>
-					<li><div class="searchList col-md-4">Vendor Address:</div><div class="col-md-8"><span ng-show = "datas.streetaddress != ''">{{datas.streetaddress}},</span><span ng-show = "datas.streetaddress2.length > 0 "><br/>{{ datas.streetaddress2 }},</span><span ng-show ="datas.streetaddress3.length > 0 "><br/>{{ datas.streetaddress3 }},</span><span ng-show ="datas.city.length > 0 "><br/>{{ datas.city }},</span><span ng-show ="datas.state.length > 0 ">{{ datas.state }},</span><span ng-show ="datas.zipcode.length > 0 "><br/>{{ datas.zipcode }},</span><span ng-show ="datas.vendorcountrycode.length > 0 ">{{ datas.vendorcountrycode | split: ':' : 0  }}</span></div></li>
-					<li><div class="searchList col-md-4 excerpet">Organization Type:</div> <div class="col-md-8">{{ datas.organizationaltype }}</div></li>
-				</ul>
-			</div>
-			<span class="clearfix borda"></span>			
-		</article>
-		<hr/>
-		<article class="search-result col">
-			<h2>Competition Information</h2>
-			<div class="col-xs-12 col-sm-12 col-md-4 ">
-				<ul class="meta-search">
-					<li><div class="searchList col-md-6">Extent Competed Reference IDB:</div> <div class="col-md-6">{{ datas.extentcompeted | split: ':' : 1 }}</div></li>
-					<li><div class="searchList col-md-6">Solicitation Procedures:</div> <div class="col-md-6">{{ datas.solicitationprocedures }}</div></li>
-					<li><div class="searchList col-md-6">Type of Set Aside:</div> <div class="col-md-6">{{ datas.typeofsetaside }}</div></li>					
-				</ul>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-4 ">
-				<ul>
-					<li><div class="searchList col-md-7">Fair oppurtunity/limited sources:</div> <div class="col-md-5">{{ datas.statutoryexceptiontofairopportunity }}</div></li>
-					<li><div class="searchList col-md-7">Local Area Set Aside:</div> <div class="col-md-5">{{ datas.localareasetaside }}</div></li>					
-				</ul>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-4 excerpet">
-				<ul>
-					<li><div class="searchList col-md-6">FEDBIZOPPS:</div><div class="col-md-6"> {{ datas.fedbizopps }}</div></li>
-					<li><div class="searchList col-md-6">No of Offers Recieved:</div><div class="col-md-6"> {{ datas.numberofoffersreceived }}</div></li>
-				</ul>
-			</div>
-			<span class="clearfix borda"></span>	
-		</article>
-		<hr/>
-		<article class="search-result col">
-			<h2>Product or Service Information</h2>
-			<div class="col-xs-12 col-sm-12 col-md-6">
-				<ul class="meta-search">
-					<li><div class="searchList col-md-7">Product/Service Code:</div><div class="col-md-5"> {{ datas.productorservicecode | split: ':' : 1 }}</div></li>
-					<li><div class="searchList col-md-7">NAICS Code:</div><div class="col-md-5"> {{ datas.principalnaicscode }}</div></li>
-					<li><div class="searchList col-md-7">System Equipment Code:</div><div class="col-md-5"> {{ (datas.systemequipmentcode != ":" ? datas.claimantprogramcode : "") }}</div></li>
-					<li><div class="searchList col-md-7">Country of Product/Service Origin:</div> <div class="col-md-5">{{ datas.countryoforigin }}</div></li>
-					<li><div class="searchList col-md-7">Place of Manufacture:</div> <div class="col-md-5">{{ datas.placeofmanufacture | split: ':' : 1 }}</div></li>
-				</ul>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-6 excerpet">
-				<ul>
-					<li><div class="searchList col-md-7">Domestic/Foreign entity:</div> <div class="col-md-5">{{ datas.manufacturingorganizationtype | split: ':' : 1 }}</div></li>
-					<li><div class="searchList col-md-7">Claimant Program Code:</div> <div class="col-md-5">{{ (datas.claimantprogramcode != ":" ? datas.claimantprogramcode : "")  }}</div></li>
-					<li><div class="searchList col-md-7">Use of EPA Designated Product:</div> <div class="col-md-5">{{ datas.useofepadesignatedproducts | split: ':' : 1 }}</div></li>
-					<li><div class="searchList col-md-7">Description of Requirement:</div> <div class="col-md-5">{{ datas.descriptionofcontractrequirement }}</div></li>
-				</ul>
-			</div>
-			<span class="clearfix borda"></span>		
-		</article>
-		<hr/>
-		<article class="search-result col">
-			<h2>Socio Economic Information</h2>
-			<div class="col-xs-12 col-sm-12 col-md-12">
-				<ul class="meta-search">
-					<li ng-show = "datas.firm8aflag == 'Y'">SBA Certified 8(a) Program Participant</li>
-					<li ng-show = "datas.sdbflag == 'Y'">Self-Certified Small Disadvantaged Business</li>
-					<li ng-show = "datas.womenownedflag == 'Y'">Women owned business</li>
-			        <li ng-show = "datas.srdvobflag == 'Y'">Small Disadvantaged veteran owned business</li>
-			        <li ng-show = "datas.minorityownedbusinessflag == 'Y'">Minority owned business</li>
-			        <li ng-show = "datas.iswomenownedsmallbusiness == 'Y'">Women owned small business</li>
-			        <li ng-show = "datas.hubzoneflag == 'Y'">SBA Certified HUBZone</li>
-			        <li ng-show = "datas.isecondisadvwomenownedsmallbusiness == 'Y'">Economic Disadvantaged women owned small business</li>
-				</ul>
-			</div>
-		</article>
-	</section>
-</div>
-<br/>
-</div>
-<footer>
-    <div class="footer1">
-    	<br/>
-        <div>
-          <p class="left">Created by <br>     
-          <img src="images/olabs_logo_sm.png" alt="Olabs">  
-          <span class="copyright text-muted small" style = "text-align: right">Copyright &copy; OLabs - Octo Consulting Group 2016. All Rights Reserved</span> </p>  
-        </div>  
-        
+	</div>
+</section>
+<footer ng-class="{'' : loading, 'footer' : !loading}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <ul class="legals">
+          <li><a href="#">Created by: <img src="images/olabs_logo_sm.png" alt="Olabs"></a></li>
+        </ul>
       </div>
+      <div class="col-md-6 credit">
+        <p>Copyright &copy; OLabs - Octo Consulting Group 2016. All Rights Reserved</p>
+      </div>
+    </div>
+  </div>
 </footer>

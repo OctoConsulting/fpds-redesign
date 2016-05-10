@@ -2,6 +2,7 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 	$scope.contractId = $routeParams.contractId;
 	$scope.expanded = false;
 	$scope.displays = false;
+	$scope.loading = 0;
 
 	var noOfContracts;
 	$scope.flag = [];
@@ -44,12 +45,18 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 		$scope.flag[val] = !$scope.flag[val];
 	};
 
+	$scope.back = function(){
+		var rl = '/search/' + $scope.vendor;
+		$location.path(rl);
+	};
+
 	SearchFactory.getViewContracts($scope.contractId)
 	.success(function(data){
 		$scope.contracts = data;
 		$scope.vendor = data[0].vendorname;
 		console.log("Here is " + $scope.contracts.length);
 		noOfContracts = $scope.contracts.length;
+		$scope.loading = 1;
 	})
 	.error(function(header,config,status,data){
 		console.log(status);

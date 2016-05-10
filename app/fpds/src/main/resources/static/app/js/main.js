@@ -14,7 +14,8 @@
   var viewIdvCtrl = require('./controllers/viewIdvCtrl');
   var searchFactory = require('../../services/SearchFactory');
   var splitFilter = require('./controllers/splitFilter');
-
+  var enterDirective = require('./controllers/enterDirective');
+  var tabsCtrl = require('./controllers/tabsCtrl');
 
   angular.module('FpdsApp', ['ngRoute', 'ngAnimate','ui.bootstrap','ui.grid','ui.grid.resizeColumns', 'ui.grid.moveColumns','ui.grid.selection', 'ui.grid.exporter'])
 
@@ -43,6 +44,10 @@
           templateUrl: "./partials/partial5.html",
           controller:"ViewIdvController",
         })
+        .when("/reports/",{
+          templateUrl: "./partials/partial-reports.html",
+          controller:"TabsController",
+        })
         .otherwise({
            redirectTo: '/'
         });
@@ -51,11 +56,13 @@
 
   .factory('SearchFactory',['$http',searchFactory])
   .filter('split',[splitFilter])
+  .directive('ngEnter',[enterDirective])
     //Load controller
   .controller('SearchDetailsController',['$scope','$http','$routeParams','$location','SearchFactory',searchDetailsCtrl])  
   .controller('SearchController',['$scope','$http','$location','$routeParams','SearchFactory',searchCtrl])
   .controller('ViewContractsController',['$scope','$http','$location','$routeParams','SearchFactory',viewContractsCtrl])
   .controller('ViewIdvController',['$scope','$http','$location','$routeParams','SearchFactory',viewIdvCtrl])
+  .controller('TabsController', ['$scope', tabsCtrl])
   .controller('MainController', ['$scope','$http','$location','SearchFactory', mainCtrl]);
 
 }());

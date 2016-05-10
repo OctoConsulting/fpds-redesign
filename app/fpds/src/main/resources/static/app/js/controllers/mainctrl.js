@@ -105,6 +105,10 @@ module.exports = function($scope,$http,$location,SearchFactory) {
     $location.path(earl);
   };
   
+  $scope.onEnter = function(){
+    console.log("Enter clicked");
+  };
+
   convertToMill = function(val){
     //val = val/1000000;
     //val = Math.round(val*100)/100;

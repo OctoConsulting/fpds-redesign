@@ -29,6 +29,15 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
  	 	.error(function(data,status,header,config){
  	 		console.log(status);
  	 	});	
+ 	SearchFactory.getResults($scope.searchValue)
+ 		.success(function(result){
+ 			$scope.widget = result;
+ 			$scope.widget.sum_obligated = Math.round($scope.widget.sum_obligated*100)/100;
+ 			console.log($scope.widget);
+ 		})
+ 		.error(function(data,status,config,header){
+ 			console.log(status);
+ 		});
 
 	$scope.search = function(){
 		$scope.searchValue = $scope.query;
@@ -39,13 +48,21 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 				$scope.totalResults = data.total;
 				$scope.bigTotalItems = data.total;
 				$scope.bigCurrentPage = 1;
-				$scope.loading = 1;
+				
 				//console.log("Size " + $scope.vendorResult.length);
 				//console.log("Total " + $scope.totalResults);
 			})
 			.error(function(data,status,header,config){
 				console.log(status);
 			});
+		SearchFactory.getResults($scope.searchValue)
+ 		.success(function(result){
+ 			$scope.widget = result;
+ 			$scope.loading = 1;
+ 		})
+ 		.error(function(data,status,config,header){
+ 			console.log(status);
+ 		});	
 	};
 
 	$scope.pageChanged = function(){
@@ -81,6 +98,8 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 	$scope.viewIDV = function(value){
 		var rl = '/viewIdv/' + value;
 		$location.path(rl);
-	};	
+	};
+
+
 
 };
