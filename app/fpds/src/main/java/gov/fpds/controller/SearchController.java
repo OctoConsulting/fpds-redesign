@@ -51,7 +51,7 @@ public class SearchController {
 	}
 	
 	@RequestMapping("/search")
-	public String autoComplete(HttpServletRequest request) {
+	public String search(HttpServletRequest request) {
 		String term = request.getParameter("q");
 		if(term == null) {
 			term = "";
@@ -67,6 +67,24 @@ public class SearchController {
 		
 		return results;
 	}	
+	
+	@RequestMapping("/autocomplete")
+	public List<String> autoComplete(HttpServletRequest request) {
+		String term = request.getParameter("q");
+		if(term == null) {
+			term = "";
+		}
+
+        List<String> results = null;
+		try {
+			results = searchService.autoSuggest(term);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return results;
+	}
 	
 	@RequestMapping("/total_awards")
 	public String getTotalAwards(HttpServletRequest request) {

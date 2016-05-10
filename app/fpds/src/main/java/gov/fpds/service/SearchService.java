@@ -29,4 +29,7 @@ public interface SearchService {
 	
 	//Search Results Analytics
 	public String getResultsAnalytics(String searchTerm, String startDt, String endDt);
+	
+	//Revised Autocomplete
+	public List<String> autoSuggest(String searchTerm);
 }

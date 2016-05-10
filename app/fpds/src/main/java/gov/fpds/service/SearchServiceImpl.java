@@ -6,12 +6,18 @@ import io.searchbox.client.JestClient;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 import io.searchbox.core.SearchResult.Hit;
+import io.searchbox.core.Suggest;
+import io.searchbox.core.SuggestResult;
 import io.searchbox.core.search.aggregation.Aggregation;
 import io.searchbox.core.search.aggregation.CardinalityAggregation;
+import io.searchbox.core.search.aggregation.DateHistogramAggregation;
+import io.searchbox.core.search.aggregation.DateHistogramAggregation.DateHistogram;
 import io.searchbox.core.search.aggregation.SumAggregation;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -20,9 +26,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.json.Json;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 
 import org.apache.commons.lang3.StringUtils;
@@ -34,6 +42,9 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Autowired
 	JestClient jestClient;
+	
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter quarterFormatter = DateTimeFormatter.ofPattern("yyyy-QQQ");
 	
 	
 	private final Function<Hit<Contract, Void>, String> autoCompleteConverter = h -> {
@@ -494,8 +505,23 @@ public class SearchServiceImpl implements SearchService {
 			    + "            \"cardinality\" : {\n"
 			    + "                \"field\" : \"agencyid\"\n"
 			    + "            }\n"
+			    + "        },\n"
+			    + "        \"amount_by_quarter\" : {\n"
+			    + "            \"date_histogram\" : {\n"
+			    + "                \"field\" : \"signeddate\",\n"
+			    + "                \"interval\" : \"quarter\",\n"
+			    + "                \"format\" : \"yyyy-MM-dd\",\n"
+                + "                \"order\" : { \"_key\" : \"desc\" }\n"
+			    + "            },\n"
+			    + "            \"aggs\" : {\n"
+			    + "                \"quarter_amount\" : {\n"
+			    + "                    \"sum\" : {\n"
+			    + "                       \"field\" : \"dollarsobligated\"    \n"
+			    + "                    }\n"
+			    + "                }\n "
+			    + "           }\n"
 			    + "        }\n"
-			    + "    }\n"				
+			    + "    }\n"			    
 		        + "}";
   
 	    //System.out.println("Query: \n" + query);
@@ -519,6 +545,7 @@ public class SearchServiceImpl implements SearchService {
 	        nameToTypeMap.put("num_vendors", CardinalityAggregation.class);
 	        nameToTypeMap.put("num_states", CardinalityAggregation.class);
 	        nameToTypeMap.put("num_agencies", CardinalityAggregation.class);
+	        nameToTypeMap.put("amount_by_quarter", DateHistogramAggregation.class);
 	        
 	        List<Aggregation> aggregations = result.getAggregations().getAggregations(nameToTypeMap); 
 	        
@@ -538,7 +565,28 @@ public class SearchServiceImpl implements SearchService {
 	        Long numStatesVal = numStates.getCardinality();
 	        
 	        CardinalityAggregation numAgencies = (CardinalityAggregation)  aggregations.get(5);
-	        Long numAgenciesVal = numAgencies.getCardinality();	        
+	        Long numAgenciesVal = numAgencies.getCardinality();	      
+	        
+	        DateHistogramAggregation amtByQuarter = (DateHistogramAggregation) aggregations.get(6);
+	        List<DateHistogram> dateHistList = amtByQuarter.getBuckets();     
+	        
+	        Map<String, Double> values = dateHistList
+	        		                     .stream()
+	        		                     .collect(Collectors.toMap(DateHistogram :: getTimeAsString, 
+	        		                    		                   extractObligAmt,
+	        		                    		                   (u, v) -> {
+	        		                    		                	   throw new IllegalStateException(String.format("Duplicate key %s", u));
+	        		                    		                	}, 
+																  LinkedHashMap::new));
+
+	        JsonArrayBuilder arrBuilder = Json.createArrayBuilder();
+
+	        values.forEach((k, v) -> {
+	        	LocalDate parsedDate = LocalDate.parse(k, formatter);
+	        	String text = parsedDate.format(quarterFormatter);
+	        	//System.out.println("Formatted date: " + text);
+	        	arrBuilder.add(Json.createObjectBuilder().add(text, v));
+	        });
 	        
 	        JsonObject resultObj = Json.createObjectBuilder()
 	        		                .add("num_contracts", numContractsVal.intValue())
@@ -547,9 +595,11 @@ public class SearchServiceImpl implements SearchService {
 	        		                .add("num_vendors", numVendorsVal.intValue())
 	        		                .add("num_states", numStatesVal.intValue())
 	        		                .add("num_agencies", numAgenciesVal.intValue())
+	        		                .add("amt_by_quarter", arrBuilder.build())
 	        		                .build();
 	        if(resultObj != null) {
 	        	results = resultObj.toString();
+	        	//System.out.println("Final Output: " + results);
 	        }
 	        
 
@@ -558,6 +608,57 @@ public class SearchServiceImpl implements SearchService {
 			e.printStackTrace();
 		}		
 		return results;
+
+	}
+	
+	private final Function<DateHistogram, Double> extractObligAmt = d -> {
+		   SumAggregation sa = d.getSumAggregation("quarter_amount");
+		   Double amt = sa.getSum();
+
+		   //System.out.println("amt: \n" + amt);
+		   return amt;
+	};
+
+	@Override
+	public List<String> autoSuggest(String term) {
+		String query = "{\n"
+				+ "    \"agency_suggest\":{\n"
+				+ "        \"text\":\"" + term + "\",\n"
+				+ "        \"completion\": {\n"
+				+ "            \"field\" : \"name_suggest\"\n"
+				+ "        }\n"
+				+ "    }\n"
+				+ "}";
+		
+		Suggest suggest = new Suggest.Builder(query)
+		                      .addIndex("search_suggest")
+		                      //.addIndex("test_index")
+				              .build();
+		
+		//System.out.println("Suggest URI: " + suggest.getURI());
+		//System.out.println("query: " + query);
+		
+		SuggestResult result = null;
+		try {
+			result = jestClient.execute(suggest);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+        //assertTrue(result.getErrorMessage(), result.isSucceeded()); 
+ 
+        List<SuggestResult.Suggestion> suggestions = result.getSuggestions("agency_suggest"); 
+        //assertEquals(3, suggestions.size());
+ 
+        SuggestResult.Suggestion suggestion = suggestions.get(0); 
+        
+        List<Map<String, Object>> results = suggestion.options;		
+        List<String> textList = results.stream()
+        		                .map(vMap -> vMap.get("text").toString().toUpperCase())
+        		                .distinct()
+        		                .collect(Collectors.toList());
+        
+		return textList;
 
 	}
 
