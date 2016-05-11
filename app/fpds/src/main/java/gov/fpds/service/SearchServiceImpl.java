@@ -579,14 +579,22 @@ public class SearchServiceImpl implements SearchService {
 	        		                    		                	}, 
 																  LinkedHashMap::new));
 
-	        JsonArrayBuilder arrBuilder = Json.createArrayBuilder();
+	        JsonArrayBuilder arrKeyBuilder = Json.createArrayBuilder();
+	        JsonArrayBuilder arrValueBuilder = Json.createArrayBuilder();	        
 
 	        values.forEach((k, v) -> {
 	        	LocalDate parsedDate = LocalDate.parse(k, formatter);
 	        	String text = parsedDate.format(quarterFormatter);
 	        	//System.out.println("Formatted date: " + text);
-	        	arrBuilder.add(Json.createObjectBuilder().add(text, v));
+	        	arrKeyBuilder.add(text);
+	        	arrValueBuilder.add(v);
 	        });
+	        
+	        JsonObject qtrAmtObj = Json.createObjectBuilder()
+	        		              .add("quarters", arrKeyBuilder.build())
+	        		              .add("amts", arrValueBuilder.build())
+	        		              .build();
+
 	        
 	        JsonObject resultObj = Json.createObjectBuilder()
 	        		                .add("num_contracts", numContractsVal.intValue())
@@ -595,7 +603,7 @@ public class SearchServiceImpl implements SearchService {
 	        		                .add("num_vendors", numVendorsVal.intValue())
 	        		                .add("num_states", numStatesVal.intValue())
 	        		                .add("num_agencies", numAgenciesVal.intValue())
-	        		                .add("amt_by_quarter", arrBuilder.build())
+	        		                .add("amt_by_quarter", qtrAmtObj)
 	        		                .build();
 	        if(resultObj != null) {
 	        	results = resultObj.toString();
