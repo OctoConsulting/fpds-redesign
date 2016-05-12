@@ -24,7 +24,7 @@
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 text-center col-lg-offset-2 col-lg-8">
 							<div class="input-group autocomplete">
-								<input type="text" ng-model="query" class="form-control" typeahead="type.field_value for type in cities($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term..." ng-enter = "search()" >
+								<input type="text" ng-model="query" class="form-control" typeahead="type for type in cities($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term..." ng-enter = "search()" >
 								<span class="input-group-btn">
 									<button class="btn btn-default" type="button" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
 								</span>

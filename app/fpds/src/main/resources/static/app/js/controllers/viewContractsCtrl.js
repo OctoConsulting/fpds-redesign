@@ -1,4 +1,4 @@
-module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
+module.exports = function($scope,$http,$location,$routeParams,$anchorScroll,SearchFactory){
 	$scope.contractId = $routeParams.contractId;
 	$scope.expanded = false;
 	$scope.displays = false;
@@ -12,7 +12,7 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 
 	$scope.company = function(value){
 		console.log(value);
-		return SearchFactory.getVendor(value).then(function(res){
+		return SearchFactory.getAutocomplete(value).then(function(res){
 			return res.data.map(function(item){
 				return item;
 			});
@@ -48,6 +48,10 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 	$scope.back = function(){
 		var rl = '/search/' + $scope.vendor;
 		$location.path(rl);
+	};
+	$scope.gototop = function(){
+		$location.hash('top1');
+		$anchorScroll();
 	};
 
 	SearchFactory.getViewContracts($scope.contractId)

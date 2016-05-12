@@ -62,6 +62,10 @@ module.exports = function($http){
 		return $http.get("results/analytics?q=" + value + "&start_date=" + endDate + "&end_date=" + nows);
 	};
 
+	factory.getAutocomplete = function(query){
+		return $http.get("/autocomplete?q=" + query);
+	};
+
 	getPeriod = function(period){
 		var today = new Date();
 

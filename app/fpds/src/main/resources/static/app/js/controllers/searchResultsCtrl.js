@@ -1,4 +1,4 @@
-module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
+module.exports = function($scope,$http,$location,$routeParams,$anchorScroll,SearchFactory){
 
 	console.log("Search Page");
 	$scope.bigCurrentPage = 1;
@@ -10,7 +10,7 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 
 	$scope.company = function(value){
 		console.log(value);
-		return SearchFactory.getVendor(value).then(function(res){
+		return SearchFactory.getAutocomplete(value).then(function(res){
 			return res.data.map(function(item){
 				return item;
 			});
@@ -34,6 +34,7 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
  			$scope.widget = result;
  			$scope.widget.sum_obligated = Math.round($scope.widget.sum_obligated*100)/100;
  			console.log($scope.widget);
+ 			start(result.amt_by_quarter.quarters,result.amt_by_quarter.amts);
  		})
  		.error(function(data,status,config,header){
  			console.log(status);
@@ -58,11 +59,17 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 		SearchFactory.getResults($scope.searchValue)
  		.success(function(result){
  			$scope.widget = result;
+ 			start(result.amt_by_quarter.quarters,result.amt_by_quarter.amts);
  			$scope.loading = 1;
  		})
  		.error(function(data,status,config,header){
  			console.log(status);
  		});	
+	};
+
+	$scope.gototop = function(){
+		$location.hash('top3');
+		$anchorScroll();
 	};
 
 	$scope.pageChanged = function(){
@@ -99,7 +106,33 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 		var rl = '/viewIdv/' + value;
 		$location.path(rl);
 	};
+	$scope.load = false;
+	$scope.analysis = function(){
+		$scope.load = !$scope.load;
+	};
+	start = function(quarts,amt){
+		Highcharts.chart('graph', {
+	      title: {
+	        text: 'Obligated Amount across Quarters'
+	      },
 
-
+	      xAxis: {
+	      	title: {
+                text: 'Quarters'
+            },
+	        categories: quarts
+	      },
+	      yAxis:{
+	      	title: {
+                text: 'Dollars Obligated'
+            }
+	      },
+	      series: [{
+	        data: amt,
+	        name: "Dollars Obligated"
+	      }]
+	    });
+	};
+	
 
 };

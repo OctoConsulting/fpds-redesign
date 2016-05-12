@@ -1,4 +1,4 @@
-module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
+module.exports = function($scope,$http,$location,$routeParams,$anchorScroll,SearchFactory){
 	$scope.idvnumber = $routeParams.idvId;
 	$scope.loading = 0;
 	$scope.expanded = [];
@@ -6,7 +6,7 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 
 	$scope.company = function(value){
 		console.log(value);
-		return SearchFactory.getVendor(value).then(function(res){
+		return SearchFactory.getAutocomplete(value).then(function(res){
 			return res.data.map(function(item){
 				return item;
 			});
@@ -60,7 +60,10 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 		}
 
 	};
-
+	$scope.gototop = function(){
+		$location.hash('top2');
+		$anchorScroll();
+	};
   		
 	var innerMax;
 	//console.log(innerMax);

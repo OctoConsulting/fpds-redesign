@@ -25,7 +25,7 @@
 					<div class="col-md-6 col-md-offset-3 text-center col-lg-offset-2 col-lg-8">
 						<div class="input-group autocomplete">	
 							<input type="hidden" name="search_param" value="all" id="search_param">
-							<input type="text" ng-model="query" class="form-control" typeahead="type.field_value for type in company($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term..." ng-enter = "search()">
+							<input type="text" ng-model="query" class="form-control" typeahead="type for type in company($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term..." ng-enter = "search()">
 							<span class="input-group-btn">
 			      				<button class="btn btn-default" type="button" ng-click = "search()">
 			      					<span class="glyphicon glyphicon-search"></span>
@@ -45,7 +45,8 @@
 	</div>
 </div>
 
-<div class = "dark-bg text-left contact-wrap" ng-show = "loading == 1">
+<div class = "dark-bg text-left contact-wrap landing" ng-show = "loading == 1">
+	<a id="top2"></a>
 	<div class = "container panel-result">
 		<!--<h3 class="pull-right"><a href="#/search/{{ vendor }}" title="Search Results">Return to Search Page</a></h3>-->
 		<h3 class="pull-right"><button type="button" class="btn btn-default inbut" ng-click="back()">Return to Search Page</button></h3><br/>
@@ -99,8 +100,12 @@
 		</div>
 	</div>
 </div>
-
-<footer ng-class="{'' : loading, 'footer' : !loading}">
+<!--<div class="pagination-centered dark-bg">
+    <h4><a ng-click="gototop()">Go to Top</a></h4>  
+</div>
+<br/>
+<br/>-->
+<footer class="footer">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
