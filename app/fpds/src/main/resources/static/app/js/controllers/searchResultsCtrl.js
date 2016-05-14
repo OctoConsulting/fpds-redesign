@@ -111,7 +111,16 @@ module.exports = function($scope,$http,$location,$routeParams,$anchorScroll,Sear
 		$scope.load = !$scope.load;
 	};
 	start = function(quarts,amt){
+		var quart = [];
+		var amtval = [];
+		for (var x = quarts.length; x>0; x--){
+			//console.log(quarts[x-1]);
+			quart.push(quarts[x-1]);
+			amtval.push(amt[x-1]);
+		}
+		console.log(quarts.length);
 		Highcharts.chart('graph', {
+
 	      title: {
 	        text: 'Obligated Amount across Quarters'
 	      },
@@ -120,7 +129,7 @@ module.exports = function($scope,$http,$location,$routeParams,$anchorScroll,Sear
 	      	title: {
                 text: 'Quarters'
             },
-	        categories: quarts
+	        categories: quart
 	      },
 	      yAxis:{
 	      	title: {
@@ -128,7 +137,7 @@ module.exports = function($scope,$http,$location,$routeParams,$anchorScroll,Sear
             }
 	      },
 	      series: [{
-	        data: amt,
+	        data: amtval,
 	        name: "Dollars Obligated"
 	      }]
 	    });

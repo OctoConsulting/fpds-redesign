@@ -51,14 +51,20 @@ module.exports = function($scope,$http,$location,$routeParams,$anchorScroll,Sear
 		for(var i = 0 ; i< mainButtons; i++){
 			$scope.expanded[i] = false;
 		}
-
+		var contractSum = 0;
+		$scope.idvSum = 0;
 		for(var x = 0; x < $scope.contractDetails.length ; x++){
 			$scope.flag[x] = [];
+			contractSum = 0;
 			for(var y = 0; y < $scope.contractDetails[x].contracts.length; y++){
 				$scope.flag[x][y] = false;
+				contractSum = contractSum + $scope.contractDetails[x].contracts[y].dollarsobligated;
+				//console.log(contractSum);
 			}
+			$scope.contractDetails[x].contractSum = contractSum;
+			$scope.idvSum = $scope.idvSum + contractSum;
 		}
-
+		$scope.idvSum = Math.round($scope.idvSum*100)/100;
 	};
 	$scope.gototop = function(){
 		$location.hash('top2');
