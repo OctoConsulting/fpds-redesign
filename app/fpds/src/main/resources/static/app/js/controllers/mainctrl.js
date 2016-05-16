@@ -7,9 +7,9 @@ module.exports = function($scope,$http,$location,SearchFactory) {
   
   $scope.cities = function(cityName){
     console.log(cityName);
-    return SearchFactory.getVendor(cityName).then(function(res){
+    return SearchFactory.getAutocomplete(cityName).then(function(res){
     //$scope.value = res.data;
-        
+       
       return res.data.map(function(item){
             
         //console.log(item.vendorname);
@@ -105,9 +105,7 @@ module.exports = function($scope,$http,$location,SearchFactory) {
     $location.path(earl);
   };
   
-  $scope.onEnter = function(){
-    console.log("Enter clicked");
-  };
+  
 
   convertToMill = function(val){
     //val = val/1000000;

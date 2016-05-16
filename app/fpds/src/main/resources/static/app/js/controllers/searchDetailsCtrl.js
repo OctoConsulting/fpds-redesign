@@ -1,4 +1,4 @@
-module.exports = function($scope,$http,$routeParams,$location,SearchFactory){
+module.exports = function($scope,$http,$routeParams,$location,$anchorScroll,SearchFactory){
 	console.log("Search Details Page");
 	$scope.test = $routeParams.tranid;
 	$scope.page = $routeParams.pageNo;
@@ -9,7 +9,7 @@ module.exports = function($scope,$http,$routeParams,$location,SearchFactory){
 
 	$scope.company = function(value){
 		console.log(value);
-		return SearchFactory.getVendor(value).then(function(res){
+		return SearchFactory.getAutocomplete(value).then(function(res){
 			return res.data.map(function(item){
 				return item;
 			});
@@ -23,6 +23,10 @@ module.exports = function($scope,$http,$routeParams,$location,SearchFactory){
 	$scope.back = function(){
 		var rl = '/search/' + $scope.vendorname;
 		$location.path(rl);
+	};
+	$scope.gototop = function(){
+		$location.hash('top');
+		$anchorScroll();
 	};
 	var start = ($scope.page - 1) * 10;
 

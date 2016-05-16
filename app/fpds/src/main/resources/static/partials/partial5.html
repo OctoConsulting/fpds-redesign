@@ -25,7 +25,7 @@
 					<div class="col-md-6 col-md-offset-3 text-center col-lg-offset-2 col-lg-8">
 						<div class="input-group autocomplete">	
 							<input type="hidden" name="search_param" value="all" id="search_param">
-							<input type="text" ng-model="query" class="form-control" typeahead="type.field_value for type in company($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term..." ng-enter = "search()">
+							<input type="text" ng-model="query" class="form-control" typeahead="type for type in company($viewValue)" typeahead-loading="loadingLocations" typeahead-min-length="2" typeahead-on-select='onSelect($item, $model, $label)' name="x" placeholder="Search term..." ng-enter = "search()">
 							<span class="input-group-btn">
 			      				<button class="btn btn-default" type="button" ng-click = "search()">
 			      					<span class="glyphicon glyphicon-search"></span>
@@ -46,15 +46,18 @@
 </div>
 
 <div class = "dark-bg text-left contact-wrap" ng-show = "loading == 1">
-	<div class = "container panel-result">
+	<a id="top2"></a>
+	<div class="dark-bg">
+	<div class = "container panel-result dark-bg">
 		<!--<h3 class="pull-right"><a href="#/search/{{ vendor }}" title="Search Results">Return to Search Page</a></h3>-->
 		<h3 class="pull-right"><button type="button" class="btn btn-default inbut" ng-click="back()">Return to Search Page</button></h3><br/>
-		<h1>Details for {{ vendor }}</h1>
+		<h1>IDV Details for {{ vendor }}</h1>
 		<hr>
 		<br/>
 		<div class="panel panel-default">
 			<div class="panel-heading contractPanel">
 				<div class="pull-left">IDV No: {{ idvnumber }}</div>
+				<div class="pull-right">Total IDV Obligated Amt: {{ idvSum | currency }}</div> 
 				<!--<button type="button" class="btn btn-default pull-right">Expand All <span class="glyphicon glyphicon-plus" aria-hidden="true"></button>-->
 				<div class="clearfix"></div>
 				</div>
@@ -64,7 +67,8 @@
 					<div class="panel panel-default">
 						<div class="panel-heading IDVPanel">
 							<div class="pull-left">Contract No: {{ contract.piid }}</div>
-							<button type="button" class="btn btn-default pull-right" ng-click = "expand($index)"> {{ expanded[$index] ? "Colapse All ": "Expand All  " }} <span class="glyphicon" ng-class="{'glyphicon-minus' : expanded[$index], 'glyphicon-plus' : !expanded[$index]}" aria-hidden="true"></span></button>
+							<div class="pull-right">Total Obligated Amt: {{ contract.contractSum | currency }}&nbsp;&nbsp;
+							<button type="button" class="btn btn-default pull-right" ng-click = "expand($index)"> {{ expanded[$index] ? "Colapse All ": "Expand All  " }} <span class="glyphicon" ng-class="{'glyphicon-minus' : expanded[$index], 'glyphicon-plus' : !expanded[$index]}" aria-hidden="true"></span></button></div>
               				<div class="clearfix"></div>
 						</div>
 					</div>
@@ -74,19 +78,20 @@
 								<div class="panel panel-default light-box-1 box-hover">
 									<div class="panel-heading">
 										<div class="pull-left">Mod Number: {{ tran.modnumber }}</div>
-										<button type="button" class="btn btn-default pull-right" ng-click ="tranExpand($parent.$index,$index)"><span class="glyphicon"  ng-class="{'glyphicon-minus' : flag[$parent.$index][$index], 'glyphicon-plus' : !flag[$parent.$index][$index]}" aria-hidden="true" aria-hidden="true"></span></button>
+										<div class="pull-right">Obligated Amount: {{ tran.dollarsobligated | currency }}&nbsp;&nbsp;
+										<button type="button" class="btn btn-default pull-right" ng-click ="tranExpand($parent.$index,$index)"><span class="glyphicon"  ng-class="{'glyphicon-minus' : flag[$parent.$index][$index], 'glyphicon-plus' : !flag[$parent.$index][$index]}" aria-hidden="true" aria-hidden="true"></span></button></div>
 										<div class="clearfix"></div>
 									</div>
 									<div class="panel-body tranPanel" ng-show="flag[$parent.$index][$index]">
 										<h4>Reason for Modification:{{ tran.reasonformodification | split: ':' : 1 }}</h4>
 										<div class="col-xs-12 col-sm-12 col-md-4">
-											Contract Start Date: {{ tran.effectivedate | date:'MM/dd/yyyy' }}
+											Signed Date: {{ tran.signeddate | date:'MM/dd/yyyy' }}
 										</div>
 										<div class="col-xs-12 col-sm-12 col-md-5">
-											Contract Completion Date: {{ tran.currentcompletiondate | date:'MM/dd/yyyy' }}
+											Contract Start Date: {{ tran.effectivedate | date:'MM/dd/yyyy' }}
 										</div>
 										<div class="col-xs-12 col-sm-12 col-md-3">
-											Obligated Amount: {{ tran.dollarsobligated | currency }}
+											Contract Completion Date: {{ tran.currentcompletiondate | date:'MM/dd/yyyy' }}
 										</div>
 									</div>
 								</div>
@@ -98,9 +103,17 @@
 			</ol>
 		</div>
 	</div>
+	</div>
 </div>
-
-<footer ng-class="{'' : loading, 'footer' : !loading}">
+<div ng-show = "contractDetails.length > 8">
+		<button type="button" class="btn btn-success inbut" ng-click="gototop()" style="width : 145px; margin-left : 45%">Back to Top</button>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<footer class="footer">
   <div class="container">
     <div class="row">
       <div class="col-md-6">

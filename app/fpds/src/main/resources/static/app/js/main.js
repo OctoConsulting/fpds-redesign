@@ -58,10 +58,10 @@
   .filter('split',[splitFilter])
   .directive('ngEnter',[enterDirective])
     //Load controller
-  .controller('SearchDetailsController',['$scope','$http','$routeParams','$location','SearchFactory',searchDetailsCtrl])  
-  .controller('SearchController',['$scope','$http','$location','$routeParams','SearchFactory',searchCtrl])
-  .controller('ViewContractsController',['$scope','$http','$location','$routeParams','SearchFactory',viewContractsCtrl])
-  .controller('ViewIdvController',['$scope','$http','$location','$routeParams','SearchFactory',viewIdvCtrl])
+  .controller('SearchDetailsController',['$scope','$http','$routeParams','$location','$anchorScroll','SearchFactory',searchDetailsCtrl])  
+  .controller('SearchController',['$scope','$http','$location','$routeParams','$anchorScroll','SearchFactory',searchCtrl])
+  .controller('ViewContractsController',['$scope','$http','$location','$routeParams','$anchorScroll','SearchFactory',viewContractsCtrl])
+  .controller('ViewIdvController',['$scope','$http','$location','$routeParams','$anchorScroll','SearchFactory',viewIdvCtrl])
   .controller('TabsController', ['$scope', tabsCtrl])
   .controller('MainController', ['$scope','$http','$location','SearchFactory', mainCtrl]);
 

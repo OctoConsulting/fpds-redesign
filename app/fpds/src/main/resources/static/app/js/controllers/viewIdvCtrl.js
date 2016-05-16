@@ -1,4 +1,4 @@
-module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
+module.exports = function($scope,$http,$location,$routeParams,$anchorScroll,SearchFactory){
 	$scope.idvnumber = $routeParams.idvId;
 	$scope.loading = 0;
 	$scope.expanded = [];
@@ -6,7 +6,7 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 
 	$scope.company = function(value){
 		console.log(value);
-		return SearchFactory.getVendor(value).then(function(res){
+		return SearchFactory.getAutocomplete(value).then(function(res){
 			return res.data.map(function(item){
 				return item;
 			});
@@ -51,16 +51,25 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 		for(var i = 0 ; i< mainButtons; i++){
 			$scope.expanded[i] = false;
 		}
-
+		var contractSum = 0;
+		$scope.idvSum = 0;
 		for(var x = 0; x < $scope.contractDetails.length ; x++){
 			$scope.flag[x] = [];
+			contractSum = 0;
 			for(var y = 0; y < $scope.contractDetails[x].contracts.length; y++){
 				$scope.flag[x][y] = false;
+				contractSum = contractSum + $scope.contractDetails[x].contracts[y].dollarsobligated;
+				//console.log(contractSum);
 			}
+			$scope.contractDetails[x].contractSum = contractSum;
+			$scope.idvSum = $scope.idvSum + contractSum;
 		}
-
+		$scope.idvSum = Math.round($scope.idvSum*100)/100;
 	};
-
+	$scope.gototop = function(){
+		$location.hash('top2');
+		$anchorScroll();
+	};
   		
 	var innerMax;
 	//console.log(innerMax);

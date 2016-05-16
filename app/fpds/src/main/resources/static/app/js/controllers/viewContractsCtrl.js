@@ -1,4 +1,4 @@
-module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
+module.exports = function($scope,$http,$location,$routeParams,$anchorScroll,SearchFactory){
 	$scope.contractId = $routeParams.contractId;
 	$scope.expanded = false;
 	$scope.displays = false;
@@ -12,7 +12,7 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 
 	$scope.company = function(value){
 		console.log(value);
-		return SearchFactory.getVendor(value).then(function(res){
+		return SearchFactory.getAutocomplete(value).then(function(res){
 			return res.data.map(function(item){
 				return item;
 			});
@@ -49,12 +49,21 @@ module.exports = function($scope,$http,$location,$routeParams,SearchFactory){
 		var rl = '/search/' + $scope.vendor;
 		$location.path(rl);
 	};
-
+	$scope.gototop = function(){
+		console.log("Entered");
+		$location.hash('top1');
+		$anchorScroll();
+	};
+	$scope.totalContractValue = 0;
 	SearchFactory.getViewContracts($scope.contractId)
 	.success(function(data){
 		$scope.contracts = data;
 		$scope.vendor = data[0].vendorname;
 		console.log("Here is " + $scope.contracts.length);
+		for(var i=0; i < $scope.contracts.length; i++){
+			$scope.totalContractValue = $scope.totalContractValue + $scope.contracts[i].dollarsobligated;
+			//console.log($scope.totalContractValue);
+		}
 		noOfContracts = $scope.contracts.length;
 		$scope.loading = 1;
 	})
