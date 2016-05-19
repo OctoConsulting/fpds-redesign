@@ -80,9 +80,9 @@ h2 {
 	margin: 0.83em 0;
 }
 h3 {
-	font-size: 1.0 em;
-	margin: 1em 0;
-	color: #0a3c5d;
+	font-size: 1 em;
+    margin: 1em 0;
+    color: #224f6d;
 }
 h4 {
 	font-size: 1.25 em;
@@ -730,7 +730,7 @@ Search Results
 .search-result h3 { font: 500 normal 1.375em "Source Sans Pro", sans-serif; margin-top: 0 !important; margin-bottom: 10px !important; }
 .search-result h3 > a, .search-result i { color: #248dc1 !important; }
 .search-result p { font: normal normal 1.125em "Source Sans Pro", sans-serif; } 
-.search-result span.plus { position: absolute; right: 0; }
+.search-result span.plus { position: absolute; right: -15px; }
 .search-result span.plus a { background-color: #248dc1; padding: 5px 5px 3px 5px; }
 .search-result span.plus a:hover { background-color: #414141; }
 .search-result span.plus a i { color: #fff !important; }
@@ -775,12 +775,30 @@ Search Results
    font-weight: bold; 
    padding-right: 0;
    padding-left: 0;
+   font-size: 14px;
+   color: black;
 }
 .searchList-1{
    padding-right: 0;
-   padding-left: 0;		
+   padding-left: 0;
+   font-size: 14px;
+   color: black;		
 }
-
+.searchList-2{
+   font-weight: bold;  		
+   padding-right: 0;
+   padding-left: 0;
+}
+.searchList-3{
+   padding-right: 0;
+   padding-left: 0;
+   font-weight: 700;
+}
 .paddingChange{
 	padding-left: 0;
+}
+.console{
+	font-size : 18px !important; 
+	line-height : 3 !important; 
+	color: #7e7e7e ;
 }
