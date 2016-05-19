@@ -362,6 +362,14 @@ h2::after {
 	padding: 10px 20px;
 	
 }
+.grey-box {
+	background-color: #f4f4f4;
+	-webkit-box-shadow: 0px 3px 0px 0px #f0f2f4;
+	-moz-box-shadow: 0px 3px 0px 0px #f0f2f4;
+	box-shadow: 0px 3px 0px 0px #f0f2f4;
+	padding: 10px 20px;
+	
+}
 .light-box-1 {
 	background-color: #fff;
 	-webkit-box-shadow: 0px 3px 0px 0px #f0f2f4;
@@ -371,12 +379,12 @@ h2::after {
 
 .lt-box{
 	height: 300px;
-}
+}/*
 .light-box:hover, .light-box:focus {
 	-webkit-box-shadow: 0px 3px 0px 0px #d9b310;
 	-moz-box-shadow: 0px 3px 0px 0px #d9b310;
-	box-shadow: 0px 3px 0px 0px #d9b310;
-}
+	/*box-shadow: 0px 3px 0px 0px #d9b310;
+}*/
 .light-box-1:hover, .light-box-1:focus {
 	-webkit-box-shadow: 0px 3px 0px 0px #d9b310;
 	-moz-box-shadow: 0px 3px 0px 0px #d9b310;
