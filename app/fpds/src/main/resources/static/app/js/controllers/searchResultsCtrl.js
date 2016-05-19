@@ -39,6 +39,10 @@ module.exports = function($scope,$http,$location,$routeParams,$anchorScroll,Sear
  		.error(function(data,status,config,header){
  			console.log(status);
  		});
+ 	$scope.onSelect = function ($item, $model, $label) {                
+	    $scope.choosen = $item.field_value;    
+	    $scope.search();
+	  };
 
 	$scope.search = function(){
 		$scope.searchValue = $scope.query;

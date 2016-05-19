@@ -94,7 +94,8 @@ module.exports = function($scope,$http,$location,SearchFactory) {
   };
 
   $scope.onSelect = function ($item, $model, $label) {                
-    $scope.choosen = $item.field_value;
+    $scope.choosen = $item.field_value;    
+    $scope.search();
   };
 
   $scope.search = function(){

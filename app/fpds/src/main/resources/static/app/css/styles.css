@@ -359,7 +359,7 @@ h2::after {
 	-webkit-box-shadow: 0px 3px 0px 0px #f0f2f4;
 	-moz-box-shadow: 0px 3px 0px 0px #f0f2f4;
 	box-shadow: 0px 3px 0px 0px #f0f2f4;
-	padding: 10px 20px;
+	padding: 7px 20px;
 	
 }
 .grey-box {
@@ -367,7 +367,7 @@ h2::after {
 	-webkit-box-shadow: 0px 3px 0px 0px #f0f2f4;
 	-moz-box-shadow: 0px 3px 0px 0px #f0f2f4;
 	box-shadow: 0px 3px 0px 0px #f0f2f4;
-	padding: 10px 20px;
+	padding: 7px 20px;
 	
 }
 .light-box-1 {
@@ -421,18 +421,18 @@ h2::after {
 	max-width: 100%;
 	position: relative;
 }
-.btn btn-success inbut {
-	/*background-color: #f7e38f;*/
+/*.btn btn-success inbut {
+	/*background-color: #f7e38f;
 	border-color: #f7e38f;
 	font-size: 16px;
-	/*color: #353535;*/
+	/*color: #353535;
 	display: block;
 	float: none;
 	width: 100%;
 	max-width: 100%;
 	position: relative;
 	line-height: 46px;
-}
+} */
 
 
 nav ul {
@@ -548,7 +548,7 @@ pagination { align-content:center; text-align: center;}
 Hero
 ========================================================================== */
 .hero {
-	background: url('../images/hero-bg.jpg') no-repeat center center;
+	background: url('../images/fpds.jpg') no-repeat center center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -657,11 +657,11 @@ footer a {
 	color: #d9b310;
 }
 footer {
-	background-color: #1d2731;
+	background-color: #338cc1;
 	padding: 5px 0 5px;
 }
 .footer{
-	background-color: #1d2731 !important;
+	background-color: #338cc1 !important;
 	padding: 5px 0 5px !important;
 	position:fixed !important;
 	height:85px !important;
@@ -750,17 +750,18 @@ Search Results
 }
 
 .inbut{
-    background-color: #FFAD33;
+    background-color: #338cc1;
     color: #fff;
-    margin-bottom: 10px;
-    border-color: #FFAD33;
-    box-shadow: 5px 5px 2px #888888;
+    height: 40px;
+    border-color: #338cc1;
+    margin-right: 10px;
+    
 }
 .inbut:hover{
     background-color: #fff;
-    color: #FFAD33;
+    color: #338cc1;
     text-decoration: underline;
-    border-color: #FFAD33;
+    border-color: #338cc1;
 }
 .panel-result ol li{list-style: none;}
 .contractPanel {
