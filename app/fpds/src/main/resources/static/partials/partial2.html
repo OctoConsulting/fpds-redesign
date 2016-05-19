@@ -48,16 +48,40 @@
 			<a id="top3"></a>
 			<h1>Search Results for {{ searchValue }}</h1>
 			<div class = "col-xs-12 col-sm-12 col-md-12">
-				<div class = "col-xs-12 col-sm-6 col-md-4">
-					<div class="col-xs-12 col-sm-12 col-md-12 search-result light-box" style="margin-top: 0px;height:400px;">
+				<div class = "col-xs-12 col-sm-6 col-md-4" style="margin-top: 0px;height:400px;">
+					<div class="col-xs-12 col-sm-12 col-md-12 search-result light-box" style="margin-top: 0px;">
 						<h3 style="text-align:left;font-size: 22px; font-family:Varela Round;">Search Results Summary</h3>
 						<ul>
-							<li  style = "font-size : 18px; line-height : 3;"><div class="searchList-2 col-md-5">No of Contracts:  </div><div class="searchList-3 col-md-7">{{ widget.num_contracts }}</div></li>
-							<li style = "font-size : 18px; line-height : 3;"><div class="searchList-2 col-md-5">No of Vendors: </div><div class="searchList-3 col-md-7">{{ widget.num_vendors }}</div></li>
-							<li style = "font-size : 18px;line-height : 3;"><div class="searchList-2 col-md-5">No of IDV's: </div><div class="searchList-3 col-md-7">{{ widget.num_idvs }}</div></li>
-							<li style = "font-size : 18px;line-height : 3;"><div class="searchList-2 col-md-5">No of Agencies: </div><div class="searchList-3 col-md-7">{{ widget.num_agencies }}</div></li>
-							<li style = "font-size : 18px; line-height : 3;"><div class="searchList-2 col-md-5">No of States: </div><div class="searchList-3 col-md-7">{{ widget.num_states }}</div></li>
-							<li style = "font-size : 18px;line-height : 3;"><div class="searchList-2 col-md-5">Total Amount:  </div><div class="searchList-3 col-md-7">{{ widget.sum_obligated | currency }}</div></li>
+							<li  style = "font-size : 18px; "><div class="searchList-2 col-md-5">No of Contracts:  </div><div class="searchList-3 col-md-7">{{ widget.num_contracts }}</div></li>							
+						</ul>
+						<br/>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 search-result grey-box" style="margin-top: 0px; ">				
+						<ul>							
+							<li style = "font-size : 18px; "><div class="searchList-2 col-md-5">No of Vendors: </div><div class="searchList-3 col-md-7">{{ widget.num_vendors }}</div></li>
+						</ul>
+						<br/>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 search-result light-box" style="margin-top: 0px;">
+						<ul>							
+							<li style = "font-size : 18px;"><div class="searchList-2 col-md-5">No of IDV's: </div><div class="searchList-3 col-md-7">{{ widget.num_idvs }}</div></li>
+						</ul>
+						<br/>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 search-result grey-box" style="margin-top: 0px; ">	
+						<ul>							
+							<li style = "font-size : 18px;"><div class="searchList-2 col-md-5">No of Agencies: </div><div class="searchList-3 col-md-7">{{ widget.num_agencies }}</div></li>							
+						</ul>
+						<br/>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 search-result light-box" style="margin-top: 0px;">
+						<ul>							
+							<li style = "font-size : 18px; "><div class="searchList-2 col-md-5">No of States: </div><div class="searchList-3 col-md-7">{{ widget.num_states }}</div></li>							
+						<br/>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 search-result grey-box" style="margin-top: 0px;">
+						<ul>							
+							<li style = "font-size : 18px;"><div class="searchList-2 col-md-5">Total Amount:  </div><div class="searchList-3 col-md-7">{{ widget.sum_obligated | currency }}</div></li>
 						</ul>
 						<br/>
 					</div>

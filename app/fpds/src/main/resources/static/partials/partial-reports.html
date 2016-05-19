@@ -1,6 +1,6 @@
 <header id="home">
   <nav>
-    <section class="hero" id="hero">
+    <section class="hero" id="hero" style="padding: 10px 0 10px 0;">
       <div class="container">
         <div class="row">
           <div class="container-fluid">
@@ -17,7 +17,7 @@
         </div>
         <div class="row">
           <div class="col-md-6 col-md-offset-3 text-center col-lg-offset-2 col-lg-8">
-            <h1 class="animated fadeInDown"><a ui-sref="home" href="#/"><img src="images/logo.png" alt="FPDS" /></a></h1>
+            <h1 class="animated fadeInDown" style="font-size: 20px; margin: 5px;" ><a ui-sref="home" href="#/"><img src="images/logo.png" alt="FPDS" /></a></h1>
           </div>
         </div>
       </div>
@@ -25,11 +25,10 @@
   </nav>
 </header>
 
-<br/>
-<div class="row" ng-controller="TabsController">
+<div class="row" ng-controller="TabsController" style="background-color : white;">
 
   <!--<div class="col-md-2">-->
-  	<ul class="nav nav-pills nav-justified">
+  	<ul class="nav nav-tabs nav-justified" style="margin-top : 0">
       <li ng-class="{ active: isSet(1) }">
           <a href ng-click="setTab(1)">Obligated Amount by Place of Performance</a>
       </li>
