@@ -792,7 +792,8 @@ Search Results
    padding-right: 0;
    padding-left: 0;
    font-size: 14px;
-   color: black;		
+   color: black;
+   font-weight: normal !important;		
 }
 .searchList-2{
    font-weight: bold;  		
@@ -826,4 +827,9 @@ Search Results
 }
 .navbar-nav > li > a {
     line-height: 5px !important;;
+}
+.butn{
+	margin-bottom: 5px;
+	width : 145px; 
+	margin-left : 45%
 }
