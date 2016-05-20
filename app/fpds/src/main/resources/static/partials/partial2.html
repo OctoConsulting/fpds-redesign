@@ -2,9 +2,9 @@
 	<nav>
 		<section class="hero" id="hero">
 			<div class="container">
-				<div class="row">
+				<div >
 					<div class="container-fluid">
-						<div class="row">
+						<div >
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> </button>
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav navbar-right">
@@ -16,12 +16,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div >
 					<div class="col-md-6 col-md-offset-3 text-center col-lg-offset-2 col-lg-8">
 						<h1 class="animated fadeInDown"><a ui-sref="home" href="#/"><img src="images/logo.png" alt="FPDS" /></a></h1>
 					</div>
 				</div>
-				<div class="row">
+				<div >
 					<div class="col-md-6 col-md-offset-3 text-center col-lg-offset-2 col-lg-8">
 						<div class="input-group autocomplete">	
 							<input type="hidden" name="search_param" value="all" id="search_param">
@@ -48,7 +48,7 @@
 			<a id="top3"></a>
 			<h1>Search Results for {{ searchValue }}</h1>
 			<div class = "col-xs-12 col-sm-12 col-md-12">
-				<div class = "col-xs-12 col-sm-6 col-md-4" style="margin-top: 0px;height:400px;">
+				<div class = "col-xs-12 col-sm-6 col-md-4" style="margin-top: 0px;height:400px;background-color: #fff;">
 					<div class="col-xs-12 col-sm-12 col-md-12 search-result light-box" style="margin-top: 0px;">
 						<h3 style="text-align:left;font-size: 22px; font-family:Varela Round;">Search Results Summary</h3>
 						<ul>
@@ -76,7 +76,8 @@
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 search-result light-box" style="margin-top: 0px;">
 						<ul>							
-							<li style = "font-size : 18px; "><div class="searchList-2 col-md-5">No of States: </div><div class="searchList-3 col-md-7">{{ widget.num_states }}</div></li>							
+							<li style = "font-size : 18px; "><div class="searchList-2 col-md-5">No of States: </div><div class="searchList-3 col-md-7">{{ widget.num_states }}</div></li>	
+						</ul>						
 						<br/>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 search-result grey-box" style="margin-top: 0px;">
@@ -85,6 +86,8 @@
 						</ul>
 						<br/>
 					</div>
+					
+
 				</div>
 				<div class = "col-xs-12 col-sm-6 col-md-8">
 					<div id="graph" style = "width: 730px;"></div>
@@ -94,50 +97,77 @@
 		</hgroup>
 			
 		<section class="col-xs-12 col-sm-6 col-md-12 ">
-				<h3>{{ totalResults }} transaction(s) were found.</h3>
+				<h1>{{ totalResults }} transaction(s) were found.</h1>
 				<hr/>
 				<div ng-repeat = "contract in vendorResult">
-					<div class = "light-box-1 box-hover">
+					<div class = "light-box-1">
 					<article class="search-result col">
 						<br/>
 						<h4>&nbsp;&nbsp;Agency Name: <label>{{ contract.maj_fund_agency_cat | split: ':' : 1 }}</label></h4>
 						<h3>&nbsp;&nbsp;Company Name: <label>{{ contract.vendorname }}</label></h3>
+						<div id="container" style="overflow:hidden;">
+						  <div id="inner" style="overflow:hidden; padding-left: 10px; ">
+						     <div style="float:left;" ng-show = "contract.firm8aflag == 'Y'" class = "searchList-1">SBA Certified 8(a) Program,&nbsp; </div>
+								<div style="float:left;" ng-show = "contract.sdbflag == 'Y'" class = "searchList-1">Small Disadvantaged Business,&nbsp; </div>
+								<div  style="float:left;"ng-show = "contract.womenownedflag == 'Y'" class = "searchList-1">Women owned business,&nbsp; </div>
+								<div style="float:left;" ng-show = "contract.srdvobflag == 'Y'" class = "searchList-1">Small Disadvantaged veteran owned business,&nbsp; </div>
+						 	 </div>
+						</div>
 						
-						<div class="col-xs-12 col-sm-12 col-md-4">
-							<ul class="meta-search">
-								<li><div class="searchList col-md-6">Date Signed:</div> <div class="searchList-1 col-md-6">{{ contract.signeddate | date:'MM/dd/yyyy' }}</div></li>
-								<li><div class="searchList col-md-6">Contract Number:</div><div class="searchList-1 col-md-6"> {{ contract.piid }}</div></li>
-								<li><div class="searchList col-md-6">Contract Start Date:</div><div class="searchList-1 col-md-6"> {{ contract.effectivedate | date:'MM/dd/yyyy' }}</div></li>
-								<li><div class="searchList col-md-6">Contract Completion Date:</div><div class="searchList-1 col-md-6"> {{ contract.currentcompletiondate | date:'MM/dd/yyyy' }}</div></li>
-							</ul>
+						
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<div class="row">
+								<ul>
+									<li><div class="searchList col-md-6">Date Signed:</div> <div class="searchList-1 col-md-6">{{ contract.signeddate | date:'MM/dd/yyyy' }}</div></li>
+								</ul>
+							</div>
+							<div class="row">
+								<ul>								
+									<li><div class="searchList col-md-6">Contract Number:</div><div class="searchList-1 col-md-6"> {{ contract.piid }}</div></li>
+								</ul>
+							</div>
+							<div class="row">
+								<ul>								
+									<li><div class="searchList col-md-6">Contract Start Date:</div><div class="searchList-1 col-md-6"> {{ contract.effectivedate | date:'MM/dd/yyyy' }}</div></li>
+								</ul>
+							</div>
+							<div class="row">
+								<ul>								
+									<li><div class="searchList col-md-6">Contract Completion Date:</div><div class="searchList-1 col-md-6"> {{ contract.currentcompletiondate | date:'MM/dd/yyyy' }}</div></li>
+								</ul>
+							</div>
 						</div>
-						<div class="col-xs-12 col-sm-12 col-md-4">
-							<ul>
-								<li><div class="searchList col-md-5">Contract Type:</div><div class="searchList-1 col-md-7"> {{ contract.contractactiontype }}</div></li>
-								<li><div class="searchList col-md-5">NAICS Code:</div><div class="searchList-1 col-md-7"> {{ contract.principalnaicscode }}</div></li>
-								<li><div class="searchList col-md-5">Obligated Amount:</div><div class="searchList-1 col-md-7"> {{ contract.dollarsobligated | currency }}</div></li>
-								<li><div class="searchList col-md-5">Total Contract Value:</div><div class="searchList-1 col-md-7"> {{ contract.baseandalloptionsvalue | currency }}</div></li>
-							</ul>
+
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<div class="row">
+								<ul>
+									<li><div class="searchList col-md-5">Contract Type:</div><div class="searchList-1 col-md-7"> {{ contract.contractactiontype }}</div></li>
+								</ul>
+							</div>
+							<div class="row">
+								<ul>								
+									<li><div class="searchList col-md-5">NAICS Code:</div><div class="dataOver col-md-7" data-toggle="tooltip" data-placement="top" title="{{ contract.principalnaicscode }}"> {{ contract.principalnaicscode }}</div></li>
+								</ul>
+							</div>
+							<div class="row">
+								<ul>								
+									<li><div class="searchList col-md-5">Obligated Amount:</div><div class="searchList-1 col-md-7"> {{ contract.dollarsobligated | currency }}</div></li>
+								</ul>
+							</div>
+							<div class="row">
+								<ul>								
+									<li><div class="searchList col-md-5">Total Contract Value:</div><div class="searchList-1 col-md-7"> {{ contract.baseandalloptionsvalue | currency }}</div></li>
+								</ul>
+							</div>
 						</div>
-						<div class="col-xs-12 col-sm-12 col-md-4">
-							<!--<div class="searchList">Socio-Economic Categories:</div>-->
-							<ul>
-								<li><div class="searchList">Socio-Economic Categories:</div></li>
-								<li ng-show = "contract.firm8aflag == 'Y'"><div class = "searchList-1">SBA Certified 8(a) Program</div></li>
-								<li ng-show = "contract.sdbflag == 'Y'"><div class = "searchList-1">Small Disadvantaged Business</div></li>
-								<li ng-show = "contract.womenownedflag == 'Y'"><div class = "searchList-1">Women owned business</div></li>
-								<li ng-show = "contract.srdvobflag == 'Y'"><div class = "searchList-1">Small Disadvantaged veteran owned business</div></li>
-								<li ng-show = "contract.minorityownedbusinessflag == 'Y'"><div class = "searchList-1">Minority owned business</div></li>
-								<li ng-show = "contract.hubzoneflag == 'Y'"><div class = "searchList-1">SBA Certified HUBZone</div></li>
-							</ul>
+						
+
+						<div class = "btn-group">
+						   <button type="button" class="inbut" ng-click="details(contract.unique_transaction_id)">Transaction Details >></button>
+		          				<button type="button" class="inbut" ng-click="viewContract(contract.piid)">Contracts Details >></button>
+		          				<button type="button" class="inbut" ng-show="contract.hasOwnProperty('idvpiid')" ng-click="viewIDV(contract.idvpiid)">IDV Details >></button>
 						</div>
-						<span class="plus">
-							<div class="btn-group-vertical" role="group" aria-label="...">
-		          				<button type="button" class="btn btn-success inbut" ng-click="details(contract.unique_transaction_id)">Transaction Details >></button>
-		          				<button type="button" class="btn btn-success inbut" ng-click="viewContract(contract.piid)">Contracts Details >></button>
-		          				<button type="button" class="btn btn-success inbut" ng-show="contract.hasOwnProperty('idvpiid')" ng-click="viewIDV(contract.idvpiid)">IDV Details >></button>
-		        			</div>
-						</span>
+						
 						<!--<span class="plus"><a href="#/searchDetails/{{ contract.unique_transaction_id }}/{{ bigCurrentPage }} /{{ searchValue }}" title="Search Details"><i class="glyphicon glyphicon-arrow-right"></i></a></span>-->
 						
 						<span class="clearfix borda"></span>
@@ -151,7 +181,7 @@
 				
 			</div>
 			
-				<button type="button" class="btn btn-success inbut" ng-click="gototop()" style="width : 145px; margin-left : 45%">Back to Top</button>
+				<button type="button" class="inbut" ng-click="gototop()" style="width : 145px; margin-left : 45%">Back to Top</button>
 				
 		</section>
 	</div>
@@ -159,7 +189,7 @@
 
 <footer ng-class="{'' : loading, 'footer' : !loading}">
   <div class="container">
-    <div class="row">
+    <div >
       <div class="col-md-6">
         <ul class="legals">
           <li><a href="#">Created by: <img src="images/olabs_logo_sm.png" alt="Olabs"></a></li>

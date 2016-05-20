@@ -827,3 +827,23 @@ Search Results
 .navbar-nav > li > a {
     line-height: 5px !important;;
 }
+
+.dataOver {
+	padding-right: 0;
+    padding-left: 0;
+    font-size: 14px;
+    color: black;    
+    width: 50%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.row {
+    background: #f4f4f4;
+    
+}
+
+.row:nth-of-type(odd) {
+    background: #fff;
+}
