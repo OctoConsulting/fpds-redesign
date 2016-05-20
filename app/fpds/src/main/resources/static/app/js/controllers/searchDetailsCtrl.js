@@ -16,6 +16,11 @@ module.exports = function($scope,$http,$routeParams,$location,$anchorScroll,Sear
 		});
 	};
 
+	$scope.onSelect = function ($item, $model, $label) {                
+	    $scope.choosen = $item.field_value;    
+	    $scope.search();
+	};
+
 	$scope.search = function(){
 		var earl = '/search/' + $scope.query;
     	$location.path(earl);
