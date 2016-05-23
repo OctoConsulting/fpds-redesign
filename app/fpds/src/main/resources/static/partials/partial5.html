@@ -18,7 +18,7 @@
 				</div>
 				<div >
 					<div class="col-md-6 col-md-offset-3 text-center col-lg-offset-2 col-lg-8">
-						<h1 class="animated fadeInDown"><a ui-sref="home" href="#/"><img src="images/logo.png" alt="FPDS" /></a></h1>
+						<h1 class="animated fadeInDown"><a ui-sref="home" href="#/"><img src="images/final_logo.png" alt="FPDS" /></a></h1>
 					</div>
 				</div>
 				<div >
@@ -51,13 +51,13 @@
 	<div class = "container panel-result dark-bg">
 		<!--<h3 class="pull-right"><a href="#/search/{{ vendor }}" title="Search Results">Return to Search Page</a></h3>-->
 		<h3 class="pull-right"><button type="button" class="btn btn-default inbut" ng-click="back()">Return to Search Page</button></h3><br/>
-		<h1>IDV Details for {{ vendor }}</h1>
+		<h1>Delivery Vehicle Details for {{ vendor }}</h1>
 		<hr>
 		<br/>
 		<div class="panel panel-default">
 			<div class="panel-heading contractPanel">
-				<div class="pull-left">IDV No: {{ idvnumber }}</div>
-				<div class="pull-right">Total IDV Obligated Amt: {{ idvSum | currency }}</div> 
+				<div class="pull-left">Delivery Vehicle No.: {{ idvnumber }}</div>
+				<div class="pull-right">Total Delivery Vehicle Obligated Amt.: {{ idvSum | currency }}</div> 
 				<!--<button type="button" class="btn btn-default pull-right">Expand All <span class="glyphicon glyphicon-plus" aria-hidden="true"></button>-->
 				<div class="clearfix"></div>
 				</div>
@@ -66,8 +66,8 @@
 				<li>
 					<div class="panel panel-default">
 						<div class="panel-heading IDVPanel">
-							<div class="pull-left">Contract No: {{ contract.piid }}</div>
-							<div class="pull-right">Total Obligated Amt: {{ contract.contractSum | currency }}&nbsp;&nbsp;
+							<div class="pull-left">Contract No.: {{ contract.piid }}</div>
+							<div class="pull-right">Total Obligated Amt.: {{ contract.contractSum | currency }}&nbsp;&nbsp;
 							<button type="button" class="btn btn-default pull-right" ng-click = "expand($index)"> {{ expanded[$index] ? "Colapse All ": "Expand All  " }} <span class="glyphicon" ng-class="{'glyphicon-minus' : expanded[$index], 'glyphicon-plus' : !expanded[$index]}" aria-hidden="true"></span></button></div>
               				<div class="clearfix"></div>
 						</div>

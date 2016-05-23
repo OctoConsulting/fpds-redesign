@@ -313,7 +313,7 @@ p {
 	color: #666666;
 	word-spacing: 1px;
 	line-height: 25px;
-	font-size: 14px;
+	font-size: 16px;
 	font-family: "Source Sans Pro";
 }
 .meta-search {
@@ -443,7 +443,6 @@ nav ul {
 nav ul li {
 	color: rgba(255, 255, 255, 0.6);
 	display: block;
-	border-bottom: 1px dotted rgba(255, 255, 255, 0.2);
 	transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-webkit-transition: all 0.5s ease;
@@ -692,6 +691,7 @@ ul.legals li:last-child::after {
 }
 .credit {
 	text-align: right;
+	margin-top: 15px;
 }
 /* ==========================================================================
 FlexSlider Custom CSS
@@ -820,6 +820,8 @@ Search Results
 .nav-tabs.nav-justified > li > a{
 	background-color: #338cc1 !important;
 	color:white !important;
+	border-color: white !important;
+	border-width: 2px;
 }
 .navbar-nav > li > a {
     padding-top: 5px !important;
@@ -849,7 +851,15 @@ Search Results
     background: #fff;
 }
 .butn{
-	margin-left: 45%
+	margin-left: 45%;
 	width : 145px;
 	margin-bottom: 5px;
+}
+span .btn-default {
+    color: #fff;
+    background-color: #d9b310;
+    border-color: #ccc;  	
+}
+hr{
+	border-top: 1px solid #aeaeae;
 }

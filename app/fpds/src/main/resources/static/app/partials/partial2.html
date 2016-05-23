@@ -18,7 +18,7 @@
 				</div>
 				<div >
 					<div class="col-md-6 col-md-offset-3 text-center col-lg-offset-2 col-lg-8">
-						<h1 class="animated fadeInDown"><a ui-sref="home" href="#/"><img src="images/logo.png" alt="FPDS" /></a></h1>
+						<h1 class="animated fadeInDown"><a ui-sref="home" href="#/"><img src="images/final_logo.png" alt="FPDS" /></a></h1>
 					</div>
 				</div>
 				<div >
@@ -52,31 +52,31 @@
 					<div class="col-xs-12 col-sm-12 col-md-12 search-result light-box" style="margin-top: 0px;">
 						<h3 style="text-align:left;font-size: 22px; font-family:Varela Round;">Search Results Summary</h3>
 						<ul>
-							<li  style = "font-size : 18px; "><div class="searchList-2 col-md-5">No of Contracts:  </div><div class="searchList-3 col-md-7">{{ widget.num_contracts }}</div></li>							
+							<li  style = "font-size : 18px; "><div class="searchList-2 col-md-6">No. of Contracts: </div><div class="searchList-3 col-md-6">{{ widget.num_contracts }}</div></li>							
 						</ul>
 						<br/>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 search-result grey-box" style="margin-top: 0px; ">				
 						<ul>							
-							<li style = "font-size : 18px; "><div class="searchList-2 col-md-5">No of Vendors: </div><div class="searchList-3 col-md-7">{{ widget.num_vendors }}</div></li>
+							<li style = "font-size : 18px; "><div class="searchList-2 col-md-5">No. of Vendors: </div><div class="searchList-3 col-md-7">{{ widget.num_vendors }}</div></li>
 						</ul>
 						<br/>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 search-result light-box" style="margin-top: 0px;">
 						<ul>							
-							<li style = "font-size : 18px;"><div class="searchList-2 col-md-5">No of IDV's: </div><div class="searchList-3 col-md-7">{{ widget.num_idvs }}</div></li>
+							<li style = "font-size : 18px;"><div class="searchList-2 col-md-5">No. of IDV's: </div><div class="searchList-3 col-md-7">{{ widget.num_idvs }}</div></li>
 						</ul>
 						<br/>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 search-result grey-box" style="margin-top: 0px; ">	
 						<ul>							
-							<li style = "font-size : 18px;"><div class="searchList-2 col-md-5">No of Agencies: </div><div class="searchList-3 col-md-7">{{ widget.num_agencies }}</div></li>							
+							<li style = "font-size : 18px;"><div class="searchList-2 col-md-5">No. of Agencies: </div><div class="searchList-3 col-md-7">{{ widget.num_agencies }}</div></li>							
 						</ul>
 						<br/>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 search-result light-box" style="margin-top: 0px;">
 						<ul>							
-							<li style = "font-size : 18px; "><div class="searchList-2 col-md-5">No of States: </div><div class="searchList-3 col-md-7">{{ widget.num_states }}</div></li>	
+							<li style = "font-size : 18px; "><div class="searchList-2 col-md-5">No. of States: </div><div class="searchList-3 col-md-7">{{ widget.num_states }}</div></li>	
 						</ul>						
 						<br/>
 					</div>
@@ -118,22 +118,22 @@
 						<div class="col-xs-12 col-sm-12 col-md-6">
 							<div class="row">
 								<ul>
-									<li><div class="searchList col-md-6">Date Signed:</div> <div class="searchList-1 col-md-6">{{ contract.signeddate | date:'MM/dd/yyyy' }}</div></li>
+									<li><div class="searchList col-md-6">&nbsp;&nbsp;&nbsp;Date Signed:</div> <div class="searchList-1 col-md-6">{{ contract.signeddate | date:'MM/dd/yyyy' }}</div></li>
 								</ul>
 							</div>
 							<div class="row">
 								<ul>								
-									<li><div class="searchList col-md-6">Contract Number:</div><div class="searchList-1 col-md-6"> {{ contract.piid }}</div></li>
+									<li><div class="searchList col-md-6">&nbsp;&nbsp;&nbsp;Contract Number:</div><div class="searchList-1 col-md-6"> {{ contract.piid }}</div></li>
 								</ul>
 							</div>
 							<div class="row">
 								<ul>								
-									<li><div class="searchList col-md-6">Contract Start Date:</div><div class="searchList-1 col-md-6"> {{ contract.effectivedate | date:'MM/dd/yyyy' }}</div></li>
+									<li><div class="searchList col-md-6">&nbsp;&nbsp;&nbsp;Contract Start Date:</div><div class="searchList-1 col-md-6"> {{ contract.effectivedate | date:'MM/dd/yyyy' }}</div></li>
 								</ul>
 							</div>
 							<div class="row">
 								<ul>								
-									<li><div class="searchList col-md-6">Contract Completion Date:</div><div class="searchList-1 col-md-6"> {{ contract.currentcompletiondate | date:'MM/dd/yyyy' }}</div></li>
+									<li><div class="searchList col-md-6">&nbsp;&nbsp;&nbsp;Contract Completion Date:</div><div class="searchList-1 col-md-6"> {{ contract.currentcompletiondate | date:'MM/dd/yyyy' }}</div></li>
 								</ul>
 							</div>
 						</div>
@@ -162,10 +162,10 @@
 						</div>
 						
 
-						<div class = "btn-group">
+						<div class = "btn-group" style = "margin:5px">
 						   <button type="button" class="inbut" ng-click="details(contract.unique_transaction_id)">Transaction Details >></button>
 		          				<button type="button" class="inbut" ng-click="viewContract(contract.piid)">Contracts Details >></button>
-		          				<button type="button" class="inbut" ng-show="contract.hasOwnProperty('idvpiid')" ng-click="viewIDV(contract.idvpiid)">IDV Details >></button>
+		          				<button type="button" class="inbut" ng-show="contract.hasOwnProperty('idvpiid')" ng-click="viewIDV(contract.idvpiid)">Delivery Vehicle Details >></button>
 						</div>
 						
 						<!--<span class="plus"><a href="#/searchDetails/{{ contract.unique_transaction_id }}/{{ bigCurrentPage }} /{{ searchValue }}" title="Search Details"><i class="glyphicon glyphicon-arrow-right"></i></a></span>-->
@@ -181,7 +181,7 @@
 				
 			</div>
 			
-				<button type="button" class="inbut" ng-click="gototop()" style="width : 145px; margin-left : 45%">Back to Top</button>
+				<button type="button" class="inbut butn" ng-click="gototop()">Back to Top</button>
 				
 		</section>
 	</div>
