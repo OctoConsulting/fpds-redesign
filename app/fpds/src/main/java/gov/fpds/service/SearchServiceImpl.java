@@ -308,7 +308,7 @@ public class SearchServiceImpl implements SearchService {
 				+ "          \"multi_match\" : {\n"
 				+ "            \"query\":      \"" + searchTerm + "\",\n"
 				+ "            \"type\":       \"phrase\",\n"
-				+ "            \"fields\":     [\"vendorname\", \"vendoralternatename\", \"vendorlegalorganizationname\", \"vendordoingasbusinessname\", \"maj_agency_cat\", \"maj_fund_agency_cat\", \"fundingrequestingofficeid\",  \"contractingofficeid\", \"contractingofficeagencyid\", \"mod_agency\", \"mod_parent\"],\n"
+				+ "            \"fields\":     [\"vendorname\", \"vendoralternatename\", \"vendorlegalorganizationname\", \"vendordoingasbusinessname\", \"maj_agency_cat\", \"maj_fund_agency_cat\", \"fundingrequestingofficeid\",  \"contractingofficeid\", \"contractingofficeagencyid\", \"mod_agency\", \"mod_parent\", \"principalnaicscode\", \"dunsnumber\"],\n"
 				+ "            \"lenient\": true\n"
 				+ "          }\n"
 				+ "        }\n"
@@ -371,7 +371,7 @@ public class SearchServiceImpl implements SearchService {
         		+ "            \"piid\", \"modnumber\", \"reasonformodification\", \"maj_fund_agency_cat\", \"vendorname\", \n"
         		+ "            \"signeddate\", \"effectivedate\",\"currentcompletiondate\",\n"
         		+ "            \"contractactiontype\", \"principalnaicscode\", \"dollarsobligated\", \n"
-        		+ "            \"baseandalloptionsvalue\"\n"
+        		+ "            \"baseandalloptionsvalue\", \"dunsnumber\"\n"
         		+ "        ]\n"
         		+ "    }\n}";
   
@@ -426,7 +426,7 @@ public class SearchServiceImpl implements SearchService {
         		+ "            \"idvpiid\", \"piid\", \"modnumber\", \"reasonformodification\",\"maj_fund_agency_cat\", \"vendorname\", \n"
         		+ "            \"signeddate\", \"effectivedate\",\"currentcompletiondate\",\n"
         		+ "            \"contractactiontype\", \"principalnaicscode\", \"dollarsobligated\", \n"
-        		+ "            \"baseandalloptionsvalue\"\n"
+        		+ "            \"baseandalloptionsvalue\", \"dunsnumber\"\n"
         		+ "        ]\n"
         		+ "    }\n}";
   
