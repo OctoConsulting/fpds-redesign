@@ -1,10 +1,10 @@
 <header id="home">
   <nav>
-    <section class="hero" id="hero">
+    <section class="hero" id="hero" style="padding: 10px 0 10px 0;">
       <div class="container">
-        <div class="row">
+        <div >
           <div class="container-fluid">
-            <div class="row">
+            <div >
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> </button>
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -15,9 +15,9 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div >
           <div class="col-md-6 col-md-offset-3 text-center col-lg-offset-2 col-lg-8">
-            <h1 class="animated fadeInDown"><a ui-sref="home" href="#/"><img src="images/logo.png" alt="FPDS" /></a></h1>
+            <h1 class="animated fadeInDown" style="font-size: 20px; margin: 5px;" ><a ui-sref="home" href="#/"><img src="images/final_logo.png" alt="FPDS" /></a></h1>
           </div>
         </div>
       </div>
@@ -25,32 +25,25 @@
   </nav>
 </header>
 
-<br/>
-<div class="row" ng-controller="TabsController">
+<div  ng-controller="TabsController" style="background-color : white;">
 
   <!--<div class="col-md-2">-->
-  	<ul class="nav nav-pills nav-justified">
+  	<ul class="nav nav-tabs nav-justified" style="margin-top : 0">
       <li ng-class="{ active: isSet(1) }">
-          <a href ng-click="setTab(1)">Obligated Amount by State</a>
+          <a href ng-click="setTab(1)">Obligated Amount by Place of Performance</a>
       </li>
       <li ng-class="{ active: isSet(2) }">
           <a href ng-click="setTab(2)">Socio-Economic Considerations by Agency</a>
       </li>
       <li ng-class="{ active: isSet(3) }">
-        <a href ng-click="setTab(3)">Top 100 Contractors Report</a>
+        <a href ng-click="setTab(3)">Top Vendor Dashboard</a>
       </li>
       <li ng-class="{ active: isSet(4) }">
-        <a href ng-click="setTab(4)">Obligated Amount by Contract Type</a>
-      </li>
-      <li ng-class="{ active: isSet(5) }">
-        <a href ng-click="setTab(5)">NAICS code by Agency</a>
+        <a href ng-click="setTab(4)">NAICS code by Agency</a>
        </li>
-      <li ng-class="{ active: isSet(6) }">
-        <a href ng-click="setTab(6)">Obligated Amount by Place of Performance</a>
-      </li>
      </ul>
   <!--</div>-->
-  <div class="col-md-12">
+  <div class="col-md-12" style="padding-left : 250px; background-color : white;">
   		
        	<div ng-show="isSet(1)">
          	 <!--<script type='text/javascript' src='http://ec2-54-197-3-94.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script>
@@ -64,16 +57,10 @@
 		        	<param name='showShareOptions' value='true' />
 	        	</object>
          	 </div>-->
-           <script type='text/javascript' src='http://ec2-54-89-67-66.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script>
-           <div class='tableauPlaceholder' style='width: 1600px; height: 800px;'>
-              <object class='tableauViz' width='1600' height='800' style='display:none;'>
-                <param name='host_url' value='http%3A%2F%2Fec2-54-89-67-66.compute-1.amazonaws.com%2F' />
-                <param name='site_root' value='' />
-                <param name='name' value='FPDSDevelopmentTDEtoSPARK&#47;ObligatedDollarsbyPlaceofPerformanceState' />
-                <param name='tabs' value='no' /><param name='toolbar' value='yes' />
-                <param name='showShareOptions' value='true' />
-              </object>
-          </div>
+          
+           
+
+            <script type='text/javascript' src='http://ec2-54-89-67-66.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1284px; height: 816px;'><object class='tableauViz' width='1284' height='816' style='display:none;'><param name='host_url' value='http%3A%2F%2Fec2-54-89-67-66.compute-1.amazonaws.com%2F' /> <param name='site_root' value='' /><param name='name' value='FPDSDevelopmentTDEtoSPARK&#47;PoPDashboard' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='showShareOptions' value='true' /></object></div>
         </div>
 			 <div ng-show="isSet(2)">
 	        <!--<script type='text/javascript' src='http://ec2-54-197-3-94.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script>
@@ -86,17 +73,7 @@
 	         		<param name='showShareOptions' value='true' />
 	         	</object>
 	         </div>-->
-           <script type='text/javascript' src='http://ec2-54-89-67-66.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script>
-           <div class='tableauPlaceholder' style='width: 1600px; height: 800px;'>
-              <object class='tableauViz' width='1600' height='800' style='display:none;'>
-                  <param name='host_url' value='http%3A%2F%2Fec2-54-89-67-66.compute-1.amazonaws.com%2F' /> 
-                  <param name='site_root' value='' />
-                  <param name='name' value='FPDSDevelopmentTDEtoSPARK&#47;SocioEconomicConsiderations' />
-                  <param name='tabs' value='no' />
-                  <param name='toolbar' value='yes' />
-                  <param name='showShareOptions' value='true' />
-              </object>
-            </div>
+           <script type='text/javascript' src='http://ec2-54-89-67-66.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1284px; height: 816px;'><object class='tableauViz' width='1284' height='816' style='display:none;'><param name='host_url' value='http%3A%2F%2Fec2-54-89-67-66.compute-1.amazonaws.com%2F' /> <param name='site_root' value='' /><param name='name' value='FPDSDevelopmentTDEtoSPARK&#47;SocioEconomicConsiderations' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='showShareOptions' value='true' /></object></div>
 	    	</div>
 	       <div ng-show="isSet(3)">
 	        <!--<script type='text/javascript' src='http://ec2-54-197-3-94.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script>
@@ -110,54 +87,10 @@
 	         		<param name='showShareOptions' value='true' />
 	         	</object>
 	         </div>-->
-           <script type='text/javascript' src='http://ec2-54-89-67-66.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script>
-              <div class='tableauPlaceholder' style='width: 1600px; height: 800px;'>
-                  <object class='tableauViz' width='1600' height='800' style='display:none;'>
-                      <param name='host_url' value='http%3A%2F%2Fec2-54-89-67-66.compute-1.amazonaws.com%2F' /> 
-                      <param name='site_root' value='' />
-                      <param name='name' value='FPDSDevelopmentTDEtoSPARK&#47;Top100Vendors' />
-                      <param name='tabs' value='no' /><param name='toolbar' value='yes' />
-                      <param name='showShareOptions' value='true' />
-                  </object>
-              </div>
+          <script type='text/javascript' src='http://ec2-54-89-67-66.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1284px; height: 816px;'><object class='tableauViz' width='1284' height='816' style='display:none;'><param name='host_url' value='http%3A%2F%2Fec2-54-89-67-66.compute-1.amazonaws.com%2F' /> <param name='site_root' value='' /><param name='name' value='FPDSDevelopmentTDEtoSPARK&#47;TopVendorsDashboard' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='showShareOptions' value='true' /></object></div>
 	    	</div>
 	    	<div ng-show="isSet(4)">
-	         <script type='text/javascript' src='http://ec2-54-210-133-194.compute-1.amazonaws.comec2-54-89-67-66.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script>
-              <div class='tableauPlaceholder' style='width: 1600px; height: 800px;'>
-                <object class='tableauViz' width='1600' height='800' style='display:none;'>
-                  <param name='host_url' value='http%3A%2F%2Fec2-54-89-67-66.compute-1.amazonaws.com%2F' /> 
-                  <param name='site_root' value='' />
-                  <param name='name' value='FPDSDevelopmentTDEtoSPARK&#47;ContractTypes' />
-                  <param name='tabs' value='no' /><param name='toolbar' value='yes' />
-                  <param name='showShareOptions' value='true' />
-                </object>
-              </div>
+	         <script type='text/javascript' src='http://ec2-54-89-67-66.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1284px; height: 816px;'><object class='tableauViz' width='1284' height='816' style='display:none;'><param name='host_url' value='http%3A%2F%2Fec2-54-89-67-66.compute-1.amazonaws.com%2F' /> <param name='site_root' value='' /><param name='name' value='FPDSDevelopmentTDEtoSPARK&#47;Top5NAICSCodeBusinessSectors' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='showShareOptions' value='true' /></object></div>
 	    	</div>
-	    	<div ng-show="isSet(5)">
-	         <script type='text/javascript' src='http://ec2-54-89-67-66.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script>
-            <div class='tableauPlaceholder' style='width: 1600px; height: 800px;'>
-              <object class='tableauViz' width='1600' height='800' style='display:none;'>
-                <param name='host_url' value='http%3A%2F%2Fec2-54-89-67-66.compute-1.amazonaws.com%2F' /> 
-                <param name='site_root' value='' />
-                <param name='name' value='FPDSDevelopmentTDEtoSPARK&#47;Top10NAICSSectorsCodeDrillDown' />
-                <param name='tabs' value='no' />
-                <param name='toolbar' value='yes' />
-                <param name='showShareOptions' value='true' />
-              </object>
-            </div>
-	    	</div>
-        <div ng-show="isSet(6)">
-          <script type='text/javascript' src='http://ec2-54-89-67-66.compute-1.amazonaws.com/javascripts/api/viz_v1.js'></script>
-            <div class='tableauPlaceholder' style='width: 1600px; height: 800px;'>
-              <object class='tableauViz' width='1600' height='800' style='display:none;'>
-                <param name='host_url' value='http%3A%2F%2Fec2-54-89-67-66.compute-1.amazonaws.com%2F' /> 
-                <param name='site_root' value='' />
-                <param name='name' value='FPDSDevelopmentTDEtoSPARK&#47;ObligatedDollarsbyPlaceofPerformanceDARK' />
-                <param name='tabs' value='no' />
-                <param name='toolbar' value='yes' />
-                <param name='showShareOptions' value='true' />
-              </object>
-            </div>
-        </div>
-          	
+                  	
 </div>

@@ -39,6 +39,10 @@ module.exports = function($scope,$http,$location,$routeParams,$anchorScroll,Sear
  		.error(function(data,status,config,header){
  			console.log(status);
  		});
+ 	$scope.onSelect = function ($item, $model, $label) {                
+	    $scope.choosen = $item.field_value;    
+	    $scope.search();
+	  };
 
 	$scope.search = function(){
 		$scope.searchValue = $scope.query;
@@ -119,12 +123,29 @@ module.exports = function($scope,$http,$location,$routeParams,$anchorScroll,Sear
 			amtval.push(amt[x-1]);
 		}
 		console.log(quarts.length);
+		Highcharts.setOptions({
+		lang: {
+			thousandsSep: ','
+		}
+		});	
+
 		Highcharts.chart('graph', {
-
+		  chart:{
+		  	style:{
+		  		fontFamily: "Varela Round"
+		  	}
+		  },	
 	      title: {
-	        text: 'Obligated Amount across Quarters'
+	        text: 'Obligated Amount across Quarters',
+	        align: 'left',
+	        style:{
+	        	fontSize:'22px',
+	        	color: '#224f6d'
+	        }	        
 	      },
-
+	      tooltip: {
+        	pointFormat: "Dollars Obligated : ${point.y:.2f}"
+    	  },
 	      xAxis: {
 	      	title: {
                 text: 'Quarters'
@@ -141,6 +162,8 @@ module.exports = function($scope,$http,$location,$routeParams,$anchorScroll,Sear
 	        name: "Dollars Obligated"
 	      }]
 	    });
+
+
 	};
 	
 

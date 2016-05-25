@@ -80,9 +80,9 @@ h2 {
 	margin: 0.83em 0;
 }
 h3 {
-	font-size: 1.0 em;
-	margin: 1em 0;
-	color: #0a3c5d;
+	font-size: 1 em;
+    margin: 1em 0;
+    color: #224f6d;
 }
 h4 {
 	font-size: 1.25 em;
@@ -313,7 +313,7 @@ p {
 	color: #666666;
 	word-spacing: 1px;
 	line-height: 25px;
-	font-size: 14px;
+	font-size: 16px;
 	font-family: "Source Sans Pro";
 }
 .meta-search {
@@ -336,7 +336,7 @@ h2::after {
 	margin: 25px auto;
 }
 .section-padding {
-	padding: 10px 0 100px
+	padding: 10px 0 10px
 }
 .dark-bg {
 	background: #f3f5f8;
@@ -359,7 +359,15 @@ h2::after {
 	-webkit-box-shadow: 0px 3px 0px 0px #f0f2f4;
 	-moz-box-shadow: 0px 3px 0px 0px #f0f2f4;
 	box-shadow: 0px 3px 0px 0px #f0f2f4;
-	padding: 10px 20px;
+	padding: 7px 20px;
+	
+}
+.grey-box {
+	background-color: #f4f4f4;
+	-webkit-box-shadow: 0px 3px 0px 0px #f0f2f4;
+	-moz-box-shadow: 0px 3px 0px 0px #f0f2f4;
+	box-shadow: 0px 3px 0px 0px #f0f2f4;
+	padding: 7px 20px;
 	
 }
 .light-box-1 {
@@ -371,18 +379,18 @@ h2::after {
 
 .lt-box{
 	height: 300px;
-}
+}/*
 .light-box:hover, .light-box:focus {
 	-webkit-box-shadow: 0px 3px 0px 0px #d9b310;
 	-moz-box-shadow: 0px 3px 0px 0px #d9b310;
-	box-shadow: 0px 3px 0px 0px #d9b310;
-}
-.light-box-1:hover, .light-box-1:focus {
+	/*box-shadow: 0px 3px 0px 0px #d9b310;
+}*/
+/*.light-box-1:hover, .light-box-1:focus {
 	-webkit-box-shadow: 0px 3px 0px 0px #d9b310;
 	-moz-box-shadow: 0px 3px 0px 0px #d9b310;
 	box-shadow: 0px 3px 0px 0px #d9b310;
-}
-.box-hover {
+}*/
+/*.box-hover {
 	transition: all 500ms ease-in-out;
 	-webkit-transition: all 500ms ease-in-out;
 	-moz-transition: all 500ms ease-in-out;
@@ -392,7 +400,7 @@ h2::after {
 	-webkit-transform: translate(0, -15px);
 	-ms-transform: translate(0, -15px);
 	transform: translate(0, -15px);
-}
+}*/
 .wrapper {
 	height: 650px;
 }
@@ -413,18 +421,19 @@ h2::after {
 	max-width: 100%;
 	position: relative;
 }
-.btn btn-success inbut {
-	/*background-color: #f7e38f;*/
+
+/*.btn btn-success inbut {
+	/*background-color: #f7e38f;
 	border-color: #f7e38f;
 	font-size: 16px;
-	/*color: #353535;*/
+	/*color: #353535;
 	display: block;
 	float: none;
 	width: 100%;
 	max-width: 100%;
 	position: relative;
 	line-height: 46px;
-}
+} */
 
 
 nav ul {
@@ -434,7 +443,6 @@ nav ul {
 nav ul li {
 	color: rgba(255, 255, 255, 0.6);
 	display: block;
-	border-bottom: 1px dotted rgba(255, 255, 255, 0.2);
 	transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-webkit-transition: all 0.5s ease;
@@ -540,7 +548,7 @@ pagination { align-content:center; text-align: center;}
 Hero
 ========================================================================== */
 .hero {
-	background: url('../images/hero-bg.jpg') no-repeat center center;
+	background: url('../images/fpds.jpg') no-repeat center center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -649,11 +657,11 @@ footer a {
 	color: #d9b310;
 }
 footer {
-	background-color: #1d2731;
+	background-color: #338cc1;
 	padding: 5px 0 5px;
 }
 .footer{
-	background-color: #1d2731 !important;
+	background-color: #338cc1 !important;
 	padding: 5px 0 5px !important;
 	position:fixed !important;
 	height:85px !important;
@@ -683,6 +691,7 @@ ul.legals li:last-child::after {
 }
 .credit {
 	text-align: right;
+	margin-top: 15px;
 }
 /* ==========================================================================
 FlexSlider Custom CSS
@@ -730,7 +739,7 @@ Search Results
 .search-result h3 { font: 500 normal 1.375em "Source Sans Pro", sans-serif; margin-top: 0 !important; margin-bottom: 10px !important; }
 .search-result h3 > a, .search-result i { color: #248dc1 !important; }
 .search-result p { font: normal normal 1.125em "Source Sans Pro", sans-serif; } 
-.search-result span.plus { position: absolute; right: 0; }
+.search-result span.plus { position: absolute; right: -15px; }
 .search-result span.plus a { background-color: #248dc1; padding: 5px 5px 3px 5px; }
 .search-result span.plus a:hover { background-color: #414141; }
 .search-result span.plus a i { color: #fff !important; }
@@ -742,17 +751,18 @@ Search Results
 }
 
 .inbut{
-    background-color: #FFAD33;
+    background-color: #338cc1;
     color: #fff;
-    margin-bottom: 10px;
-    border-color: #FFAD33;
-    box-shadow: 5px 5px 2px #888888;
+    height: 40px;
+    border-color: #338cc1;
+    margin-right: 10px;
+    
 }
 .inbut:hover{
     background-color: #fff;
-    color: #FFAD33;
+    color: #338cc1;
     text-decoration: underline;
-    border-color: #FFAD33;
+    border-color: #338cc1;
 }
 .panel-result ol li{list-style: none;}
 .contractPanel {
@@ -775,12 +785,81 @@ Search Results
    font-weight: bold; 
    padding-right: 0;
    padding-left: 0;
+   font-size: 14px;
+   color: black;
 }
 .searchList-1{
    padding-right: 0;
-   padding-left: 0;		
+   padding-left: 0;
+   font-size: 14px;
+   color: black;
+   font-weight: normal !important;		
 }
-
+.searchList-2{
+   font-weight: bold;  		
+   padding-right: 0;
+   padding-left: 0;
+}
+.searchList-3{
+   padding-right: 0;
+   padding-left: 0;
+   font-weight: 700;
+}
 .paddingChange{
 	padding-left: 0;
+}
+.console{
+	font-size : 18px !important; 
+	line-height : 3 !important; 
+	color: #7e7e7e ;
+}
+.nav-tabs.nav-justified > li.active > a{
+	background-color: white !important;
+	color:black !important;
+}
+.nav-tabs.nav-justified > li > a{
+	background-color: #0A3C5D !important;
+	color:white !important;
+	border-color: white !important;
+	border-width: 2px;
+}
+.navbar-nav > li > a {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+.navbar-nav > li > a {
+    line-height: 5px !important;;
+}
+
+.dataOver {
+	padding-right: 0;
+    padding-left: 0;
+    font-size: 14px;
+    color: black;    
+    width: 50%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.row {
+    background: #f4f4f4;
+    
+}
+
+.row:nth-of-type(odd) {
+    background: #fff;
+}
+.butn{
+	margin-left: 45%;
+	width : 145px;
+	margin-bottom: 5px;
+}
+span .btn-default {
+    color: #fff;
+    background-color: #d9b310;
+    border-color: #ccc;  	
+}
+hr{
+	border-top: 1px solid #aeaeae;
 }
