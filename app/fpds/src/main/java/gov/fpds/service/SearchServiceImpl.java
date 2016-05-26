@@ -641,7 +641,7 @@ public class SearchServiceImpl implements SearchService {
 				+ "}";
 		
 		Suggest suggest = new Suggest.Builder(query)
-		                      .addIndex("search_suggest")
+		                      .addIndex("search_suggest_new")
 		                      //.addIndex("test_index")
 				              .build();
 		
